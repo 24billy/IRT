@@ -1,42 +1,181 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-"http://struts.apache.org/dtds/struts-2.0.dtd">	
-
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+ 
 <struts>
-    <!-- devMode is helpful when you want some extra logs for debugging -->
-    <constant name="struts.devMode" value="false" />
-    <!-- Global message resource; 
-    	 Otherwise you will have seperate message resource for each Action 
-    -->
-    <constant name="struts.custom.i18n.resources" value="messages" /> 
-    <!-- 
-    	This is important if you are planning to have slashes in Action URLs
-    	e.g. In this demo, employee is deleted using URL /delete/10
-    	This this is set to false; then struts will try to find mapping for 
-    	URL "/10" instaed of "/delete/10"
-     -->
-    <constant name="struts.enable.SlashesInActionNames" value="true"/>
-     
-    <!-- Normal Action mappings are defined here -->
-	<package name="default" namespace="" extends="struts-default">
-	    <!-- Two things to Notice: 
-	    	 1) class is set to 'editEmployeeAction' which is bean defined by Spring context
-	    	 2) We have given the method to be called here as well;
-	   	-->
-		<action name="list" class="editEmployeeAction" method="listEmployees">
-			<result>/view/editEmployeeList.jsp</result>
-		</action>
-		<action name="add" class="editEmployeeAction" method="addEmployee">
-			<result type="redirect">/list</result>
-		</action>
-		<action name="delete/*" class="editEmployeeAction" method="deleteEmployee">
-		    <param name="employee.id">{1}</param>
-			<result type="redirect">/list</result>
-		</action>
-		<action name="*" class="editEmployeeAction" method="listEmployees">
-		  <result>/view/editEmployeeList.jsp</result>
-		</action> 
-	</package>
+ 
+  <constant name="struts.devMode" value="true" />
+  <constant name="struts.ui.theme" value="simple" />
+  <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+  <constant name="struts.custom.i18n.resources" value="locale/global" />
+  <!-- 
+  <package name="admin" namespace="/admin" extends="struts-default" strict-method-invocation="true">
+  	<default-action-ref name="home"/>
+  	<action name="gameAdmin" class="gameAction" method="admin">
+  		<result name="success">/admin/gameAdmin.jsp</result>
+  		<result name="message" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<result name="select" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>select,insert,delete,update,payout,open,payoutToday,selectLatestFiveRecord</allowed-methods>
+  	</action>
+  	
+  	<action name="teamAdmin" class="teamAction" method="admin">
+  		<result name="success">/admin/teamAdmin.jsp</result>
+  		<result name="message" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+  		<result name="select" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>insert,select,delete,getLeagueNames,getBallTypes</allowed-methods>
+  	</action>
+  	
+  	<action name="oddsAdmin" class="oddsAction" method="insert"> 
+		<result name="message" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+	</action> 
+  	
+  	<action name="adminChart" class="adminLogAction" method="admin">
+  		<result name="success">/admin/adminChart.jsp</result>
+  		<result name="message" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<result name="select" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>select,insert,delete</allowed-methods>
+  	</action>
+  	
+  	<action name="announceAdmin" class="announceAction" method="admin">
+  		<result name="success">/admin/announceAdmin.jsp</result>
+  		<result name="message" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<result name="select" type="stream">
+			<param name="contentType">text/plain</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>select,insert,delete,selectLatestFiveRecord</allowed-methods>
+  	</action>
+  	
+  	<action name="login">
+  		<result>/admin/login.jsp</result>
+  	</action>
+  	
+  	<action name="home" class="adminAction" method="execute">
+		<result name="success">/admin/home.jsp</result>
+	</action>
+  </package>
+  
+  
+  
+  <package name="default" namespace="/" extends="struts-default" strict-method-invocation="true">
+  	
+  	<action name="nav">
+  		<result name="success">/nav.jsp</result>
+  	</action>
+  	
+    <action name="game" class="gameAction" method="execute"> 
+    	<result name="success">/Event/match-index.jsp</result>
+		<result name="select" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<result name="selectNearDays" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<result name="selectNearNotEnd" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<result name="selectNotEnd" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<result name="getHotGames" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>execute,select,selectNearDays,selectNotEnd,selectNearNotEnd,getHotGames</allowed-methods>
+	</action> 
 	
+	<action name="searchHistory" class="gameAction" method="gameHistory">
+		<result name="success" >/History/showInTable.jsp</result>
+		<result name="searchHistoryMethod" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>searchHistoryMethod</allowed-methods>
+	</action>
+	
+	<action name="teamsByCountry" class="teamAction" method="getTeamsByLeagueName">
+		<result name="success" >/History/showInTable.jsp</result>
+		<result name="getTeamsByCountry" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>getTeamsByLeagueName</allowed-methods>
+	</action>
+	<action name="teamsByCountryStatistic" class="teamAction" method="getTeamsByLeagueName">
+		<result name="success" >/History/statisticResult.jsp</result>
+		<result name="getTeamsByCountry" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>getTeamsByLeagueName</allowed-methods>
+	</action>
+	
+	<action name="searchHistoryComplex" class="gameAction" method="gameHistoryComplex">
+		<result name="success" >/History/historyComplex.jsp</result>
+		<result name="searchHistoryComplexData" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>searchHistoryComplexData</allowed-methods>
+	</action>
+	
+	<action name="oddsStatisticByTime" class="oddsAction" method="oddsStatisticByTime">
+		<result name="success" >/History/TimeStatistics.jsp</result>
+		<result name="SuccessOfCountOfOddsBytype" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>countOfOddsBytype</allowed-methods>
+	</action>
+	
+	<action name="odds" class="oddsAction" method="execute"> 
+		<result name="message" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<result name="select" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<result name="getHotOdds" type="stream">
+			<param name="contentType">appliction/json</param>
+			<param name="inputName">inputStream</param>
+		</result>
+		<allowed-methods>select,insert</allowed-methods>
+	</action> 
+	
+  	<action name="welcome">
+  		<result>/welcome.jsp</result>
+  	</action>
+  </package>
+   -->
 </struts>

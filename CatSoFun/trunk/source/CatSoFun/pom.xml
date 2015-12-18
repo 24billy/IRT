@@ -1,228 +1,251 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.howtodoinjava.app</groupId>
-  <artifactId>CatSoFun</artifactId>
-  <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>CatSoFun Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <!-- JBoss repository for Hibernate -->
-  <repositories>
-	<repository>
-		<id>JBoss repository</id>
-		<url>http://repository.jboss.org/nexus/content/groups/public/</url>
-	</repository>
-  </repositories>
-  <properties>
-    <org.springframework.version>4.0.3.RELEASE</org.springframework.version>
-  </properties>
-  <dependencies>
-    
-	<dependency>
-		<groupId>javax.servlet</groupId>
-		<artifactId>javax.servlet-api</artifactId>
-		<version>3.1.0</version>
-	</dependency>
-	
-	<dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-     <!--
-	    Core utilities used by other modules.
-	    Define this if you use Spring Utility APIs (org.springframework.core.*/org.springframework.util.*)
-	-->
-	<dependency>
-	  <groupId>org.springframework</groupId>
-	  <artifactId>spring-core</artifactId>
-	  <version>${org.springframework.version}</version>
-	  <scope>runtime</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-web</artifactId>
-		<version>${org.springframework.version}</version>
-		<scope>runtime</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-webmvc</artifactId>
-		<version>${org.springframework.version}</version>
-		<scope>runtime</scope>
-	</dependency>
-            
-	<!--
-	    Bean Factory and JavaBeans utilities (depends on spring-core)
-	    Define this if you use Spring Bean APIs (org.springframework.beans.*)
-	-->
-	<dependency>
-	  <groupId>org.springframework</groupId>
-	  <artifactId>spring-beans</artifactId>
-	  <version>${org.springframework.version}</version>
-	</dependency>
-	<!--
-	    Application Context (depends on spring-core, spring-expression, spring-aop, spring-beans)
-	    This is the central artifact for Spring's Dependency Injection Container and is generally always defined
-	-->
-	<dependency>
-	  <groupId>org.springframework</groupId>
-	  <artifactId>spring-context</artifactId>
-	  <version>${org.springframework.version}</version>
-	</dependency>
-	<!--
-	    Aspect Oriented Programming (AOP) Framework (depends on spring-core, spring-beans)
-	    Define this if you use Spring AOP APIs (org.springframework.aop.*)
-	-->
-	<dependency>
-	  <groupId>org.springframework</groupId>
-	  <artifactId>spring-aop</artifactId>
-	  <version>${org.springframework.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>org.aspectj</groupId>
-		<artifactId>aspectjtools</artifactId>
-		<version>1.6.2</version>
-	</dependency>
-	<dependency>
-		<groupId>cglib</groupId>
-		<artifactId>cglib</artifactId>
-		<version>3.1</version>
-	</dependency>
-            
-	<!--
-	    Transaction Management Abstraction (depends on spring-core, spring-beans, spring-aop, spring-context)
-	    Define this if you use Spring Transactions or DAO Exception Hierarchy
-	    (org.springframework.transaction.*/org.springframework.dao.*)
-	-->
-	<dependency>
-	  <groupId>org.springframework</groupId>
-	  <artifactId>spring-tx</artifactId>
-	  <version>${org.springframework.version}</version>
-	</dependency>
-	<!--
-	    JDBC Data Access Library (depends on spring-core, spring-beans, spring-context, spring-tx)
-	    Define this if you use Spring's JdbcTemplate API (org.springframework.jdbc.*)
-	-->
-	<dependency>
-	  <groupId>org.springframework</groupId>
-	  <artifactId>spring-jdbc</artifactId>
-	  <version>${org.springframework.version}</version>
-	</dependency>
-	 
-	<!--
-	    Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, and iBatis.
-	    (depends on spring-core, spring-beans, spring-context, spring-tx)
-	    Define this if you need ORM (org.springframework.orm.*)
-	-->
-	<dependency>
-	  <groupId>org.springframework</groupId>
-	  <artifactId>spring-orm</artifactId>
-	  <version>${org.springframework.version}</version>
-	</dependency>
-	
-	<dependency>  
-       <groupId>log4j</groupId>  
-       <artifactId>log4j</artifactId>  
-       <version>1.2.15</version>  
-       <exclusions>  
-         <exclusion>  
-           <groupId>javax.mail</groupId>  
-           <artifactId>mail</artifactId>  
-         </exclusion>  
-         <exclusion>  
-           <groupId>javax.jms</groupId>  
-           <artifactId>jms</artifactId>  
-         </exclusion>  
-         <exclusion>  
-           <groupId>com.sun.jdmk</groupId>  
-           <artifactId>jmxtools</artifactId>  
-         </exclusion>  
-         <exclusion>  
-           <groupId>com.sun.jmx</groupId>  
-           <artifactId>jmxri</artifactId>  
-         </exclusion>  
-       </exclusions>  
-       <scope>runtime</scope>  
-     </dependency>  
-     
-     <dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-core</artifactId>
-		<version>3.6.3.Final</version>
-	</dependency>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>tw.com.pmt.catsofun</groupId>
+	<artifactId>CatSoFun</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>CatSoFun Webapp</name>
+	<url>http://maven.apache.org</url>
 
-	<dependency>
-		<groupId>javassist</groupId>
-		<artifactId>javassist</artifactId>
-		<version>3.12.1.GA</version>
-	</dependency>
- 
- 	<dependency>
-		<groupId>javax.servlet</groupId>
-		<artifactId>jstl</artifactId>
-		<version>1.2</version>
-		<scope>runtime</scope>
-	</dependency>
-	
-	<dependency>
-		<groupId>taglibs</groupId>
-		<artifactId>standard</artifactId>
-		<version>1.1.2</version>
-		<scope>runtime</scope>
-	</dependency>
-	
-	<dependency>
-	  <groupId>commons-dbcp</groupId>
-	  <artifactId>commons-dbcp</artifactId>
-	  <version>1.4</version>
-	</dependency>
-        
-<!--    <dependency> -->
-<!-- 	    <groupId>mysql</groupId> -->
-<!-- 	    <artifactId>mysql-connector-java</artifactId> -->
-<!-- 	    <version>5.1.9</version> -->
-<!-- 	</dependency> -->
-	
-	<dependency>
-		<groupId>postgresql</groupId>
-		<artifactId>postgresql</artifactId>
-		<version>9.1-901-1.jdbc4</version>
-	</dependency>
-	
-   <dependency>
-		<groupId>org.apache.struts</groupId>
-		<artifactId>struts2-core</artifactId>
-		<version>2.3.16.2</version>
-	</dependency>
-	
-   <dependency>
-		<groupId>org.apache.struts</groupId>
-		<artifactId>struts2-spring-plugin</artifactId>
-		<version>2.3.16.2</version>
-	</dependency>
-	
-	<dependency>
-		<groupId>org.apache.struts</groupId>
-		<artifactId>struts2-json-plugin</artifactId>
-		<version>2.3.24.1</version>
-	</dependency>
-            
-	
-  </dependencies>
-  <build>
-    <finalName>CatSoFun</finalName>
-    <plugins>
-		<plugin>
-			<artifactId>maven-compiler-plugin</artifactId>
-			<version>2.3.2</version>
-			<configuration>
-				<source>1.6</source>
-				<target>1.6</target>
-			</configuration>
-		</plugin>
-	</plugins>
-  </build>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java-version>1.7</java-version>
+		<springframework-version>3.2.9.RELEASE</springframework-version>
+	</properties>
+
+	<dependencies>
+		<!-- Servlet 2.5 API -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<!-- test dependencies -->
+
+		<!-- postgreSQL -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901-1.jdbc4</version>
+		</dependency>
+
+		<!-- SpringFramework -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${springframework-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<!-- Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.6.10.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.3</version>
+		</dependency>
+
+		<!-- joda-time -->
+		<!-- others -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time-jsptags</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time-hibernate</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.core</artifactId>
+			<version>3.1.0.CR1</version>
+		</dependency>
+
+		<!-- Struts 2 -->
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-core</artifactId>
+			<version>2.3.16.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-spring-plugin</artifactId>
+			<version>2.3.16.3</version>
+		</dependency>
+
+		<!-- 整合RESTful預備用，因為載入後需要設定struts.action.extension才能正常運作，所以先拿掉。 <dependency> 
+			<groupId>org.apache.struts</groupId> <artifactId>struts2-rest-plugin</artifactId> 
+			<version>2.3.16.3</version> </dependency> -->
+
+		<!-- jersey -->
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>1.18.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.18.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-core</artifactId>
+			<version>1.18.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>1.18.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-servlet</artifactId>
+			<version>1.18.1</version>
+		</dependency>
+
+		<!-- Gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+
+		<!-- JSTL -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+		<!-- JUnit -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<type>jar</type>
+		</dependency>
+
+		<!-- Apache Poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.11-beta2</version>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
