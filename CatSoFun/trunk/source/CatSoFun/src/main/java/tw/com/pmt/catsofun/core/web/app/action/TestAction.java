@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 import tw.com.pmt.catsofun.core.business.service.IItemService;
 import tw.com.pmt.catsofun.core.business.service.IResponseService;
 import tw.com.pmt.catsofun.core.db.model.Item;
 import tw.com.pmt.catsofun.core.db.model.Response;
+
+import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * 「測驗」控制器
@@ -33,13 +33,14 @@ public class TestAction extends ActionSupport {
 	
 	private Item item;
 	private Response response;
-	private String[] options;
-
+	private Boolean isEnd;
+	
 	public String showCatMainPage() {
 		System.out.println("showCatMainContent() begin...");
 
 		// 初始化可選題庫，選取題目
 		//List<Integer> chooseItemPool = initChooseItemPool();
+		isEnd = false;
 		initChooseItemPool();
 		selectedOptions = new ArrayList<String>();
 
@@ -62,16 +63,23 @@ public class TestAction extends ActionSupport {
 		// 估計能力 選下一題
 		// chooseNext();
 
-		// 隨機選題與作答反應
+		// 隨機「選題﹞與「作答反應」
 		item = chooseRandomItem(chooseItemPool);
 		int responseIndex = item.getAnswerType().intValue();
 		
-		response = responseService.getAllResponse().get(responseIndex);
-		options = new String[]{response.getResponseContent()};
+		response = responseService.getAllResponse().get(responseIndex - 1);
 		
 		System.out.println("本次所選題目：" + item);
+		System.out.println("剩餘可選題目：" + chooseItemPool);
 		System.out.println("本次所選題目選項：" + response);
 
+		// 設定中止條件，作答十題結束
+		if (chooseItemPool.size() < 15) {
+			isEnd = true;
+		} else {
+			isEnd = false;
+		}
+		
 		return ActionSupport.SUCCESS;
 	}
 
@@ -122,12 +130,12 @@ public class TestAction extends ActionSupport {
 		this.response = response;
 	}
 
-	public String[] getOptions() {
-		return options;
+	public Boolean getIsEnd() {
+		return isEnd;
 	}
 
-	public void setOptions(String[] options) {
-		this.options = options;
+	public void setIsEnd(Boolean isEnd) {
+		this.isEnd = isEnd;
 	}
-	
+
 }

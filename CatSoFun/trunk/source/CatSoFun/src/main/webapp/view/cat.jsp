@@ -205,24 +205,24 @@ $(document).ready(function(){
 				data : params,
 				dataType : "text", //ajax返回值設定為text
 				success : function(json) {
-
 					var obj = $.parseJSON(json); //解析json
+					console.log(json);
+					if (obj.isEnd) {
+						alert("test finished")
+					} else {
+						var item = obj.item;
+						var response = obj.response;
 
-					var item = obj.item;
-					var opt = obj.options;
+						$("#question").html(item.itemContent);
+						
+						$("#opt0").html(response.option01);
+						$("#opt1").html(response.option02);
+						$("#opt2").html(response.option03);
+						$("#opt3").html(response.option04);
+						$("#opt4").html(response.option05);
 
-					alert("item : " + item);
-					alert("opt : " + opt);
-
-					$("#question").html(item);
-					$("#opt0").html(opt[0]);
-					$("#opt1").html(opt[1]);
-					$("#opt2").html(opt[2]);
-					$("#opt3").html(opt[3]);
-					$("#opt4").html(opt[4]);
-					
-					$('#reset').prop('checked','checked');
-
+						$('#reset').prop('checked','checked');
+					}
 				},
 				error : function(json) {
 					alert("json=" + json);
