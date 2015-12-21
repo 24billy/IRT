@@ -19,6 +19,7 @@
 	
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 	
+	<bean id="catAction" class="tw.com.pmt.catsofun.core.web.app.action.CatAction" scope="prototype"/>
 	<!-- 
 	<bean id="teamAction" class="tw.com.softleader.sportslottery.setting.web.TeamAction" scope="prototype"/>
 	<bean id="lotteryAction" class="tw.com.softleader.sportslottery.setting.web.LotteryAction" scope="prototype"/>

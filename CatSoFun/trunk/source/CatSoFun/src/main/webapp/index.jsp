@@ -9,6 +9,9 @@
 
 <body>
 	<h1>CatSoFun is Work</h1>
+	
+	<br>
+		<a href="/CatSoFun/frontend/test.action" target="_blank">cat</a>
 </body>
 
 </html>

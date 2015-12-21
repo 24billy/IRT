@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CatSoFun</title>
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
 
 <style type="text/css">
 
@@ -182,7 +182,7 @@
 <!-- jQuery (Bootstrap 所有外掛均需要使用) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <!-- 依需要參考已編譯外掛版本（如下），或各自獨立的外掛版本 -->
-<script src="js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 
 <script>
 $(document).ready(function(){
