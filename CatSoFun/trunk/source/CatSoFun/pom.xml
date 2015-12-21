@@ -144,6 +144,13 @@
 			<artifactId>struts2-spring-plugin</artifactId>
 			<version>2.3.16.3</version>
 		</dependency>
+		
+		<!-- Struts 2 JSON Plugins -->
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-json-plugin</artifactId>
+			<version>2.3.16.3</version>
+		</dependency>
 
 		<!-- 整合RESTful預備用，因為載入後需要設定struts.action.extension才能正常運作，所以先拿掉。 <dependency> 
 			<groupId>org.apache.struts</groupId> <artifactId>struts2-rest-plugin</artifactId> 
