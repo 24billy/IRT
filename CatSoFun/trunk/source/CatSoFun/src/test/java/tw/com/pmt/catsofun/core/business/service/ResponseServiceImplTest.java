@@ -29,8 +29,12 @@ public class ResponseServiceImplTest extends BaseTest {
 	public void testInsertResponse() {
 		Response response = new Response();
 		response.setId(new Long(8));
-		response.setResponseContent("試題內容");
-		response.setGuild("指導語");
+		response.setOption01("選項一");
+		response.setOption02("選項二");
+		response.setOption03("選項三");
+		response.setOption04("選項四");
+		response.setOption05("選項五");
+		response.setGuild("指導語一");
 		
 		responseService.insertResponse(response);
 	}
@@ -39,7 +43,11 @@ public class ResponseServiceImplTest extends BaseTest {
 	public void testUpdateResponse() {
 		Response response = new Response();
 		response.setId(new Long(1));
-		response.setResponseContent("試題內容");
+		response.setOption01("選項A");
+		response.setOption02("選項B");
+		response.setOption03("選項C");
+		response.setOption04("選項D");
+		response.setOption05("選項E");
 		response.setGuild("指導語2");
 		
 		responseService.updateResponse(response);

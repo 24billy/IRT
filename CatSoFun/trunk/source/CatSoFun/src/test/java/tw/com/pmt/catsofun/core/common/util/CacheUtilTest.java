@@ -34,7 +34,7 @@ public class CacheUtilTest extends BaseTest {
 	
 	@Test
 	public void testGetCatItems() {
-		System.out.println(itemService.findAllItem());
+		System.out.println(CacheUtil.getCatItems());
 	}
 
 	@Test

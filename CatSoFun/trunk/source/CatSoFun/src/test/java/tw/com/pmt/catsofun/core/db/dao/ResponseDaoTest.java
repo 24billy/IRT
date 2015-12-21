@@ -26,7 +26,11 @@ public class ResponseDaoTest extends BaseTest {
 	public void testInsert() {
 		Response response = new Response();
 		response.setId(new Long(10));
-		response.setResponseContent("試題內容44");
+		response.setOption01("選項一");
+		response.setOption02("選項二");
+		response.setOption03("選項三");
+		response.setOption04("選項四");
+		response.setOption05("選項五");
 		response.setGuild("指導語44");
 		responseDao.insert(response);
 	}
