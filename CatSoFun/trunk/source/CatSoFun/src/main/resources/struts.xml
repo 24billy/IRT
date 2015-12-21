@@ -2,196 +2,44 @@
 <!DOCTYPE struts PUBLIC
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
- 
+
 <struts>
- 
-  <constant name="struts.devMode" value="true" />
-  <constant name="struts.ui.theme" value="simple" />
-  <constant name="struts.enable.DynamicMethodInvocation" value="true" />
-  <constant name="struts.custom.i18n.resources" value="locale/global" />
-  
-  <package name="frontend" namespace="/frontend" extends="struts-default">
-  	<result-types>
-		<result-type name="json" class="org.apache.struts2.json.JSONResult" />
-	</result-types>
-  
-	<action name="test" class="catAction" method="show">
-		<result>/view/cat.jsp</result>
-	</action>
-	<action name="catAjax" class="catAction" method="choose">
-		<result type="json">
-			<param name="contentType">text/html</param>
-		</result>
-	</action>
-  </package>
-  
-  <!-- 
-  <package name="admin" namespace="/admin" extends="struts-default" strict-method-invocation="true">
-  	<default-action-ref name="home"/>
-  	<action name="gameAdmin" class="gameAction" method="admin">
-  		<result name="success">/admin/gameAdmin.jsp</result>
-  		<result name="message" type="stream">
-			<param name="contentType">text/plain</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<result name="select" type="stream">
-			<param name="contentType">text/plain</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<allowed-methods>select,insert,delete,update,payout,open,payoutToday,selectLatestFiveRecord</allowed-methods>
-  	</action>
-  	
-  	<action name="teamAdmin" class="teamAction" method="admin">
-  		<result name="success">/admin/teamAdmin.jsp</result>
-  		<result name="message" type="stream">
-			<param name="contentType">text/plain</param>
-			<param name="inputName">inputStream</param>
-		</result>
-  		<result name="select" type="stream">
-			<param name="contentType">text/plain</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<allowed-methods>insert,select,delete,getLeagueNames,getBallTypes</allowed-methods>
-  	</action>
-  	
-  	<action name="oddsAdmin" class="oddsAction" method="insert"> 
-		<result name="message" type="stream">
-			<param name="contentType">text/plain</param>
-			<param name="inputName">inputStream</param>
-		</result>
-	</action> 
-  	
-  	<action name="adminChart" class="adminLogAction" method="admin">
-  		<result name="success">/admin/adminChart.jsp</result>
-  		<result name="message" type="stream">
-			<param name="contentType">text/plain</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<result name="select" type="stream">
-			<param name="contentType">text/plain</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<allowed-methods>select,insert,delete</allowed-methods>
-  	</action>
-  	
-  	<action name="announceAdmin" class="announceAction" method="admin">
-  		<result name="success">/admin/announceAdmin.jsp</result>
-  		<result name="message" type="stream">
-			<param name="contentType">text/plain</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<result name="select" type="stream">
-			<param name="contentType">text/plain</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<allowed-methods>select,insert,delete,selectLatestFiveRecord</allowed-methods>
-  	</action>
-  	
-  	<action name="login">
-  		<result>/admin/login.jsp</result>
-  	</action>
-  	
-  	<action name="home" class="adminAction" method="execute">
-		<result name="success">/admin/home.jsp</result>
-	</action>
-  </package>
-  
-  
-  
-  <package name="default" namespace="/" extends="struts-default" strict-method-invocation="true">
-  	
-  	<action name="nav">
-  		<result name="success">/nav.jsp</result>
-  	</action>
-  	
-    <action name="game" class="gameAction" method="execute"> 
-    	<result name="success">/Event/match-index.jsp</result>
-		<result name="select" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<result name="selectNearDays" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<result name="selectNearNotEnd" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<result name="selectNotEnd" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<result name="getHotGames" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<allowed-methods>execute,select,selectNearDays,selectNotEnd,selectNearNotEnd,getHotGames</allowed-methods>
-	</action> 
-	
-	<action name="searchHistory" class="gameAction" method="gameHistory">
-		<result name="success" >/History/showInTable.jsp</result>
-		<result name="searchHistoryMethod" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<allowed-methods>searchHistoryMethod</allowed-methods>
-	</action>
-	
-	<action name="teamsByCountry" class="teamAction" method="getTeamsByLeagueName">
-		<result name="success" >/History/showInTable.jsp</result>
-		<result name="getTeamsByCountry" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<allowed-methods>getTeamsByLeagueName</allowed-methods>
-	</action>
-	<action name="teamsByCountryStatistic" class="teamAction" method="getTeamsByLeagueName">
-		<result name="success" >/History/statisticResult.jsp</result>
-		<result name="getTeamsByCountry" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<allowed-methods>getTeamsByLeagueName</allowed-methods>
-	</action>
-	
-	<action name="searchHistoryComplex" class="gameAction" method="gameHistoryComplex">
-		<result name="success" >/History/historyComplex.jsp</result>
-		<result name="searchHistoryComplexData" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<allowed-methods>searchHistoryComplexData</allowed-methods>
-	</action>
-	
-	<action name="oddsStatisticByTime" class="oddsAction" method="oddsStatisticByTime">
-		<result name="success" >/History/TimeStatistics.jsp</result>
-		<result name="SuccessOfCountOfOddsBytype" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<allowed-methods>countOfOddsBytype</allowed-methods>
-	</action>
-	
-	<action name="odds" class="oddsAction" method="execute"> 
-		<result name="message" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<result name="select" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<result name="getHotOdds" type="stream">
-			<param name="contentType">appliction/json</param>
-			<param name="inputName">inputStream</param>
-		</result>
-		<allowed-methods>select,insert</allowed-methods>
-	</action> 
-	
-  	<action name="welcome">
-  		<result>/welcome.jsp</result>
-  	</action>
-  </package>
-   -->
+
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.custom.i18n.resources" value="locale/global" />
+
+	<package name="mock" namespace="/" extends="struts-default">
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+
+		<action name="mock" class="testAction" method="showCatMainPage">
+			<result>/view/cat.jsp</result>
+		</action>
+
+		<action name="chooseItem" class="testAction" method="chooseItem">
+			<result type="json">
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="frontend" namespace="/frontend" extends="struts-default">
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+
+		<action name="show" class="catAction" method="show">
+			<result>/view/cat.jsp</result>
+		</action>
+
+		<action name="chooseItem" class="catAction" method="chooseItem">
+			<result type="json">
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+	</package>
+
 </struts>

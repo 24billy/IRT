@@ -5,7 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CatSoFun</title>
-<link href="../css/bootstrap.min.css" rel="stylesheet">
+
+<script src="/CatSoFun/js/jquery-1.11.3.min.js"></script>
+<script src="/CatSoFun/js/bootstrap.min.js"></script>
+
+<link href="/CatSoFun/css/bootstrap.min.css" rel="stylesheet">
 
 <style type="text/css">
 
@@ -179,10 +183,6 @@
 </div>
 <!-- END footer -->
 
-<!-- jQuery (Bootstrap 所有外掛均需要使用) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<!-- 依需要參考已編譯外掛版本（如下），或各自獨立的外掛版本 -->
-<script src="../js/bootstrap.min.js"></script>
 
 <script>
 $(document).ready(function(){
@@ -201,7 +201,7 @@ $(document).ready(function(){
 
 			$.ajax({
 				type : "POST",
-				url : "catAjax.action",
+				url : "chooseItem.action",
 				data : params,
 				dataType : "text", //ajax返回值設定為text
 				success : function(json) {

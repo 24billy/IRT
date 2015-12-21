@@ -19,29 +19,9 @@
 	
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 	
+	<!-- Spring 註冊 Action -->
 	<bean id="catAction" class="tw.com.pmt.catsofun.core.web.app.action.CatAction" scope="prototype"/>
-	<!-- 
-	<bean id="teamAction" class="tw.com.softleader.sportslottery.setting.web.TeamAction" scope="prototype"/>
-	<bean id="lotteryAction" class="tw.com.softleader.sportslottery.setting.web.LotteryAction" scope="prototype"/>
-	<bean id="oddsAction" class="tw.com.softleader.sportslottery.setting.web.OddsAction" scope="prototype"/>
-	<bean id="userAction" class="tw.com.softleader.sportslottery.setting.web.UserAction" scope="prototype"/>
-	<bean id="gameAction" class="tw.com.softleader.sportslottery.setting.web.GameAction" scope="prototype"/>
-	<bean id="passToAction" class="tw.com.softleader.sportslottery.setting.util.PassToAction" scope="prototype"/>
-	<bean id="adminLogAction" class="tw.com.softleader.sportslottery.setting.web.AdminLogAction" scope="prototype"/>
-	<bean id="announceAction" class="tw.com.softleader.sportslottery.setting.web.AnnounceAction" scope="prototype"/>
-	<bean id="statisticAction" class="tw.com.softleader.sportslottery.setting.web.StatisticAction" scope="prototype"/>
-	<bean id="adminAction" class="tw.com.softleader.sportslottery.setting.web.AdminAction" scope="prototype"/>
-	<bean id="writeFileAction" class="tw.com.softleader.sportslottery.setting.web.WriteFileAction" scope="prototype"/>
-	 -->
-	<!-- 此頁提供 xxxxAction的程式碼位置-->
-	<!-- 以下以gameAction為例:
-			<bean id ="gameAction" ....>的值對應到 struts.xml裡的  
-			<action name="game" class="gameAction" method="execute"> --> 
-			
-	<!-- scope="prototype" 是每寄一次http://localhost:8080/softleader-iii-sportslottery/game, 
-			就會重新new 一個game的bean  
-			game bean的位置: 
-			/softleader/sportslottery/setting/entity/GameEntity.java
-			/softleader/sportslottery/common/entity/GenericEntity.java	
-	-->
+	<bean id="testAction" class="tw.com.pmt.catsofun.core.web.app.action.TestAction" scope="prototype"/>
+	<bean id="roleAction" class="tw.com.pmt.catsofun.core.web.app.action.RoleAction" scope="prototype"/>
+	
 </beans>

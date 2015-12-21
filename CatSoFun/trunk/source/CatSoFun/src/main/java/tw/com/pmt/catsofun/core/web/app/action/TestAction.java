@@ -3,9 +3,12 @@ package tw.com.pmt.catsofun.core.web.app.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.opensymphony.xwork2.ActionSupport;
 
-import tw.com.pmt.catsofun.core.common.util.CacheUtil;
+import tw.com.pmt.catsofun.core.business.service.IItemService;
+import tw.com.pmt.catsofun.core.business.service.IResponseService;
 import tw.com.pmt.catsofun.core.db.model.Item;
 import tw.com.pmt.catsofun.core.db.model.Response;
 
@@ -20,27 +23,30 @@ public class TestAction extends ActionSupport {
 
 	private String selectedOption;
 	private static List<String> selectedOptions;
-
 	private static List<Integer> chooseItemPool;
 
+	@Autowired
+	private IItemService itemService;
+	
+	@Autowired
+	private IResponseService responseService;
+	
 	private Item item;
 	private Response response;
+	private String[] options;
 
 	public String showCatMainPage() {
-		return ActionSupport.SUCCESS;
-	}
-	
-	public String showCatMainContent() {
 		System.out.println("showCatMainContent() begin...");
 
 		// 初始化可選題庫，選取題目
-		List<Integer> chooseItemPool = initChooseItemPool();
+		//List<Integer> chooseItemPool = initChooseItemPool();
+		initChooseItemPool();
 		selectedOptions = new ArrayList<String>();
 
 		// 隨機選題與作答反應
-		item = chooseRandomItem(chooseItemPool);
-		int responseIndex = item.getAnswerType().intValue();
-		response = CacheUtil.getCatResponses().get(responseIndex);
+//		item = chooseRandomItem(chooseItemPool);
+//		int responseIndex = item.getAnswerType().intValue();
+//		response = responseService.getAllResponse().get(responseIndex);
 
 		return ActionSupport.SUCCESS;
 	}
@@ -59,8 +65,10 @@ public class TestAction extends ActionSupport {
 		// 隨機選題與作答反應
 		item = chooseRandomItem(chooseItemPool);
 		int responseIndex = item.getAnswerType().intValue();
-		response = CacheUtil.getCatResponses().get(responseIndex);
-
+		
+		response = responseService.getAllResponse().get(responseIndex);
+		options = new String[]{response.getResponseContent()};
+		
 		System.out.println("本次所選題目：" + item);
 		System.out.println("本次所選題目選項：" + response);
 
@@ -76,7 +84,7 @@ public class TestAction extends ActionSupport {
 		Integer choosedItemNum = chooseItemPool.get(choosedItemIndex);
 		chooseItemPool.remove(choosedItemIndex);
 
-		return CacheUtil.getCatItems().get(choosedItemNum);
+		return itemService.findAllItem().get(choosedItemNum);
 	}
 
 	private List<Integer> initChooseItemPool() {
@@ -112,6 +120,14 @@ public class TestAction extends ActionSupport {
 
 	public void setResponse(Response response) {
 		this.response = response;
+	}
+
+	public String[] getOptions() {
+		return options;
+	}
+
+	public void setOptions(String[] options) {
+		this.options = options;
 	}
 	
 }

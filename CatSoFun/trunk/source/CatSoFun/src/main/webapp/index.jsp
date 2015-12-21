@@ -11,7 +11,8 @@
 	<h1>CatSoFun is Work</h1>
 	
 	<br>
-		<a href="/CatSoFun/frontend/test.action" target="_blank">cat</a>
+		<h3><a href="/CatSoFun/mock" target="_blank">mock_cat</a></h3>
+		<h3><a href="/CatSoFun/frontend/show" target="_blank">frontend_cat</a></h3>
 </body>
 
 </html>

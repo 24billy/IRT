@@ -4,6 +4,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class CatAction extends ActionSupport {
 	
+	private static final long serialVersionUID = -5912867523538941164L;
+
 	private String item;
 	private String selectedOption;
 	private String[] options;
@@ -32,7 +34,7 @@ public class CatAction extends ActionSupport {
 		this.item = item;
 	}
 
-	public String choose() {
+	public String chooseItem() {
 		System.out.println("choose() begin...");
 		
 		//收到選項
