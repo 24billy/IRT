@@ -17,12 +17,16 @@ public class RecordServiceImplTest extends BaseTest {
 		record.setId(1L);
 		record.setAbility(0.2);
 		record.setSelectedItems(new int[]{1,2,3,4,5});
+		record.setSelectedOptions(new int[]{1,2,1,1,3});
 		record.setIsFinished(true);
+		record.setRoleId(1L);
 		
 		System.out.println("before" + recordService.getAllRecord());
 		
 		recordService.insertRecord(record);
 		System.out.println("after" + recordService.getAllRecord());
+		
+		System.out.println(recordService.getRecordByRoleId(1L));
 	}
 
 	@Test
@@ -31,7 +35,8 @@ public class RecordServiceImplTest extends BaseTest {
 	}
 
 	@Test
-	public void testGetRecordById() {
+	public void testGetRecordByRoleId() {
+		
 	}
 
 }

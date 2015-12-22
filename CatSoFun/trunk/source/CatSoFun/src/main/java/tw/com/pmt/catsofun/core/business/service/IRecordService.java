@@ -22,11 +22,19 @@ public interface IRecordService {
 	List<Record> getAllRecord();
 	
 	/**
-	 * 根據Id取得作答反應
+	 * 根據id取得作答紀錄
 	 * 
 	 * @param id
 	 * @return Record
 	 */
 	Record getRecordById(Long id);
+	
+	/**
+	 * 根據roleId取得作答紀錄
+	 * 
+	 * @param roleId
+	 * @return Record
+	 */
+	Record getRecordByRoleId(Long roleId);
 	
 }

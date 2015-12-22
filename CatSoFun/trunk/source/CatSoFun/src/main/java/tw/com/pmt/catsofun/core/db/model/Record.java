@@ -26,9 +26,15 @@ public class Record extends GenericEntity  {
 	@Column(name = "selected_items")
 	private int[] selectedItems;
 	
+	@Column(name = "selected_options")
+	private int[] selectedOptions;
+	
 	@Column(name = "is_finished")
 	private Boolean isFinished;
 
+	@Column(name = "role_id")
+	private Long roleId;
+	
 	public Double getAbility() {
 		return ability;
 	}
@@ -53,11 +59,28 @@ public class Record extends GenericEntity  {
 		this.isFinished = isFinished;
 	}
 
+	public int[] getSelectedOptions() {
+		return selectedOptions;
+	}
+
+	public void setSelectedOptions(int[] selectedOptions) {
+		this.selectedOptions = selectedOptions;
+	}
+
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
+
 	@Override
 	public String toString() {
 		return "Record [ability=" + ability + ", selectedItems="
-				+ Arrays.toString(selectedItems) + ", isFinished=" + isFinished
-				+ ", id=" + id + "]";
+				+ Arrays.toString(selectedItems) + ", selectedOptions="
+				+ Arrays.toString(selectedOptions) + ", isFinished="
+				+ isFinished + ", roleId=" + roleId + ", id=" + id + "]";
 	}
-	
+
 }
