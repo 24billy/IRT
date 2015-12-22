@@ -92,7 +92,7 @@ public class TestAction extends ActionSupport {
 		Integer choosedItemNum = chooseItemPool.get(choosedItemIndex);
 		chooseItemPool.remove(choosedItemIndex);
 
-		return itemService.findAllItem().get(choosedItemNum);
+		return itemService.getAllItem().get(choosedItemNum);
 	}
 
 	private List<Integer> initChooseItemPool() {

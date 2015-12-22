@@ -22,12 +22,12 @@ public class ItemServiceImpl extends GenericService<Item> implements IItemServic
 	}
 	
 	@Override
-	public List<Item> findAllItem() {
+	public List<Item> getAllItem() {
 		return itemDao.findAll();
 	}
 
 	@Override
-	public Item findItemById(Long id) {
+	public Item getItemById(Long id) {
 		return itemDao.findById(id);
 	}
 

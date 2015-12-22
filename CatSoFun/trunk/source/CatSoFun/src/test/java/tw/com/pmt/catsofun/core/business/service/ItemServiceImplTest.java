@@ -14,12 +14,14 @@ public class ItemServiceImplTest extends BaseTest {
 	
 	@Test
 	public void testFindAllItem() {
-		System.out.println(itemService.findAllItem());
+		System.out.println(itemService.getAllItem());
 	}
 
 	@Test
 	public void testFindItemById() {
-		fail("Not yet implemented");
+		Long id = 1L;
+		
+		System.out.println(itemService.getItemById(id));
 	}
 
 }

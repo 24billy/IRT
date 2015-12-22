@@ -38,7 +38,7 @@ public class TestActionTest extends BaseTest {
 
 	private Item itemSelection(Double initAbility) {
 		// 取得所有試題
-		itemList = itemService.findAllItem();
+		itemList = itemService.getAllItem();
 
 		// 初始化參數
 		Double prior = 0.5;

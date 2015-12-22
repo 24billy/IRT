@@ -6,8 +6,20 @@ import tw.com.pmt.catsofun.core.db.model.Item;
 
 public interface IItemService {
 
-	List<Item> findAllItem();
+	/**
+	 * 取得所有試題
+	 * 
+	 * @return List<Item>
+	 */
+	List<Item> getAllItem();
 	
-	Item findItemById(Long id);
+	/**
+	 * 根據Id取得試題
+	 * 
+	 * @param id
+	 * 
+	 * @return Item
+	 */
+	Item getItemById(Long id);
 	
 }

@@ -69,7 +69,7 @@ public class CacheUtil {
 	 */
 	private static void checkCache() {
 		if (catItems == null || catItems.isEmpty()) {
-			catItems = itemService.findAllItem();
+			catItems = itemService.getAllItem();
 		}
 
 		if (catResponses == null || catResponses.isEmpty()) {
