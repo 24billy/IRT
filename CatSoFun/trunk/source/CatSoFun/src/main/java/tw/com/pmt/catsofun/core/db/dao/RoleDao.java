@@ -24,5 +24,24 @@ public class RoleDao extends GenericDao<Role> {
 		
 		return null;
 	}
+
+	/**
+	 * 根據帳號名稱與密碼取得相關資料
+	 * 
+	 * @param userName userPassword
+	 * @return Role
+	 */
+	public Role findRoleByUserNameAndUserPassword(String userName, String userPassword) {
+		if (userName != null && !userName.isEmpty() && userPassword != null && !userPassword.isEmpty()) {
+			Query query = getSession().createQuery("from Role where user_name = :userName and user_password = :userPassword");
+			
+			query.setString("userName", userName);
+			query.setString("userPassword", userPassword);
+
+			return (Role) query.uniqueResult();
+		}
+		
+		return null;
+	}
 	
 }
