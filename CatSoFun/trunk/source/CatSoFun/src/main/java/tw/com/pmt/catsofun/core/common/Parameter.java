@@ -14,6 +14,7 @@ public class Parameter {
 	// Cat parameters
 	public static final Double TEST_PRIOR = 0.5;
 	public static final Double TEST_TERMINATION_CRITERIA = 0.001d;
+	public static final Double TEST_MAX_ITEM_LENGTH = 12d;
 	public static final Double TEST_POPULATION_MEAN = 0d;
 	public static final Double TEST_VARIANCE = 2.0d;
 	

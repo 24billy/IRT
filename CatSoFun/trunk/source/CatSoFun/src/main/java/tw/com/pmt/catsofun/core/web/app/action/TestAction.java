@@ -164,8 +164,8 @@ public class TestAction extends ActionSupport {
 			Long[] options = new Long[selectedOptions.size()];
 			selectedOptions.toArray(options);
 	
-			// 設定中止條件，作答十題結束
-			if (chooseItemPool.size() < 13) {
+			// 設定中止條件，作答十二題結束
+			if (selectedItems.size() > Parameter.TEST_MAX_ITEM_LENGTH) {
 				isFinished = true;
 				record.setIsFinished(isFinished);
 			} else {

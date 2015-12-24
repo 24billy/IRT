@@ -172,7 +172,7 @@ $(document).ready(function(){
 					var obj = $.parseJSON(json); //解析json
 					console.log(json);
 					if (obj.isFinished) {
-						alert("test finished")
+						alert("test finished:ability = " + obj.record.ability)
 					} else {
 						var item = obj.item;
 						var response = obj.response;
