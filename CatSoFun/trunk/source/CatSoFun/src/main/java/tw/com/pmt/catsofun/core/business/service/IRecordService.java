@@ -37,4 +37,11 @@ public interface IRecordService {
 	 */
 	Record getRecordByRoleId(Long roleId);
 	
+	/**
+	 * 取得目前最後一筆資料Id
+	 * 
+	 * @return Record
+	 */
+	Record getLastRecordId();
+	
 }

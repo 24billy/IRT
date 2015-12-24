@@ -8,6 +8,7 @@ import tw.com.pmt.catsofun.core.db.model.Record;
 
 @Repository
 public class RecordDao extends GenericDao<Record> {
+	
 	/**
 	 * 根據帳號名稱取得相關資料
 	 * 
@@ -23,4 +24,5 @@ public class RecordDao extends GenericDao<Record> {
 		
 		return null;
 	}
+	
 }

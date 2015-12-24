@@ -42,4 +42,15 @@ public class RecordServiceImpl extends GenericService<Record> implements
 		return recordDao.findRecordByRoleId(roleId);
 	}
 
+	@Override
+	public Record getLastRecordId() {
+		List<Record> recordList = recordDao.findAll();
+		
+		if (recordList != null && !recordList.isEmpty()) {
+			return recordList.get(recordList.size() - 1);
+		}
+
+		return null;
+	}
+
 }

@@ -20,14 +20,17 @@ public class Record extends GenericEntity  {
 
 	private static final long serialVersionUID = 3131964513654250815L;
 	
+	@Column(name = "init_ability", columnDefinition = "NUMERIC(8,3) default 0")
+	private Double initAbility;
+	
 	@Column(name = "ability", columnDefinition = "NUMERIC(8,3) default 0")
 	private Double ability;
 	
 	@Column(name = "selected_items")
-	private int[] selectedItems;
+	private Long[] selectedItems;
 	
 	@Column(name = "selected_options")
-	private int[] selectedOptions;
+	private Long[] selectedOptions;
 	
 	@Column(name = "is_finished")
 	private Boolean isFinished;
@@ -35,6 +38,15 @@ public class Record extends GenericEntity  {
 	@Column(name = "role_id")
 	private Long roleId;
 	
+	
+	public Double getInitAbility() {
+		return initAbility;
+	}
+
+	public void setInitAbility(Double initAbility) {
+		this.initAbility = initAbility;
+	}
+
 	public Double getAbility() {
 		return ability;
 	}
@@ -43,11 +55,11 @@ public class Record extends GenericEntity  {
 		this.ability = ability;
 	}
 
-	public int[] getSelectedItems() {
+	public Long[] getSelectedItems() {
 		return selectedItems;
 	}
 
-	public void setSelectedItems(int[] selectedItems) {
+	public void setSelectedItems(Long[] selectedItems) {
 		this.selectedItems = selectedItems;
 	}
 
@@ -59,11 +71,11 @@ public class Record extends GenericEntity  {
 		this.isFinished = isFinished;
 	}
 
-	public int[] getSelectedOptions() {
+	public Long[] getSelectedOptions() {
 		return selectedOptions;
 	}
 
-	public void setSelectedOptions(int[] selectedOptions) {
+	public void setSelectedOptions(Long[] selectedOptions) {
 		this.selectedOptions = selectedOptions;
 	}
 
@@ -77,10 +89,11 @@ public class Record extends GenericEntity  {
 
 	@Override
 	public String toString() {
-		return "Record [ability=" + ability + ", selectedItems="
-				+ Arrays.toString(selectedItems) + ", selectedOptions="
-				+ Arrays.toString(selectedOptions) + ", isFinished="
-				+ isFinished + ", roleId=" + roleId + ", id=" + id + "]";
+		return "Record [initAbility=" + initAbility + ", ability=" + ability
+				+ ", selectedItems=" + Arrays.toString(selectedItems)
+				+ ", selectedOptions=" + Arrays.toString(selectedOptions)
+				+ ", isFinished=" + isFinished + ", roleId=" + roleId + ", id="
+				+ id + "]";
 	}
 
 }

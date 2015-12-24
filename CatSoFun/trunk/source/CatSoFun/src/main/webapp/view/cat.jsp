@@ -207,7 +207,7 @@ $(document).ready(function(){
 				success : function(json) {
 					var obj = $.parseJSON(json); //解析json
 					console.log(json);
-					if (obj.isEnd) {
+					if (obj.isFinished) {
 						alert("test finished")
 					} else {
 						var item = obj.item;
