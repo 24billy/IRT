@@ -36,4 +36,9 @@ public class RoleServiceImpl extends GenericService<Role> implements IRoleServis
 		return roleDao.findAll();
 	}
 
+	@Override
+	public Role getRoleByUserNameAndPwd(String userName, String userPassword) {
+		return roleDao.findRoleByUserNameAndUserPassword(userName, userPassword);
+	}
+
 }

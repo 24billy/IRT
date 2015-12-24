@@ -12,4 +12,6 @@ public interface IRoleServise {
 	
 	Role insertRole(Role role);
 	
+	Role getRoleByUserNameAndPwd(String userName, String userPassword);
+
 }
