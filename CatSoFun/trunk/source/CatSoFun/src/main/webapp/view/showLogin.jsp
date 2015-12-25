@@ -20,7 +20,6 @@
 body {
 	background-image: url(../pic/pen.jpg);
 	background-size: cover;
-	/*   background-color: #000000; */
 }
 </style>
  
@@ -56,7 +55,7 @@ body {
 <br><br><br><br><br>
 <div class="row" style="opacity:0.6;">
 	
-	<div class="col-md-4 col-md-offset-4 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px;">
+	<div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px;">
 		<form method="POST" class="form-signin" role="form" action="login">
 			<h2 class="form-signin-heading">請登入帳密</h2>
 			<label for="inputUserName" class="sr-only">UserName</label> 

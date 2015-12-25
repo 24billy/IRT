@@ -13,17 +13,10 @@
 <link href="/CatSoFun/css/bootstrap.min.css" rel="stylesheet">
 
 <style type="text/css">
-
-.radio:hover
-	{
-		background-color: #F5A9F2;
-		font-size: 28px;
-	}
-body
-	 { 
-	 background-image: url(/CatSoFun/pic/.jpg);
-	 background-size: cover;
-	 }
+body {
+	background-image: url(/CatSoFun/pic/pen.jpg);
+	background-size: cover;
+}
 </style>
  
 </head>
@@ -55,12 +48,13 @@ body
 
 <!-- BEGIN Content -->
 <br><br><br><br><br>
-<div class="row ">
-	<div class="col-md-4 col-md-offset-4 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px;text-align: center;">
+<div class="row" style="opacity:0.6;">
+	<div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px;text-align: center;">
 		<h2>帳號或密碼錯誤!</h2>
-		<h5>10秒後將自動導回登入頁! 您也可點選下列連結返回登入頁!</h5>
+		<h4>10秒後將自動導回登入頁!</h4> 
+		<h4>您也可點選下列連結返回登入頁!</h4>
 		<br>
-		<button class="btn btn-info"><a href="/CatSoFun/frontend/showLogin">重新登入</a></button>
+		<button class="btn btn-primary btn-block"><a href="/CatSoFun/frontend/showLogin" style="text-decoration:none; color: white;">重新登入</a></button>
 	</div>
 </div>
 
@@ -69,7 +63,7 @@ body
 <!-- BEGIN footer -->
 <div class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
 	<div class="container">
-		<p>Copyright ©2015 footer......</p>
+		<p style="color: white;">Copyright ©2015 footer......</p>
 	</div>
 </div>
 <!-- END footer -->

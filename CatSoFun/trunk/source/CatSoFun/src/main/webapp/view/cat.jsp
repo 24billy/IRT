@@ -12,35 +12,17 @@
 <link href="/CatSoFun/css/bootstrap.min.css" rel="stylesheet">
 
 <style type="text/css">
+.radio:hover {
+	font-size: 28px;
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 5px;
+}
 
-.radio:hover
-	{
-/* 		background-color: #F5A9F2; */
-		font-size: 28px;
-		border-width:2px; 
-		border-style:solid;
-		border-radius:5px;
-	}
-
-/* .radio:checked */
-/* 	{ */
-/*  		background-color: #F5A9F2; */
-/* 		font-size: 28px; */
-/* 		border-width:2px;  */
-/* 		border-style:solid; */
-/* 		border-radius:5px; */
-/* 	}	 */
-
-/* 	input:checked */
-/* 	{ */
-/* 		background-color: #F5A9F2; */
-/* 	} */
-	
-.test123
-	 { 
-	 background-image: url(/CatSoFun/pic/camera.jpg);
-	 background-size: cover;
-	 }
+.contentDiv {
+	background-image: url(/CatSoFun/pic/camera.jpg);
+	background-size: cover;
+}
 </style>
  
 </head>
@@ -64,7 +46,7 @@
 			    <li><a href="#contact">聯絡我們</a></li>
 			</ul>
 			<form class="navbar-form navbar-right" role="search">
-			    <input class="btn btn-default" type="button" value="登出" onclick="location.href='cat0.html'">
+			    <input class="btn btn-default" type="button" value="登出" onclick="location.href='logout'">
 			</form>
 		</div>
 	</div>
@@ -73,21 +55,16 @@
 
 <!-- BEGIN Content -->
 
-<div class="test123">
+<div class="contentDiv">
 
 	<!-- BEGIN 測驗開始頁 -->
-	<div class="row" id="welcomeDiv" style="opacity:0.6;">
-		<br><br><br><br><br>
-		
-		<div class="col-md-6 col-md-offset-3" style="font-family:Microsoft JhengHei; font-size: 20px;"> 
-			<div class="thumbnail">
-		      <div class="caption">
-		        <h4 style="font-family: bold;font-size: 26px;">歡迎XXX</h4>
+	<br><br><br><br><br>
+	<div class="row" style="opacity:0.6;" id="welcomeDiv">
+		<div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px;">
+				<h4 style="font-family: bold;font-size: 26px;">歡迎XXX</h4>
 		        <p>這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗...測驗說明測驗說明</p>
 		        <br>
 		        <p><button type="button" class="btn btn-primary form-control" id="begin">開始測驗</button></p>
-		      </div>
-		    </div>
 		</div>
 	</div>
 	<!-- END 測驗開始頁 -->
@@ -99,35 +76,35 @@
 		<div class="col-md-10 col-md-offset-1" style="padding: 32px 64px ">
 			<br><br>
 	
-		<div style="border-width:1px; border-style:solid;border-radius:5px; padding: 20px;">
-			<h4 id="questionCount">Q1.</h4>
-			<p style="font-size: 24px;color: white;font-weight:;" id="guild">第一組問題將問您從事某項特定的活動時有多少困難。每項問題都是探討有些人在中風後所遇到的困難。
-					空格中的號碼描述您過去一週從事該活動時的困難，請您將最適當的號碼圈起來或打。</p>
-			<p id="question" style="font-size: 24px;color: white;font-weight:;">在過去一週裡：  您從事以前的工作有困難嗎？</p>
-			
-			<form role="form" style="font-size: 26px; color: white;">
-			  <div class="radio" >
-			    <label><input type="radio" name="optradio" value="0" checked id="reset"><span id="opt0">完全無法做到</span></label>
-			  </div>
-			  <div class="radio">
-			    <label><input type="radio" name="optradio" value="1"><span id="opt1">很多困難</span></label>
-			  </div>
-			  <div class="radio">
-			    <label><input type="radio" name="optradio" value="2"><span id="opt2">中等困難</span></label>
-			  </div>
-			  <div class="radio">
-			    <label><input type="radio" name="optradio" value="3"><span id="opt3">一點困難</span></label>
-			  </div>
-			  <div class="radio">
-			    <label><input type="radio" name="optradio" value="4"><span id="opt4">完全沒有困難</span></label>
-			  </div>
-			  <br> 
-			  <div class="text-center">
-			    <button type="button" class="btn btn-primary btn-lg  form-control" id="next" style="">NEXT</button>
-			  </div>
-			</form>
-		</div>
-		<br>	
+			<div style="border-width:1px; border-style:solid;border-radius:5px; padding: 20px;">
+				<h4 id="questionCount">Q1.</h4>
+				<p style="font-size: 24px;color: white;font-weight:;" id="guild">第一組問題將問您從事某項特定的活動時有多少困難。每項問題都是探討有些人在中風後所遇到的困難。
+						空格中的號碼描述您過去一週從事該活動時的困難，請您將最適當的號碼圈起來或打。</p>
+				<p id="question" style="font-size: 24px;color: white;font-weight:;">在過去一週裡：  您從事以前的工作有困難嗎？</p>
+				
+				<form role="form" style="font-size: 26px; color: white;">
+				  <div class="radio" >
+				    <label><input type="radio" name="optradio" value="0" checked id="reset"><span id="opt0">完全無法做到</span></label>
+				  </div>
+				  <div class="radio">
+				    <label><input type="radio" name="optradio" value="1"><span id="opt1">很多困難</span></label>
+				  </div>
+				  <div class="radio">
+				    <label><input type="radio" name="optradio" value="2"><span id="opt2">中等困難</span></label>
+				  </div>
+				  <div class="radio">
+				    <label><input type="radio" name="optradio" value="3"><span id="opt3">一點困難</span></label>
+				  </div>
+				  <div class="radio">
+				    <label><input type="radio" name="optradio" value="4"><span id="opt4">完全沒有困難</span></label>
+				  </div>
+				  <br> 
+				  <div class="text-center">
+				    <button type="button" class="btn btn-primary btn-lg  form-control" id="next" style="">NEXT</button>
+				  </div>
+				</form>
+			</div>
+			<br>	
 				
 		</div>
 	</div>
@@ -142,7 +119,7 @@
 <!-- BEGIN footer -->
 <div class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
 	<div class="container">
-		<p>Copyright ©2015 footer......</p>
+		<p style="color: white;">Copyright ©2015 footer......</p>
 	</div>
 </div>
 <!-- END footer -->

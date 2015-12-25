@@ -12,7 +12,6 @@
 	
 	<br>
 		<h3><a href="/CatSoFun/mock" target="_blank">mock_cat</a></h3>
-		<h3><a href="/CatSoFun/frontend/show" target="_blank">frontend_cat</a></h3>
 		
 		<h3><a href="/CatSoFun/frontend/showLogin" target="_blank">showLogin</a></h3>
 </body>
