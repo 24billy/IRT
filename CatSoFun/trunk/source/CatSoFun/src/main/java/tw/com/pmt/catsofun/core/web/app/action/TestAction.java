@@ -63,7 +63,8 @@ public class TestAction extends ActionSupport {
 		initChooseItemPool();
 		selectedOptions = new ArrayList<Long>();
 
-		initAbility = (Math.random() * 1 - 0.5);
+//		initAbility = (Math.random() * 1 - 0.5);
+		initAbility = 0.3536939680421002;
 		currentAbility = initAbility;
 		
 		// 隨機選題與作答反應
@@ -240,8 +241,8 @@ public class TestAction extends ActionSupport {
 
 			Double itemInformation = betaProb - (expectK * expectK) + prior;
 
-//			System.out.println("itemInformation(" + item.getId() + "):"
-//					+ itemInformation);
+			System.out.println("itemInformation(" + item.getId() + "):"
+					+ itemInformation);
 
 			if (itemInformation > maxInformation) {
 				maxInformation = itemInformation;

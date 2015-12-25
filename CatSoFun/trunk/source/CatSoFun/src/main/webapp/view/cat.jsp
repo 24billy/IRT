@@ -100,8 +100,8 @@
 			<br><br>
 	
 		<div style="border-width:1px; border-style:solid;border-radius:5px; padding: 20px;">
-			<h4>Q1.</h4>
-			<p style="font-size: 24px;color: white;font-weight:;">第一組問題將問您從事某項特定的活動時有多少困難。每項問題都是探討有些人在中風後所遇到的困難。
+			<h4 id="questionCount">Q1.</h4>
+			<p style="font-size: 24px;color: white;font-weight:;" id="guild">第一組問題將問您從事某項特定的活動時有多少困難。每項問題都是探討有些人在中風後所遇到的困難。
 					空格中的號碼描述您過去一週從事該活動時的困難，請您將最適當的號碼圈起來或打。</p>
 			<p id="question" style="font-size: 24px;color: white;font-weight:;">在過去一週裡：  您從事以前的工作有困難嗎？</p>
 			
@@ -149,8 +149,11 @@
 
 
 <script>
-$(document).ready(function(){
+var questionCount = 0 ;
 
+$(document).ready(function(){
+	questionCount = 1 ;
+	
 	// 按下 開始測驗鍵
 	$('#begin').click(function() {
 		$('#welcomeDiv').hide();
@@ -169,15 +172,19 @@ $(document).ready(function(){
 				data : params,
 				dataType : "text", //ajax返回值設定為text
 				success : function(json) {
+					questionCount++;
+					
 					var obj = $.parseJSON(json); //解析json
-					console.log(json);
+
 					if (obj.isFinished) {
 						alert("test finished:ability = " + obj.record.ability)
 					} else {
 						var item = obj.item;
 						var response = obj.response;
 
+						$("#questionCount").html("Q" + questionCount + ".");
 						$("#question").html(item.itemContent);
+						$("#guild").html(obj.response.guild);
 						
 						$("#opt0").html(response.option01);
 						$("#opt1").html(response.option02);
@@ -189,7 +196,6 @@ $(document).ready(function(){
 					}
 				},
 				error : function(json) {
-					alert("json=" + json);
 					return false;
 				}
 			});
