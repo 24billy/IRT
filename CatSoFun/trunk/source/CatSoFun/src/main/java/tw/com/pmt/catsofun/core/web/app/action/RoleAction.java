@@ -7,6 +7,7 @@ import tw.com.pmt.catsofun.core.business.service.IItemService;
 import tw.com.pmt.catsofun.core.business.service.IRoleServise;
 import tw.com.pmt.catsofun.core.db.model.Role;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -45,30 +46,35 @@ public class RoleAction extends ActionSupport{
 	}
 
 	public String login() {
-		System.out.println("loginId = " + loginId);
-		
-		String sflag = ERROR;
-		
+		System.out.println("login() begin...");
+		System.out.println("loginId = " + loginId + " ; pwd = " + pwd);
+
+		String sflag = ActionSupport.ERROR;
+
 		if (StringUtils.isNotEmpty(loginId) && StringUtils.isNotEmpty(pwd)) {
 			//和DB比對
 			Role role = roleService.getRoleByUserNameAndPwd(loginId, pwd);
-			
+
             if (role != null) {
             	System.out.println("Get Role : " + role.toString());
 
-            	sflag = "success";
+            	sflag = ActionSupport.SUCCESS;
             } else {
             	System.out.println("Didn't found Role");
-            	sflag = "error";
             }
 		} 
-		
+
+		ActionContext.getContext().getSession().put("loginFlag", sflag);
+
 		return sflag;
 	}
-	
-	public String showMainFramePage() {
-		
-		return "success";
+
+	public String logout() {
+		System.out.println("logout() begin...");
+
+		ActionContext.getContext().getSession().put("loginFlag", "logout");
+
+		return ActionSupport.SUCCESS;
 	}
-	
+
 }
