@@ -1,6 +1,6 @@
 --作答反應--
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (1,'完全無法做到','很多困難','中等困難','一點困難','完全沒有困難','在過去一週裡：');
-INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (2,'從未如此','很少時間如此','某些時間如此','大部分時間如此','總是如此','在過去一週裡：');
+INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (2,'非常同意','中等同意','不同意也不反對','中等不同意','非常不同意','在過去一週裡：');
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (3,'從未如此','很少時間如此','某些時間如此','大部分時間如此','總是如此','在過去四星期內,您在從事以下活動而感覺受限的情況有多頻繁…');
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (4,'極不滿意','不滿意','中等程度滿意','滿意','極滿意','我們的問題所關心的是您最近兩星期內的生活情形，請您用自己的標準、希望、愉快、以及關注點來回答問題。請參考下面的例題：');
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (5,'完全沒有','有一點有','中等程度有','很有','極有','我們的問題所關心的是您最近兩星期內的生活情形，請您用自己的標準、希望、愉快、以及關注點來回答問題。請參考下面的例題：');
