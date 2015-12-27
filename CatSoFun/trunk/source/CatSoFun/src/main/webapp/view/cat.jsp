@@ -151,59 +151,56 @@
 
 <!-- Modal -->
 <div id="recordDialog" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" id="recordTitle">能力估計結果</h4>
-      </div>
-      <div class="modal-body">
-        <table>
-        	<tr>
-        		<td>目前能力估計值</td>
-        		<td id="recordAbility"></td>
-        	</tr>
-        	<tr>
-        		<td>所選題目</td>
-        		<td id="recordSelectedItems"></td>
-        	</tr>
-        	<tr>
-        		<td>作答反應</td>
-        		<td id="recordSelectedOptions"></td>
-        	</tr>
-        </table>
-      </div>
-      <div class="modal-footer">
-		<button type="button" class="btn btn-success" onclick="window.location.href='/CatSoFun/mock'">重新施測</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">關閉</button>
-      </div>
-    </div>
-
-  </div>
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+		    <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal">&times;</button>
+			    <h4 class="modal-title" id="recordTitle">能力估計結果</h4>
+		    </div>
+		    <div class="modal-body">
+			    <table>
+				   	<tr>
+				   		<td>目前能力估計值</td>
+				   		<td id="recordAbility"></td>
+				   	</tr>
+				   	<tr>
+				   		<td>所選題目</td>
+				   		<td id="recordSelectedItems"></td>
+				   	</tr>
+				   	<tr>
+				   		<td>作答反應</td>
+				   		<td id="recordSelectedOptions"></td>
+				   	</tr>
+			    </table>
+		    </div>
+		    <div class="modal-footer">
+				<button type="button" class="btn btn-success" onclick="window.location.href='/CatSoFun/mock'">重新施測</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">關閉</button>
+			</div>
+		</div>
+	
+	</div>
 </div>
 
 <div class="container">
-  <!-- Trigger the modal with a button -->
-  <button id="warningDialog" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: none;">Open Modal</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-body">
-          <h3>請選擇選項!</h3>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
+	<!-- Trigger the modal with a button -->
+	<button id="warningDialog" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: none;">Open Modal</button>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-body">
+					<h3>請選擇選項!</h3>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+				</div>
+			</div>
+		</div>
+	</div>
   
 </div>
 
@@ -213,89 +210,97 @@ var questionCount = 0 ;
 $(document).ready(function(){
 	questionCount = 1 ;
 	
-	// 按下 開始測驗鍵
-	$('#begin').click(function() {
-		$('#welcomeDiv').hide();
-		$('#quizDiv').show();
-	});
+	
 
 	// 	按下 next鍵 發ajax 顯示下一題
 	$('#next').click(function() {
-	
-			var option = $('input:radio[name=optradio]:checked').val();
-			if (option == null || option == undefined || option == ''){
-				//檢核有無勾選radio button
-				$("#warningDialog").trigger( "click" );
-				return;
-			}
-	
-			var params = {
-				selectedOption : $('input:radio[name=optradio]:checked').val()
-			};
 
-			$.ajax({
-				type : "POST",
-				url : "chooseItem.action",
-				data : params,
-				dataType : "text", //ajax返回值設定為text
-				success : function(json) {
-					questionCount++;
+		var option = $('input:radio[name=optradio]:checked').val();
+		if (option == null || option == undefined || option == ''){
+			//檢核有無勾選radio button
+			$("#warningDialog").trigger( "click" );
+			return;
+		}
+
+		var params = {
+			selectedOption : $('input:radio[name=optradio]:checked').val()
+		};
+
+		$.ajax({
+			type : "POST",
+			url : "chooseItem.action",
+			data : params,
+			dataType : "text", //ajax返回值設定為text
+			success : function(json) {
+				questionCount++;
+				
+				var obj = $.parseJSON(json); //解析json
+
+				if (obj.isFinished) {
+					refreshRecordDialog(obj.record);
+					$("#recordTitle").html("測驗結束");
+					$("#recordButton").trigger( "click" );
+
+					// 刷新內容div
+					$('#theta').html(obj.record.ability);
+					$('#contentDiv').html($('#finishDiv').html());
+				} else {
+					var item = obj.item;
+					var response = obj.response;
+
+					$("#questionCount").html("Q" + questionCount + ".");
+					$("#question").html(item.itemContent);
+					$("#guild").html(obj.response.guild);
 					
-					var obj = $.parseJSON(json); //解析json
+					$("#opt0").html(response.option01);
+					$("#opt1").html(response.option02);
+					$("#opt2").html(response.option03);
+					$("#opt3").html(response.option04);
+					$("#opt4").html(response.option05);
 
-					if (obj.isFinished) {
-						$("#recordTitle").html("測驗結束");
-						$("#recordButton").trigger( "click" );
-
-						// 刷新內容div
-						$('#theta').html(obj.record.ability);
-						$('#contentDiv').html($('#finishDiv').html());
-					} else {
-						var item = obj.item;
-						var response = obj.response;
-
-						$("#questionCount").html("Q" + questionCount + ".");
-						$("#question").html(item.itemContent);
-						$("#guild").html(obj.response.guild);
-						
-						$("#opt0").html(response.option01);
-						$("#opt1").html(response.option02);
-						$("#opt2").html(response.option03);
-						$("#opt3").html(response.option04);
-						$("#opt4").html(response.option05);
-
-						$("td#recordAbility").html(obj.record.ability);
-						
-						var selectedItems='';
-						for(var key in obj.record.selectedItems){
-							if(key == 0) {
-								selectedItems = obj.record.selectedItems[key]
-							} else {
-								selectedItems += "," + obj.record.selectedItems[key]
-							}
-						}
-						$("td#recordSelectedItems").html(selectedItems);
-						
-						var selectedOptions='';
-						for(var key in obj.record.selectedOptions){
-							if(key == 0) {
-								selectedOptions = obj.record.selectedOptions[key]
-							} else {
-								selectedOptions += "," + obj.record.selectedOptions[key]
-							}
-						}
-						$("td#recordSelectedOptions").html(selectedOptions);
-						
-						$(':checked').prop('checked',false);
-					}
-				},
-				error : function(json) {
-					return false;
+					refreshRecordDialog(obj.record);
+					
+					$(':checked').prop('checked',false);
 				}
-			});
+			},
+			error : function(json) {
+				return false;
+			}
 		});
-
 	});
+
+});
+
+//按下 開始測驗鍵
+$('#begin').click(function() {
+	$('#welcomeDiv').hide();
+	$('#quizDiv').show();
+});
+
+function refreshRecordDialog(record) {
+	$("td#recordAbility").html(record.ability);
+	
+	var selectedItems='';
+	for(var key in record.selectedItems){
+		if(key == 0) {
+			selectedItems = record.selectedItems[key]
+		} else {
+			selectedItems += "," + record.selectedItems[key]
+		}
+	}
+	$("td#recordSelectedItems").html(selectedItems);
+	
+	var selectedOptions='';
+	for(var key in record.selectedOptions){
+		if(key == 0) {
+			selectedOptions = record.selectedOptions[key]
+		} else {
+			selectedOptions += "," + record.selectedOptions[key]
+		}
+	}
+	$("td#recordSelectedOptions").html(selectedOptions);
+};
+	
 </script>
 
 </body>
