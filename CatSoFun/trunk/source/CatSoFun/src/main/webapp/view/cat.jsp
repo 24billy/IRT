@@ -209,8 +209,6 @@ var questionCount = 0 ;
 
 $(document).ready(function(){
 	questionCount = 1 ;
-	
-	
 
 	// 	按下 next鍵 發ajax 顯示下一題
 	$('#next').click(function() {
@@ -239,7 +237,6 @@ $(document).ready(function(){
 				if (obj.isFinished) {
 					refreshRecordDialog(obj.record);
 					$("#recordTitle").html("測驗結束");
-					$("#recordButton").trigger( "click" );
 
 					// 刷新內容div
 					$('#theta').html(obj.record.ability);
