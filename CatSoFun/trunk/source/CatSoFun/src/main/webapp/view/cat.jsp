@@ -28,6 +28,18 @@
 		background-image: url(/CatSoFun/pic/camera.jpg);
 		background-size:cover;
 	}
+	
+	input[type="radio"] {
+  		display: none;
+	}
+	
+	input[type="radio"]:checked + label{
+  	background-color: white;
+  	color: black;
+  	border-radius: 5px;
+  	opacity:0.6;
+  	}
+
 </style>
  
 </head>
@@ -99,19 +111,19 @@
 					
 					<form role="form" style="font-size: 26px; color: white; margin-top: 50px;">
 					  <div class="radio" >
-					    <label style="width: 2000px;"><input type="radio" name="optradio" value="0" checked id="reset"><span id="opt0">完全無法做到</span></label>
+					    <input type="radio" name="optradio" value="0" id="radio01"><label style="width: 2000px;" for="radio01"><span id="opt0">完全無法做到</span></label>
 					  </div>
 					  <div class="radio">
-					    <label style="width: 2000px;"><input type="radio" name="optradio" value="1"><span id="opt1">很多困難</span></label>
+					    <input type="radio" name="optradio" value="1" id="radio02"><label style="width: 2000px;" for="radio02"><span id="opt1">很多困難</span></label>
 					  </div>
 					  <div class="radio">
-					    <label style="width: 2000px;"><input type="radio" name="optradio" value="2"><span id="opt2">中等困難</span></label>
+					    <input type="radio" name="optradio" value="2" id="radio03"><label style="width: 2000px;" for="radio03"><span id="opt2">中等困難</span></label>
 					  </div>
 					  <div class="radio">
-					    <label style="width: 2000px;"><input type="radio" name="optradio" value="3"><span id="opt3">一點困難</span></label>
+					    <input type="radio" name="optradio" value="3" id="radio04"><label style="width: 2000px;" for="radio04"><span id="opt3">一點困難</span></label>
 					  </div>
 					  <div class="radio">
-					    <label style="width: 2000px;"><input type="radio" name="optradio" value="4"><span id="opt4">完全沒有困難</span></label>
+					    <input type="radio" name="optradio" value="4" id="radio05"><label style="width: 2000px;" for="radio05"><span id="opt4">完全沒有困難</span></label>
 					  </div>
 					  <br> 
 					  <div class="text-center">
@@ -171,6 +183,30 @@
 
   </div>
 </div>
+
+<div class="container">
+  <!-- Trigger the modal with a button -->
+  <button id="warningDialog" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display: none;">Open Modal</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body">
+          <h3>請選擇選項!</h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
 <script>
 var questionCount = 0 ;
 
@@ -185,6 +221,14 @@ $(document).ready(function(){
 
 	// 	按下 next鍵 發ajax 顯示下一題
 	$('#next').click(function() {
+	
+			var option = $('input:radio[name=optradio]:checked').val();
+			if (option == null || option == undefined || option == ''){
+				//檢核有無勾選radio button
+				$("#warningDialog").trigger( "click" );
+				return;
+			}
+	
 			var params = {
 				selectedOption : $('input:radio[name=optradio]:checked').val()
 			};
@@ -242,7 +286,7 @@ $(document).ready(function(){
 						}
 						$("td#recordSelectedOptions").html(selectedOptions);
 						
-						$('#reset').prop('checked','checked');
+						$(':checked').prop('checked',false);
 					}
 				},
 				error : function(json) {
