@@ -35,7 +35,7 @@ public class Response extends GenericEntity {
 	private String option05;
 
 	// guild
-	@Column(name = "guild", length = 100, nullable = false)
+	@Column(name = "guild", length = 150, nullable = false)
 	private String guild;
 
 	public String getOption01() {
