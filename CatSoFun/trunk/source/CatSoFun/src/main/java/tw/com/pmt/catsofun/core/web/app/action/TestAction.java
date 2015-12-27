@@ -241,8 +241,8 @@ public class TestAction extends ActionSupport {
 
 			Double itemInformation = betaProb - (expectK * expectK) + prior;
 
-			System.out.println("itemInformation(" + item.getId() + "):"
-					+ itemInformation);
+//			System.out.println("itemInformation(" + item.getId() + "):"
+//					+ itemInformation);
 
 			if (itemInformation > maxInformation) {
 				maxInformation = itemInformation;
