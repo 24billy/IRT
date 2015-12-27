@@ -160,6 +160,10 @@
 		    </div>
 		    <div class="modal-body">
 			    <table>
+			    	<tr>
+				   		<td>初始能力值</td>
+				   		<td id="initAbility"></td>
+				   	</tr>
 				   	<tr>
 				   		<td>目前能力估計值</td>
 				   		<td id="recordAbility"></td>
@@ -275,6 +279,8 @@ $('#begin').click(function() {
 });
 
 function refreshRecordDialog(record) {
+	$("td#initAbility").html(record.initAbility);
+	
 	$("td#recordAbility").html(record.ability);
 	
 	var selectedItems='';

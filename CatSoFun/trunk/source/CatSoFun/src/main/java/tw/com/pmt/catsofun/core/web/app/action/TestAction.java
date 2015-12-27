@@ -63,8 +63,8 @@ public class TestAction extends ActionSupport {
 		initChooseItemPool();
 		selectedOptions = new ArrayList<Long>();
 
-//		initAbility = (Math.random() * 1 - 0.5);
-		initAbility = 0.3536939680421002;
+		initAbility = (Math.random() * 1 - 0.5);
+//		initAbility = 0.3536939680421002;
 		currentAbility = initAbility;
 		
 		// 隨機選題與作答反應
@@ -271,7 +271,7 @@ public class TestAction extends ActionSupport {
 		Double deltaAbility = 1d;
 		int iterationCount = 1;
 
-		while (deltaAbility > terminationCriteria) {
+		while (Math.abs(deltaAbility) > terminationCriteria) {
 			Double sumOfbetaDiffEk = 0d;
 			Double sumOfbetaDiffSqEk = 0d;
 
