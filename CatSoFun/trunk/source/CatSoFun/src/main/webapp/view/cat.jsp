@@ -105,25 +105,24 @@
 			<div class="col-md-10 col-md-offset-1" >
 				<div style="border-width:1px; border-style:solid;border-radius:5px;padding:15px;">
 					<h4 id="questionCount" style="color:white;">Q1.</h4>
-					<p style="font-size: 24px;color: white;font-weight:;" id="guild">第一組問題將問您從事某項特定的活動時有多少困難。每項問題都是探討有些人在中風後所遇到的困難。
-							空格中的號碼描述您過去一週從事該活動時的困難，請您將最適當的號碼圈起來或打。</p>
-					<p id="question" style="font-size: 24px;color: white;font-weight:;">在過去一週裡：  您從事以前的工作有困難嗎？</p>
+					<p style="font-size: 24px;color: white;font-weight:;" id="guild">${response.guild}</p>
+					<p id="question" style="font-size: 24px;color: white;font-weight:;">${item.itemContent}</p>
 					
 					<form role="form" style="font-size: 26px; color: white; margin-top: 50px;">
 					  <div class="radio" >
-					    <input type="radio" name="optradio" value="0" id="radio01"><label style="width: 2000px;" for="radio01"><span id="opt0">完全無法做到</span></label>
+					    <input type="radio" name="optradio" value="0" id="radio01"><label style="width: 2000px;" for="radio01"><span id="opt0">${response.option01}</span></label>
 					  </div>
 					  <div class="radio">
-					    <input type="radio" name="optradio" value="1" id="radio02"><label style="width: 2000px;" for="radio02"><span id="opt1">很多困難</span></label>
+					    <input type="radio" name="optradio" value="1" id="radio02"><label style="width: 2000px;" for="radio02"><span id="opt1">${response.option02}</span></label>
 					  </div>
 					  <div class="radio">
-					    <input type="radio" name="optradio" value="2" id="radio03"><label style="width: 2000px;" for="radio03"><span id="opt2">中等困難</span></label>
+					    <input type="radio" name="optradio" value="2" id="radio03"><label style="width: 2000px;" for="radio03"><span id="opt2">${response.option03}</span></label>
 					  </div>
 					  <div class="radio">
-					    <input type="radio" name="optradio" value="3" id="radio04"><label style="width: 2000px;" for="radio04"><span id="opt3">一點困難</span></label>
+					    <input type="radio" name="optradio" value="3" id="radio04"><label style="width: 2000px;" for="radio04"><span id="opt3">${response.option04}</span></label>
 					  </div>
 					  <div class="radio">
-					    <input type="radio" name="optradio" value="4" id="radio05"><label style="width: 2000px;" for="radio05"><span id="opt4">完全沒有困難</span></label>
+					    <input type="radio" name="optradio" value="4" id="radio05"><label style="width: 2000px;" for="radio05"><span id="opt4">${response.option05}</span></label>
 					  </div>
 					  <br> 
 					  <div class="text-center">

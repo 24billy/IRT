@@ -276,7 +276,7 @@ public class CatAction extends ActionSupport {
 		Double deltaAbility = 1d;
 		int iterationCount = 1;
 
-		while (deltaAbility > terminationCriteria) {
+		while (Math.abs(deltaAbility) > terminationCriteria) {
 			Double sumOfbetaDiffEk = 0d;
 			Double sumOfbetaDiffSqEk = 0d;
 
