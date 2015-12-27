@@ -13,9 +13,9 @@
 
 <style type="text/css">
 	.radio:hover {
-		font-size: 28px;
-		border-width: 2px;
-		border-style: solid;
+		font-size: 24px;
+		border-width: 1px;
+		border-style: groove;
 		border-radius: 5px;
 	}
 	
@@ -68,17 +68,26 @@
 	
 		<!-- BEGIN 測驗開始頁 -->
 		<div class="row" style="opacity:0.6;" id="welcomeDiv">
-			<div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px;">
-					<h4 style="font-family: bold;font-size: 26px;">歡迎XXX</h4>
-			        <p>這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗...測驗說明測驗說明</p>
-			        <br>
-			        <p><button type="button" class="btn btn-primary form-control" id="begin">開始測驗</button></p>
+			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px;">
+				<h4 style="font-family: bold;font-size: 26px;">歡迎XXX</h4>
+		        <p>這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗...測驗說明測驗說明</p>
+		        <br>
+		        <p><button type="button" class="btn btn-primary form-control" id="begin">開始測驗</button></p>
 			</div>
 		</div>
 		<!-- END 測驗開始頁 -->
+
 	
-	
-	
+		<!-- BEGIN 測驗結束頁 -->
+		<div class="row" style="display: none;" id="finishDiv">
+			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px; opacity:0.6; margin-top: 50px;">
+				<p style="font-family: bold;font-size: 26px;">您已完成本測驗</p>
+		        <p style="font-family: bold;font-size: 26px;">您的能力估計為 : <span style="color: red;font-family: bold;" id="theta"></span></p>
+			</div>
+		</div>
+		<!-- END 測驗結束頁 -->
+
+
 		<!-- BEGIN 試題頁 -->
 		<div class="row" style="display: none;font-family:Microsoft JhengHei; opacity:1.0;" id="quizDiv" >
 			<div class="col-md-10 col-md-offset-1" >
@@ -88,21 +97,21 @@
 							空格中的號碼描述您過去一週從事該活動時的困難，請您將最適當的號碼圈起來或打。</p>
 					<p id="question" style="font-size: 24px;color: white;font-weight:;">在過去一週裡：  您從事以前的工作有困難嗎？</p>
 					
-					<form role="form" style="font-size: 26px; color: white;">
+					<form role="form" style="font-size: 26px; color: white; margin-top: 50px;">
 					  <div class="radio" >
-					    <label><input type="radio" name="optradio" value="0" checked id="reset"><span id="opt0">完全無法做到</span></label>
+					    <label style="width: 2000px;"><input type="radio" name="optradio" value="0" checked id="reset"><span id="opt0">完全無法做到</span></label>
 					  </div>
 					  <div class="radio">
-					    <label><input type="radio" name="optradio" value="1"><span id="opt1">很多困難</span></label>
+					    <label style="width: 2000px;"><input type="radio" name="optradio" value="1"><span id="opt1">很多困難</span></label>
 					  </div>
 					  <div class="radio">
-					    <label><input type="radio" name="optradio" value="2"><span id="opt2">中等困難</span></label>
+					    <label style="width: 2000px;"><input type="radio" name="optradio" value="2"><span id="opt2">中等困難</span></label>
 					  </div>
 					  <div class="radio">
-					    <label><input type="radio" name="optradio" value="3"><span id="opt3">一點困難</span></label>
+					    <label style="width: 2000px;"><input type="radio" name="optradio" value="3"><span id="opt3">一點困難</span></label>
 					  </div>
 					  <div class="radio">
-					    <label><input type="radio" name="optradio" value="4"><span id="opt4">完全沒有困難</span></label>
+					    <label style="width: 2000px;"><input type="radio" name="optradio" value="4"><span id="opt4">完全沒有困難</span></label>
 					  </div>
 					  <br> 
 					  <div class="text-center">
@@ -112,7 +121,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<!-- END 試題頁 -->
 	
 	</div>
@@ -194,6 +202,10 @@ $(document).ready(function(){
 					if (obj.isFinished) {
 						$("#recordTitle").html("測驗結束");
 						$("#recordButton").trigger( "click" );
+
+						// 刷新內容div
+						$('#theta').html(obj.record.ability);
+						$('#contentDiv').html($('#finishDiv').html());
 					} else {
 						var item = obj.item;
 						var response = obj.response;
