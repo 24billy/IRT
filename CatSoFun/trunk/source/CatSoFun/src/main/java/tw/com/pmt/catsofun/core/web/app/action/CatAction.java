@@ -15,6 +15,7 @@ import tw.com.pmt.catsofun.core.common.util.ScopeUtil.Scope;
 import tw.com.pmt.catsofun.core.db.model.Item;
 import tw.com.pmt.catsofun.core.db.model.Record;
 import tw.com.pmt.catsofun.core.db.model.Response;
+import tw.com.pmt.catsofun.core.db.model.Role;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ActionContext;
@@ -58,6 +59,9 @@ public class CatAction extends ActionSupport {
 
 		// 確認是否已登入
 		if ("success".equals(loginFlag)) {
+			
+			// 取得login Role
+			Role role =(Role) ActionContext.getContext().getSession().get("loginRole");
 		
 			// 初始化可選題庫，選取題目
 			isFinished = false;
@@ -97,6 +101,7 @@ public class CatAction extends ActionSupport {
 			record.setInitAbility(initAbility);
 			record.setAbility(currentAbility);
 			record.setIsFinished(false);
+			record.setRoleId(role.getId());
 	
 			// 使用同一組Record
 			Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
@@ -276,7 +281,7 @@ public class CatAction extends ActionSupport {
 		Double deltaAbility = 1d;
 		int iterationCount = 1;
 
-		while (deltaAbility > terminationCriteria) {
+		while (Math.abs(deltaAbility) > terminationCriteria) {
 			Double sumOfbetaDiffEk = 0d;
 			Double sumOfbetaDiffSqEk = 0d;
 

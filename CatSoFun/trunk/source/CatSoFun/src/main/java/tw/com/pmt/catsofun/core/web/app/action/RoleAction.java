@@ -58,6 +58,8 @@ public class RoleAction extends ActionSupport{
             if (role != null) {
             	System.out.println("Get Role : " + role.toString());
 
+            	ActionContext.getContext().getSession().put("loginRole", role);
+
             	sflag = ActionSupport.SUCCESS;
             } else {
             	System.out.println("Didn't found Role");
