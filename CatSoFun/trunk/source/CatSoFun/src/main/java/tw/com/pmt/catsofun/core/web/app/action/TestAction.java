@@ -137,7 +137,7 @@ public class TestAction extends ActionSupport {
 		
 		Double deltaAbility = Math.abs(originalAbility - currentAbility);
 		
-		if (deltaAbility < 0.001) {
+		if (deltaAbility < 0.005) {
 			isFinished = true;
 			record.setIsFinished(isFinished);
 		} else {
