@@ -6,6 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
+
 import tw.com.pmt.catsofun.core.common.entity.GenericEntity;
 
 /**
@@ -20,10 +23,10 @@ public class Record extends GenericEntity  {
 
 	private static final long serialVersionUID = 3131964513654250815L;
 	
-	@Column(name = "init_ability", columnDefinition = "NUMERIC(8,3) default 0")
+	@Column(name = "init_ability", columnDefinition = "NUMERIC(8,5) default 0")
 	private Double initAbility;
 	
-	@Column(name = "ability", columnDefinition = "NUMERIC(8,3) default 0")
+	@Column(name = "ability", columnDefinition = "NUMERIC(8,5) default 0")
 	private Double ability;
 	
 	@Column(name = "selected_items")
@@ -38,6 +41,15 @@ public class Record extends GenericEntity  {
 	@Column(name = "role_id")
 	private Long roleId;
 	
+	@Column(name = "sem", columnDefinition = "NUMERIC(8,5) default 0")
+	private Double sem;
+	
+	@Column(name="create_time")
+	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+	private LocalDateTime createTime;
+	
+	@Column(name="test_complete_time")
+	private Long testCompleteTime;
 	
 	public Double getInitAbility() {
 		return initAbility;
@@ -87,13 +99,38 @@ public class Record extends GenericEntity  {
 		this.roleId = roleId;
 	}
 
+	public Double getSem() {
+		return sem;
+	}
+
+	public void setSem(Double sem) {
+		this.sem = sem;
+	}
+
+	public LocalDateTime getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(LocalDateTime createTime) {
+		this.createTime = createTime;
+	}
+
+	public Long getTestCompleteTime() {
+		return testCompleteTime;
+	}
+
+	public void setTestCompleteTime(Long testCompleteTime) {
+		this.testCompleteTime = testCompleteTime;
+	}
+
 	@Override
 	public String toString() {
 		return "Record [initAbility=" + initAbility + ", ability=" + ability
 				+ ", selectedItems=" + Arrays.toString(selectedItems)
 				+ ", selectedOptions=" + Arrays.toString(selectedOptions)
-				+ ", isFinished=" + isFinished + ", roleId=" + roleId + ", id="
-				+ id + "]";
+				+ ", isFinished=" + isFinished + ", roleId=" + roleId
+				+ ", sem=" + sem + ", createTime=" + createTime
+				+ ", testCompleteTime=" + testCompleteTime + ", id=" + id + "]";
 	}
 
 }

@@ -64,5 +64,13 @@
 			</result>
 		</action>
 	</package>
+	
+	<package name="admin" namespace="/admin" extends="struts-default">
+	    <!-- 後台登入首頁 -->
+		<action name="showLogin">
+			<result>/admin/login.jsp
+			</result>
+		</action>
+	</package>
 
 </struts>

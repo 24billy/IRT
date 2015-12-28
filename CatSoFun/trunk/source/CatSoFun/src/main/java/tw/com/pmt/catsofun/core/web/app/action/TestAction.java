@@ -1,9 +1,12 @@
 package tw.com.pmt.catsofun.core.web.app.action;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.hssf.record.chart.BeginRecord;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.pmt.catsofun.core.business.service.IItemService;
@@ -52,12 +55,14 @@ public class TestAction extends ActionSupport {
 	private Double currentAbility;
 
 	private static Double prior = Parameter.TEST_PRIOR;
-	
+	private Long startTime;
 	
 	
 	public String showCatMainPage() {
 		System.out.println("showCatMainContent() begin...");
 
+		// 初始化測驗開始時間
+		startTime = new Date().getTime();
 		// 初始化可選題庫，選取題目
 		isFinished = false;
 		initChooseItemPool();
@@ -100,6 +105,7 @@ public class TestAction extends ActionSupport {
 		// 使用同一組Record
 		Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
 		sessionMap.put("record", record);
+		sessionMap.put("startTime", startTime);
 		
 		System.out.println("record(init) : " + record);
 		
@@ -112,6 +118,8 @@ public class TestAction extends ActionSupport {
 		// Session取出初始化結果
 		Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
 		record = (Record) sessionMap.get("record");
+		startTime = (Long) sessionMap.get("startTime");
+		
 		initAbility = record.getInitAbility();
 		Double originalAbility = record.getAbility();
 
@@ -181,8 +189,20 @@ public class TestAction extends ActionSupport {
 			if (recordList != null && !recordList.isEmpty()) {
 				Integer newId = recordList.size();
 				record.setId(newId.longValue() + 1);
+				
+				Long testCompleteTime = new Date().getTime() - startTime;
+				System.out.println("Complete Time : " + testCompleteTime);
+				
+				record.setTestCompleteTime(testCompleteTime);
+				record.setCreateTime(LocalDateTime.now());
 			} else {
 				record.setId(1L);
+				
+				Long testCompleteTime = new Date().getTime() - startTime;
+				System.out.println("Complete Time : " + testCompleteTime);
+				
+				record.setTestCompleteTime(testCompleteTime);
+				record.setCreateTime(LocalDateTime.now());
 			}
 			
 			recordService.insertRecord(record);
@@ -269,6 +289,7 @@ public class TestAction extends ActionSupport {
 		// 初始化迭代參數
 		currentAbility = initAbility;
 		Double deltaAbility = 1d;
+		Double sem = 0d;
 		int iterationCount = 1;
 
 		while (Math.abs(deltaAbility) > terminationCriteria) {
@@ -327,7 +348,7 @@ public class TestAction extends ActionSupport {
 			System.out.println("currentAbility:" + currentAbility);
 
 			Double itemInformation = -sumOfbetaDiffSqEk + (1 / variance);
-			Double sem = Math.sqrt(1 / itemInformation);
+			sem = Math.sqrt(1 / itemInformation);
 			System.out.println("itemInformation:" + itemInformation);
 			System.out.println("sem:" + sem);
 
@@ -343,8 +364,8 @@ public class TestAction extends ActionSupport {
 		Long[] selectedOptions = new Long[optionList.size()];
 		optionList.toArray(selectedOptions);
 
-//		Record record = new Record();
 		record.setAbility(currentAbility);
+		record.setSem(sem);
 		record.setSelectedItems(selectedItems);
 		record.setSelectedOptions(selectedOptions);
 		System.out.println("======== End ability estimate ========");
