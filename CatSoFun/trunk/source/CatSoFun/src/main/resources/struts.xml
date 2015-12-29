@@ -66,9 +66,15 @@
 	</package>
 	
 	<package name="admin" namespace="/admin" extends="struts-default">
-	    <!-- 後台登入首頁 -->
+	    <!-- 後台登入頁 -->
 		<action name="showLogin">
 			<result>/admin/login.jsp
+			</result>
+		</action>
+		
+		<!-- 後台功能頁 -->
+		<action name="home">
+			<result>/admin/home.jsp
 			</result>
 		</action>
 	</package>
