@@ -17,6 +17,7 @@
 	rel="stylesheet">
 <style type="text/css">
 body {
+	padding-top:40px;
 	background-color: #27272b;
 }
 </style>
@@ -35,7 +36,7 @@ body {
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-4 col-sm-offset-4">
+				<div class="col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
 					<form role="form" id="loginForm" action="/" method="post">
 						<div class="form-group">
 							<div class="input-group">
@@ -54,12 +55,14 @@ body {
 								 class="form-control" placeholder="password">
 							</div>
 						</div>
+						<!-- 
 						<div class="form-group has-error has-feedback">
 								<label class="control-label" for="inputError2">Input
 									with error</label> <input type="text" class="form-control"
 									id="inputError2" aria-describedby="inputError2Status">
 								<span aria-hidden="true"></span> 
 						</div>
+						 -->
 						<button type="submit" id="formSubmit" style="display: none;"></button>
 					</form>
 					<button id="messageButton" type="button" style="display: none;"

@@ -1,6 +1,7 @@
 package tw.com.pmt.catsofun.core.db.model;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,8 +46,8 @@ public class Record extends GenericEntity  {
 	private Double sem;
 	
 	@Column(name="create_time")
-	@Type(type="org.joda.time.contrib.hibernate.PersistentLocalDateTime")
-	private LocalDateTime createTime;
+	@Type(type="timestamp")
+	private Date createTime;
 	
 	@Column(name="test_complete_time")
 	private Long testCompleteTime;
@@ -107,11 +108,11 @@ public class Record extends GenericEntity  {
 		this.sem = sem;
 	}
 
-	public LocalDateTime getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(LocalDateTime createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 

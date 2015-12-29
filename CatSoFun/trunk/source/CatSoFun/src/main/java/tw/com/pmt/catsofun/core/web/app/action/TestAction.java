@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.hssf.record.chart.BeginRecord;
-import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.com.pmt.catsofun.core.business.service.IItemService;
@@ -194,7 +192,7 @@ public class TestAction extends ActionSupport {
 				System.out.println("Complete Time : " + testCompleteTime);
 				
 				record.setTestCompleteTime(testCompleteTime);
-				record.setCreateTime(LocalDateTime.now());
+				record.setCreateTime(new Date());
 			} else {
 				record.setId(1L);
 				
@@ -202,7 +200,7 @@ public class TestAction extends ActionSupport {
 				System.out.println("Complete Time : " + testCompleteTime);
 				
 				record.setTestCompleteTime(testCompleteTime);
-				record.setCreateTime(LocalDateTime.now());
+				record.setCreateTime(new Date());
 			}
 			
 			recordService.insertRecord(record);
