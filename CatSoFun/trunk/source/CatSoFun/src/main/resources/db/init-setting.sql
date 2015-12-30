@@ -5,7 +5,7 @@ INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild)
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (4,'極不滿意','不滿意','中等程度滿意','滿意','極滿意','我們的問題所關心的是您最近兩星期內的生活情形，請您用自己的標準、希望、愉快、以及關注點來回答問題。請參考下面的例題：');
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (5,'完全沒有','有一點有','中等程度有','很有','極有','我們的問題所關心的是您最近兩星期內的生活情形，請您用自己的標準、希望、愉快、以及關注點來回答問題。請參考下面的例題：');
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (6,'完全沒有機會','少許機會','中等程度機會','很有機會','完全有機會','我們的問題所關心的是您最近兩星期內的生活情形，請您用自己的標準、希望、愉快、以及關注點來回答問題。請參考下面的例題：');
-INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (7,'從來沒有','很少','偶爾','常常','總是','在過去一星期內‚您出現以下情況有多頻繁…');
+INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (7,'總是','常常','偶爾','很少','從來沒有','在過去一星期內‚您出現以下情況有多頻繁…');
 
 --題目--
 INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(1,'從事以前工作',0.168,0.293,0.049,-0.155,-0.188,1);
