@@ -13,39 +13,53 @@
 <link href="/CatSoFun/css/bootstrap.min.css" rel="stylesheet">
 
 <style type="text/css">
+	@media (max-width: 768px) {
+
+	}
+
 	@media (max-width: 480px) {
 
-	 	label {
-			font-size: 24px;
-			border-width: 1px;
-			border-style: groove;
-			border-radius: 5px;
-		}
-		
-/* 		body { */
-/* 		padding-top: 60px; */
-/*         padding-bottom: 60px; */
-/* 		background-image: url(/CatSoFun/pic/pen.jpg); */
-/* 		background-size:100% 100%; */
-/* 		} */
-		
 	}
-	 
-	.radio:hover {
+	
+	@media (max-width: 320px) {
+
+	}
+
+	
+	body {
+		padding-top: 60px;
+        padding-bottom: 60px;
+/* 		background-image: url(/CatSoFun/pic/camera.jpg); */
+		background-color: black;
+		background-size:cover;
+		
+		font-family: Microsoft JhengHei;
+	}
+	
+	#quizDiv  {
+		font-size: 24px;
+		color: white;
+	}
+
+ 	label {
 		font-size: 24px;
 		border-width: 1px;
 		border-style: groove;
 		border-radius: 5px;
 	}
+	 
+ 	.radio:hover { 
+ 		font-size: 24px; 
+ 		border-width: 1px; 
+ 		border-style: groove; 
+		border-radius: 5px;
+		background-color: white;
+		color: black;
+		opacity:0.6;
+ 	} 
 	
 	#contentDiv {
 		margin-top: 20px;
-	}
-	body {
-		padding-top: 60px;
-        padding-bottom: 60px;
-		background-image: url(/CatSoFun/pic/camera.jpg);
-		background-size:cover;
 	}
 	
 	input[type="radio"] {
@@ -99,8 +113,7 @@
 	
 		<!-- BEGIN 測驗開始頁 -->
 		<div class="row" style="opacity:0.6;" id="welcomeDiv">
-			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px;">
-				<h4 style="font-family: bold;font-size: 26px;">歡迎XXX</h4>
+			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="padding: 15px; color: black;">
 		        <p>這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗...測驗說明測驗說明</p>
 		        <br>
 		        <p><button type="button" class="btn btn-primary form-control" id="begin">開始測驗</button></p>
@@ -111,8 +124,8 @@
 	
 		<!-- BEGIN 測驗結束頁 -->
 		<div class="row" style="display: none;" id="finishDiv">
-			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px; opacity:0.6; margin-top: 50px;">
-				<p style="font-family: bold;font-size: 24px;">您已完成本測驗</p>
+			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="padding: 15px; opacity:0.6; margin-top: 50px;">
+				<p style="font-size: 24px; text-align: center; color: blue;">您已完成本測驗</p>
 		        
 		        <table style="width: 90%; text-align: center; font-size: 22px;">
 			    	<tr>
@@ -142,14 +155,14 @@
 
 
 		<!-- BEGIN 試題頁 -->
-		<div class="row" style="display: none;font-family:Microsoft JhengHei; opacity:1.0;" id="quizDiv" >
+		<div class="row" style="display: none;" id="quizDiv" >
 			<div class="col-md-10 col-md-offset-1" >
-				<div style="border-width:1px; border-style:solid;border-radius:5px;padding:15px;">
-					<h4 id="questionCount" style="color:white;">Q1.</h4>
-					<p style="font-size: 24px;color: white;font-weight:;" id="guild">${response.guild}</p>
-					<p id="question" style="font-size: 24px;color: white;font-weight:;">${item.itemContent}</p>
+				<div style="border-width: 1px; border-style: solid; border-radius: 5px; padding: 15px;">
+					<p id="questionCount">Q1.</p>
+					<p id="guild">${response.guild}</p>
+					<p id="question">${item.itemContent}</p>
 					
-					<form role="form" style="font-size: 26px; color: white; margin-top: 50px;">
+					<form role="form" style="font-size: ; color: ; margin-top: 20px;">
 					  <div class="radio" >
 					    <input type="radio" name="optradio" value="0" id="radio01"><label style="width: 2000px;" for="radio01"><span id="opt0">${response.option01}</span></label>
 					  </div>
@@ -165,8 +178,7 @@
 					  <div class="radio">
 					    <input type="radio" name="optradio" value="4" id="radio05"><label style="width: 2000px;" for="radio05"><span id="opt4">${response.option05}</span></label>
 					  </div>
-					  <br> 
-					  <div class="text-center">
+					  <div class="text-center" style="margin: 20px 0px 0px 0px;">
 					    <button type="button" class="btn btn-primary btn-lg  form-control" id="next" style="">NEXT</button>
 					  </div>
 					</form>
@@ -190,7 +202,7 @@
 </div>
 
 <!-- Modal -->
-<div id="recordDialog" class="modal fade" role="dialog">
+<div id="recordDialog" class="modal fade" role="dialog" style="black;">
 	<div class="modal-dialog">
 		<!-- Modal content-->
 		<div class="modal-content">
@@ -256,11 +268,14 @@ $(document).ready(function(){
 
 	// 	按下 next鍵 發ajax 顯示下一題
 	$('#next').click(function() {
-
+	
+		$('#next').prop("disabled","disabled");
+		
 		var option = $('input:radio[name=optradio]:checked').val();
 		if (option == null || option == undefined || option == ''){
 			//檢核有無勾選radio button
 			$("#warningDialog").trigger( "click" );
+			$('#next').prop("disabled","");
 			return;
 		}
 
@@ -310,6 +325,7 @@ $(document).ready(function(){
 					refreshRecordDialog(obj.record);
 					
 					$(':checked').prop('checked',false);
+					$('#next').prop("disabled","");
 				}
 			},
 			error : function(json) {
