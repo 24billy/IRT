@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0">
 <title>CatSoFun</title>
 
 <script src="/CatSoFun/js/jquery-1.11.3.min.js"></script>
@@ -12,6 +13,24 @@
 <link href="/CatSoFun/css/bootstrap.min.css" rel="stylesheet">
 
 <style type="text/css">
+	@media (max-width: 480px) {
+
+	 	label {
+			font-size: 24px;
+			border-width: 1px;
+			border-style: groove;
+			border-radius: 5px;
+		}
+		
+/* 		body { */
+/* 		padding-top: 60px; */
+/*         padding-bottom: 60px; */
+/* 		background-image: url(/CatSoFun/pic/pen.jpg); */
+/* 		background-size:100% 100%; */
+/* 		} */
+		
+	}
+	 
 	.radio:hover {
 		font-size: 24px;
 		border-width: 1px;
@@ -93,8 +112,30 @@
 		<!-- BEGIN 測驗結束頁 -->
 		<div class="row" style="display: none;" id="finishDiv">
 			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px; opacity:0.6; margin-top: 50px;">
-				<p style="font-family: bold;font-size: 26px;">您已完成本測驗</p>
-		        <p style="font-family: bold;font-size: 26px;">您的能力估計為 : <span style="color: red;font-family: bold;" id="theta"></span></p>
+				<p style="font-family: bold;font-size: 24px;">您已完成本測驗</p>
+		        
+		        <table style="width: 90%; text-align: center; font-size: 22px;">
+			    	<tr>
+				   		<td style="width: 50%;">能力估計</td>
+				   		<td style="width: 50%; color: red; font-weight: bold;" id="theta"></td>
+				   	</tr>
+				   	<tr>
+				   		<td style="width: 50%;">t分數</td>
+				   		<td style="width: 50%; color: red; font-weight: bold;" id="tScore"></td>
+				   	</tr>
+				   	<tr>
+				   		<td style="width: 50%;">估計標準誤</td>
+				   		<td style="width: 50%; color: red; font-weight: bold;" id="sem"></td>
+				   	</tr>
+				   	<tr>
+				   		<td style="width: 50%;">測驗題數</td>
+				   		<td style="width: 50%; color: red; font-weight: bold;" id="itemNum"></td>
+				   	</tr>
+				   	<tr>
+				   		<td style="width: 50%;">測驗時間</td>
+				   		<td style="width: 50%; color: red; font-weight: bold;" id="testTime"></td>
+				   	</tr>
+			    </table>
 			</div>
 		</div>
 		<!-- END 測驗結束頁 -->
@@ -199,7 +240,7 @@
 					<h3>請選擇選項!</h3>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">關閉</button>
 				</div>
 			</div>
 		</div>
@@ -236,13 +277,21 @@ $(document).ready(function(){
 				questionCount++;
 				
 				var obj = $.parseJSON(json); //解析json
-
+				
 				if (obj.isFinished) {
 					refreshRecordDialog(obj.record);
 					$("#recordTitle").html("測驗結束");
+					
+					var mu = 0;
+					var variance = 2;
 
 					// 刷新內容div
-					$('#theta').html(obj.record.ability);
+					$('#theta').html((obj.record.ability).toFixed(3));
+					$('#tScore').html((50 + 10*(obj.record.ability - mu)/Math.sqrt(variance)).toFixed(3));
+					$('#itemNum').html(questionCount-1);
+					$('#sem').html((obj.record.sem).toFixed(3));
+					$('#testTime').html(Math.round(obj.record.testCompleteTime/1000) + "秒");
+
 					$('#contentDiv').html($('#finishDiv').html());
 				} else {
 					var item = obj.item;
