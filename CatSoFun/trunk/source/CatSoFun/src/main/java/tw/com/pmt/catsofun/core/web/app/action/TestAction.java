@@ -180,7 +180,7 @@ public class TestAction extends ActionSupport {
 			selectedOptions.toArray(options);
 	
 			// 設定中止條件，作答十二題結束
-			if (selectedItems.size() > 24) {
+			if (selectedItems.size() > 12) {
 //				if (selectedItems.size() > Parameter.TEST_MAX_ITEM_LENGTH) {
 				isFinished = true;
 				record.setIsFinished(isFinished);
@@ -330,9 +330,9 @@ public class TestAction extends ActionSupport {
 				Double expectK = (1 * prob1) + (2 * prob2) + (3 * prob3)
 						+ (4 * prob4) + (5 * prob5);
 
-				System.out.println("b-E(K) : " + (selected - expectK));
-				System.out.println("bbp-E(K)^2:"
-						+ (betaProb - (expectK * expectK)));
+//				System.out.println("b-E(K) : " + (selected - expectK));
+//				System.out.println("bbp-E(K)^2:"
+//						+ (betaProb - (expectK * expectK)));
 
 				sumOfbetaDiffEk += (selected - expectK);
 				sumOfbetaDiffSqEk += ((expectK * expectK) - betaProb);
