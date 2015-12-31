@@ -47,7 +47,7 @@ public class CatAction extends ActionSupport {
 	private Double initAbility;
 	private Double currentAbility;
 
-	private static Double prior = Parameter.TEST_PRIOR;
+	private static Double prior = Parameter.TEST_PRIOR_INVERSE_VARIANCE;
 	
 	private Long startTime;
 	
@@ -292,8 +292,8 @@ public class CatAction extends ActionSupport {
 
 		// 初始化參數
 		Double terminationCriteria = Parameter.TEST_TERMINATION_CRITERIA;
-		Double mu = Parameter.TEST_POPULATION_MEAN;
-		Double variance = Parameter.TEST_VARIANCE;
+		Double mu = Parameter.TEST_PRIOR_POPULATION_MEAN;
+		Double variance = Parameter.TEST_PRIOR_VARIANCE;
 
 		// 初始化迭代參數
 		currentAbility = initAbility;

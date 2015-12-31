@@ -34,7 +34,7 @@ public class TestActionTest extends BaseTest {
 		// Double initAbility = -0.7877;
 		// Double initAbility = -1.5073;
 
-		Double prior = 0.5;
+		Double prior = Parameter.TEST_PRIOR_INVERSE_VARIANCE;
 
 		// 取得所有試題
 		List<Item> itemList = itemService.getAllItem();
@@ -87,8 +87,8 @@ public class TestActionTest extends BaseTest {
 
 		// 初始化參數
 		Double terminationCriteria = Parameter.TEST_TERMINATION_CRITERIA;
-		Double mu = Parameter.TEST_POPULATION_MEAN;
-		Double variance = Parameter.TEST_VARIANCE;
+		Double mu = Parameter.TEST_PRIOR_POPULATION_MEAN;
+		Double variance = Parameter.TEST_PRIOR_INVERSE_VARIANCE;
 
 		// 初始化迭代參數
 		Double currentAbility = initAbility;
