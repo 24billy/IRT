@@ -23,5 +23,6 @@
 	<bean id="catAction" class="tw.com.pmt.catsofun.core.web.app.action.CatAction" scope="prototype"/>
 	<bean id="testAction" class="tw.com.pmt.catsofun.core.web.app.action.TestAction" scope="prototype"/>
 	<bean id="roleAction" class="tw.com.pmt.catsofun.core.web.app.action.RoleAction" scope="prototype"/>
+	<bean id="adminAction" class="tw.com.pmt.catsofun.core.web.app.action.AdminAction" scope="prototype"/>
 	
 </beans>

@@ -85,7 +85,7 @@ body {
 
         <div class="container animated fadeIn">
             <div class="row">
-                <div class="col-sm-9 container-right animated fadeIn">
+                <div class="col-md-9 container-right animated fadeIn">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -96,22 +96,18 @@ body {
                         </div>
                         <div id="recordPanel" class="panel-collapse collapse">
                             <div class="panel-body">
-                                <table class="table table-hover table-condensed" id="myTable">
+                                <table class="table table-hover table-condensed" id="recordTable" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>1</th>
-                                        <th>2</th>
+                                        <th>序號</th>
+                                        <th>能力估計值</th>
+                                        <th>初始能力值</th>
+                                        <th>選題歷程</th>
+                                        <th>作答歷程</th>
+                                        <th>估計標準誤</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>4</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>4</td>
-                                    </tr>
                                 </tbody>
                                 </table>
                         </div>
@@ -121,7 +117,7 @@ body {
                 </div>
             </div>
 
-            <div class="col-sm-3 container-left">
+            <div class="col-md-3 container-left">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -133,13 +129,13 @@ body {
                         <div class="panel-body">
                             <form>
                                 
-                                <div>
+                                <div width="100%">
                                     <input><label>帳號</label>
                                     <input><label>密碼</label>
                                 </div>
                                 <div>
-                                    <button class="btn btn-default btn-sm">產生帳號密碼</button>
-                                    <button class="btn btn-default btn-sm" type="submit">送出</button>
+                                    <button class="btn btn-primary btn-sm">產生帳號密碼</button>
+                                    <button class="btn btn-success btn-sm" type="submit">送出</button>
                                 </div>
                             </form>
                         </div>
@@ -181,10 +177,63 @@ body {
 </body>
 <script>
 $(document).ready(function(){
-   $('#myTable').DataTable();
    $("a#allRecordBtn").trigger("click");
    $("a#accountBtn").trigger("click");
+   
+   getAllRecord();
 });
 
+function getAllRecord() {
+	$.ajax({
+		type : "POST",
+		url : "getAllRecord.action",
+		dataType : "text", //ajax返回值設定為text
+		success : function(data) {
+			var jsonData = $.parseJSON(data); //解析json
+			
+			if (jsonData != null) {
+				generateDataTable(jsonData);
+			}
+			$('#recordTable').DataTable();
+		}
+	});
+}
+
+function generateDataTable(jsonData) {
+	$.each(jsonData.recordList, function(index, data) {
+    	var $tr = $("<tr width='100%'>");
+		    	
+    	$tr.append($("<td>").html(data.id));
+    	$tr.append($("<td>").html(data.ability));
+    	$tr.append($("<td>").html(data.initAbility));
+    	
+    	var selectedItems='';
+    	for(var key in data.selectedItems){
+    		if(key == 0) {
+    			selectedItems = data.selectedItems[key]
+    		} else {
+    			selectedItems += "," + data.selectedItems[key]
+    		}
+    	}
+    	$tr.append($("<td>").html(selectedItems));
+    	
+    	
+    	var selectedOptions='';
+    	for(var key in data.selectedOptions){
+    		if(key == 0) {
+    			selectedOptions = data.selectedOptions[key]
+    		} else {
+    			selectedOptions += "," + data.selectedOptions[key]
+    		}
+    	}
+    	$tr.append($("<td>").html(selectedOptions));
+    	
+    	$tr.append($("<td>").html(data.sem));
+    	
+    	$('table#recordTable > tbody:last').append($tr);
+	});
+}
 </script>
+
+
 </html>
