@@ -228,6 +228,10 @@
 				   		<td>作答反應</td>
 				   		<td id="recordSelectedOptions"></td>
 				   	</tr>
+				   	<tr>
+				   		<td>SEM</td>
+				   		<td id="recordSem"></td>
+				   	</tr>
 			    </table>
 		    </div>
 		    <div class="modal-footer">
@@ -346,6 +350,8 @@ function refreshRecordDialog(record) {
 	$("td#initAbility").html(record.initAbility);
 	
 	$("td#recordAbility").html(record.ability);
+
+	$("td#recordSem").html(record.sem);
 	
 	var selectedItems='';
 	for(var key in record.selectedItems){
