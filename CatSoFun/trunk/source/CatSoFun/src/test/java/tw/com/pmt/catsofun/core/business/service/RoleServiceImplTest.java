@@ -14,17 +14,21 @@ public class RoleServiceImplTest extends BaseTest {
 	@Test
 	public void testInsertRole() {
 		Role role = new Role();
-		role.setId(new Long(3));
+		int roleCount = roleServise.getAllRole().size();
+		role.setId(new Long(roleCount + 1));
 		role.setUserName("Steven");
 		role.setUserPassword("1234");
 		
 		roleServise.insertRole(role);
+		
+		System.out.println(roleServise.getAllRole());
 	}
 	
 	@Test
 	public void testGetRoleByUserName() {
 		String userName = new String("Billy");
 		System.out.println(roleServise.getRoleByUserName(userName));
+		System.out.println(roleServise.getRoleByUserName(userName).getUserPassword().equals("4321"));
 	}
 
 	@Test

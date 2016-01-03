@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html, charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CatSoFun Admin System</title>
 
 <script src="/CatSoFun/js/jquery-1.11.3.min.js"></script>
@@ -62,7 +62,7 @@ body {
                                    role="button" aria-haspopup="true" 
                                    aria-expanded="false">
                                     <i class="fa fa-fw fa-user"></i>
-                                    Admin
+                                    <span id="loginRole">Admin</span>
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
@@ -102,8 +102,6 @@ body {
                                         <th>序號</th>
                                         <th>能力估計值</th>
                                         <th>初始能力值</th>
-                                        <th>選題歷程</th>
-                                        <th>作答歷程</th>
                                         <th>估計標準誤</th>
                                     </tr>
                                 </thead>
@@ -127,17 +125,16 @@ body {
                     </div>
                     <div id="accountPanel" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <form>
-                                
+                            <form id="addUserForm">
                                 <div width="100%">
-                                    <input><label>帳號</label>
-                                    <input><label>密碼</label>
-                                </div>
-                                <div>
-                                    <button class="btn btn-primary btn-sm">產生帳號密碼</button>
-                                    <button class="btn btn-success btn-sm" type="submit">送出</button>
+                                    <label>帳號：</label><input name="username">
+                                    <label>密碼：</label><input name="password">
                                 </div>
                             </form>
+                            <div>
+	                            <button class="btn btn-primary btn-sm" id="generateAcount">產生帳號密碼</button>
+	                            <button class="btn btn-success btn-sm" id="addAcount">送出</button>
+                            </div>
                         </div>
                         <!-- .panel-body -->
                     </div>
@@ -176,12 +173,22 @@ body {
 
 </body>
 <script>
+var $role = "${role.userName}";
 $(document).ready(function(){
    $("a#allRecordBtn").trigger("click");
    $("a#accountBtn").trigger("click");
    
+   checkLogin();
    getAllRecord();
 });
+
+function checkLogin() {
+	if($role == null || $role.length == 0 ) {
+		window.location = "logout";
+	} else {
+		$("span#loginRole").text($role);
+	}
+}
 
 function getAllRecord() {
 	$.ajax({
@@ -206,32 +213,48 @@ function generateDataTable(jsonData) {
     	$tr.append($("<td>").html(data.id));
     	$tr.append($("<td>").html(data.ability));
     	$tr.append($("<td>").html(data.initAbility));
-    	
+    	/**
     	var selectedItems='';
     	for(var key in data.selectedItems){
     		if(key == 0) {
-    			selectedItems = data.selectedItems[key]
+    			selectedItems = data.selectedItems[key];
     		} else {
-    			selectedItems += "," + data.selectedItems[key]
+    			selectedItems += "," + data.selectedItems[key];
     		}
     	}
     	$tr.append($("<td>").html(selectedItems));
+    	*/
     	
-    	
+    	/**
     	var selectedOptions='';
     	for(var key in data.selectedOptions){
     		if(key == 0) {
-    			selectedOptions = data.selectedOptions[key]
+    			selectedOptions = data.selectedOptions[key];
     		} else {
-    			selectedOptions += "," + data.selectedOptions[key]
+    			selectedOptions += "," + data.selectedOptions[key];
     		}
     	}
     	$tr.append($("<td>").html(selectedOptions));
+    	*/
     	
     	$tr.append($("<td>").html(data.sem));
+    	//$tr.append($("<td>").html(data.testCompleteTime/1000));
     	
     	$('table#recordTable > tbody:last').append($tr);
 	});
+}
+
+$("button#generateAcount").on("click",function(){
+	
+});
+
+$("button#addAcount").on("click",function(){
+	
+});
+
+
+function logout() {
+	  window.location = "logout.action";
 }
 </script>
 

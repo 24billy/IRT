@@ -76,6 +76,15 @@
 			</result>
 		</action>
 		
+		<action name="login" class="adminAction" method="login">
+		    <result name="success" type="chain">home</result>
+		    <result name="error" type="chain">showLogin</result>
+		</action>
+		
+		<action name="logout" class="adminAction" method="logout">
+		    <result name="success">/admin/login.jsp</result>
+		</action>
+		
 		<!-- 後台功能頁 -->
 		<action name="home">
 			<result>/admin/home.jsp

@@ -38,7 +38,7 @@
             
             <div class="row">
                 <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
-                    <form role="form" id="loginForm" action="home" method="post">
+                    <form role="form" id="loginForm" action="login" method="post">
                         <div class="form-group" id="nameInput">
                             <div class="input-group">
                                 <span class="input-group-addon">

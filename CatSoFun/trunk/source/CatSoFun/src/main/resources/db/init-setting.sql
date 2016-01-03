@@ -36,5 +36,6 @@ INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALU
 --使用者帳密--
 INSERT INTO role(id,user_name,user_password) VALUES (1,'Billy','4321');
 INSERT INTO role(id,user_name,user_password) VALUES (2,'Allen','1234');
+INSERT INTO role(id,user_name,user_password) VALUES (3,'admin','admin');
 
 --作答結果--
