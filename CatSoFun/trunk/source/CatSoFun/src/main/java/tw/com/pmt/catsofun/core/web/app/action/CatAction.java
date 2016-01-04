@@ -16,14 +16,20 @@ import tw.com.pmt.catsofun.core.common.util.ScopeUtil.Scope;
 import tw.com.pmt.catsofun.core.db.model.Item;
 import tw.com.pmt.catsofun.core.db.model.Record;
 import tw.com.pmt.catsofun.core.db.model.Response;
-import tw.com.pmt.catsofun.core.db.model.Role;
 
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * 「測驗」控制器
+ * 
+ * @author Billy
+ * 
+ */
 public class CatAction extends ActionSupport {
-	
-	private static final long serialVersionUID = -5912867523538941164L;
+
+	private static final long serialVersionUID = 352281438045676179L;
+
 	private String selectedOption;
 	private static List<Long> selectedOptions;
 	private static List<Item> selectedItems;
@@ -48,12 +54,12 @@ public class CatAction extends ActionSupport {
 	private Double currentAbility;
 
 	private static Double prior = Parameter.TEST_PRIOR_INVERSE_VARIANCE;
-	
 	private Long startTime;
+	
 	
 	public String showCatMainPage() {
 		System.out.println("showCatMainContent() begin...");
-		
+
 		// 初始化測驗開始時間
 		startTime = new Date().getTime();
 
@@ -63,55 +69,51 @@ public class CatAction extends ActionSupport {
 
 		// 確認是否已登入
 		if ("success".equals(loginFlag)) {
-			
-			// 取得login Role
-			Role role =(Role) ActionContext.getContext().getSession().get("loginRole");
-		
+
 			// 初始化可選題庫，選取題目
 			isFinished = false;
 			initChooseItemPool();
 			selectedOptions = new ArrayList<Long>();
-	
-	//		initAbility = (Math.random() * 1 - 0.5);
-			initAbility = 0.3536939680421002;
+
+			initAbility = (Math.random() * 1 - 0.5);
+	//		initAbility = -0.4252277076193661;
 			currentAbility = initAbility;
-			
+
 			// 隨機選題與作答反應
 	//		item = chooseRandomItem(chooseItemPool);
-			
+
 			// 正式選題
 			item = itemSelection(initAbility, chooseItemPool, prior);
 			selectedItems.add(item);
-			
+
 			for (int i = 0 ; i < chooseItemPool.size() ; i++) {
 				if (item.getId() == chooseItemPool.get(i).getId()) {
 					chooseItemPool.remove(i);
 				}
 			}
-			
+
 			// 取得作答反應 
 			int responseIndex = item.getAnswerType().intValue() - 1;
 			response = responseService.getAllResponse().get(responseIndex);
-	
+
 			// 耕新選題結果
 			Long[] selected = new Long[selectedItems.size()];
-	
+
 			for (int i = 0; i < selectedItems.size(); i++) {
 				selected[i] = selectedItems.get(i).getId();
 			}
-			
+
 			record = new Record();
 			record.setSelectedItems(selected);
 			record.setInitAbility(initAbility);
 			record.setAbility(currentAbility);
 			record.setIsFinished(false);
-			record.setRoleId(role.getId());
-	
+
 			// 使用同一組Record
 			Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
 			sessionMap.put("record", record);
 			sessionMap.put("startTime", startTime);
-			
+
 			System.out.println("record(init) : " + record);
 
 			return ActionSupport.SUCCESS;
@@ -128,25 +130,34 @@ public class CatAction extends ActionSupport {
 		Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
 		record = (Record) sessionMap.get("record");
 		startTime = (Long) sessionMap.get("startTime");
-		
+		isFinished = record.getIsFinished();
 		initAbility = record.getInitAbility();
 		Double originalAbility = record.getAbility();
-
+		
 		if (record.getIsFinished()) {
 			isFinished = true;
 			return ActionSupport.SUCCESS;
 		}
+
+		// get the last time sem
+		Double originalReliability = 0d;
+		if (record.getSem() != null) {
+			originalReliability = 1 - Math.pow(record.getSem(),2);
+		}
 		
 		// 收到選項
 		selectedOptions.add(Long.parseLong(selectedOption) + 1);
-		System.out.println("已選擇選項(清單) : " + selectedOptions);
+		//System.out.println("已選擇選項(清單) : " + selectedOptions);
 
 		// 能力估計 
 		record = abilityEstimate(selectedItems, originalAbility, selectedOptions);
 		
-		Double deltaAbility = Math.abs(originalAbility - currentAbility);
+		Double currentReliability = 1 - Math.pow(record.getSem(),2);
+		System.out.println("originalReliability:" + originalReliability);
+		System.out.println("currentReliability:" + currentReliability);
+		Double deltaReliability = Math.abs(currentReliability - originalReliability);
 		
-		if (deltaAbility < 0.005) {
+		if (deltaReliability < 0.005) {
 			isFinished = true;
 			record.setIsFinished(isFinished);
 		} else {
@@ -157,23 +168,22 @@ public class CatAction extends ActionSupport {
 		if (!isFinished) {
 			// 隨機「選題﹞與「作答反應」
 			//item = chooseRandomItem(chooseItemPool);
-			
 			item = itemSelection(currentAbility, chooseItemPool, prior);
 			selectedItems.add(item);
-			
+
+			// 更新可選題庫
 			for (int i = 0 ; i < chooseItemPool.size() ; i++) {
 				if (item.getId() == chooseItemPool.get(i).getId()) {
 					chooseItemPool.remove(i);
 				}
 			} 
 			
-			
-			// 取得作答反應
+			// 取得所選題目的作答選項與指導語
 			int responseIndex = item.getAnswerType().intValue() - 1;
 			response = responseService.getAllResponse().get(responseIndex);
 	
 			// 更新選題結果
-			System.out.println("selectedItems : " + selectedItems);
+//			System.out.println("selectedItems : " + selectedItems);
 			Long[] items = new Long[selectedItems.size()];
 			for (int i = 0; i < selectedItems.size(); i++) {
 				items[i] = selectedItems.get(i).getId();
@@ -183,7 +193,8 @@ public class CatAction extends ActionSupport {
 			selectedOptions.toArray(options);
 	
 			// 設定中止條件，作答十二題結束
-			if (selectedItems.size() > Parameter.TEST_MAX_ITEM_LENGTH) {
+			if (selectedItems.size() > 12) {
+//				if (selectedItems.size() > Parameter.TEST_MAX_ITEM_LENGTH) {
 				isFinished = true;
 				record.setIsFinished(isFinished);
 			} else {
@@ -193,26 +204,21 @@ public class CatAction extends ActionSupport {
 		}
 		
 		if (isFinished) {
+			// 取得目前紀錄的筆數產生Id
 			List<Record> recordList = recordService.getAllRecord();
 	
 			if (recordList != null && !recordList.isEmpty()) {
 				Integer newId = recordList.size();
 				record.setId(newId.longValue() + 1);
-				
-				Long testCompleteTime = new Date().getTime() - startTime;
-				System.out.println("Complete Time : " + testCompleteTime);
-				
-				record.setTestCompleteTime(testCompleteTime);
-				record.setCreateTime(new Date());
 			} else {
 				record.setId(1L);
-				
-				Long testCompleteTime = new Date().getTime() - startTime;
-				System.out.println("Complete Time : " + testCompleteTime);
-				
-				record.setTestCompleteTime(testCompleteTime);
-				record.setCreateTime(new Date());
 			}
+
+			// 紀錄測驗完成時間(千分之一秒)
+			Long testCompleteTime = new Date().getTime() - startTime;
+//			System.out.println("Complete Time : " + testCompleteTime);
+			record.setTestCompleteTime(testCompleteTime);
+			record.setCreateTime(new Date());
 			
 			recordService.insertRecord(record);
 		}
@@ -263,22 +269,22 @@ public class CatAction extends ActionSupport {
 			prob5 = prob5 / probSum;
 
 			Double betaProb = 0d;
+			Double expectK = 0d;
 			betaProb = (1 * 1 * prob1) + (2 * 2 * prob2) + (3 * 3 * prob3)
 					+ (4 * 4 * prob4) + (5 * 5 * prob5);
-			Double expectK = (1 * prob1) + (2 * prob2) + (3 * prob3)
+			expectK = (1 * prob1) + (2 * prob2) + (3 * prob3)
 					+ (4 * prob4) + (5 * prob5);
 
 			Double itemInformation = betaProb - (expectK * expectK) + prior;
 
-			System.out.println("itemInformation(" + item.getId() + "):"
-					+ itemInformation);
+//			System.out.println("itemInformation(" + item.getId() + "):"
+//					+ itemInformation);
 
 			if (itemInformation > maxInformation) {
 				maxInformation = itemInformation;
 				chooseItem = item.getId();
 			}
 		}
-
 		System.out.println("Max information : item(" + chooseItem + ")" + ";"
 				+ maxInformation);
 		System.out.println("======== End item selection ========");
@@ -337,9 +343,9 @@ public class CatAction extends ActionSupport {
 				Double expectK = (1 * prob1) + (2 * prob2) + (3 * prob3)
 						+ (4 * prob4) + (5 * prob5);
 
-				System.out.println("b-E(K) : " + (selected - expectK));
-				System.out.println("bbp-E(K)^2:"
-						+ (betaProb - (expectK * expectK)));
+//				System.out.println("b-E(K) : " + (selected - expectK));
+//				System.out.println("bbp-E(K)^2:"
+//						+ (betaProb - (expectK * expectK)));
 
 				sumOfbetaDiffEk += (selected - expectK);
 				sumOfbetaDiffSqEk += ((expectK * expectK) - betaProb);
@@ -348,35 +354,39 @@ public class CatAction extends ActionSupport {
 			Double firstOrderDiff = sumOfbetaDiffEk - (currentAbility - mu)
 					/ variance;
 			Double secondOrderDiff = sumOfbetaDiffSqEk - (1 / variance);
-			System.out.println("firstOrderDiff:" + firstOrderDiff);
-			System.out.println("secondOrderDiff:" + secondOrderDiff);
+//			System.out.println("firstOrderDiff:" + firstOrderDiff);
+//			System.out.println("secondOrderDiff:" + secondOrderDiff);
 
 			deltaAbility = firstOrderDiff / secondOrderDiff;
 			currentAbility = currentAbility - deltaAbility;
-			System.out.println("deltaAbility:" + deltaAbility);
-			System.out.println("currentAbility:" + currentAbility);
+//			System.out.println("deltaAbility:" + deltaAbility);
+//			System.out.println("currentAbility:" + currentAbility);
 
 			Double itemInformation = -sumOfbetaDiffSqEk + (1 / variance);
 			sem = Math.sqrt(1 / itemInformation);
-			System.out.println("itemInformation:" + itemInformation);
-			System.out.println("sem:" + sem);
-
-			System.out.println("第" + iterationCount + "次迭代結束");
+//			System.out.println("itemInformation:" + itemInformation);
+//			System.out.println("sem:" + sem);
+//
+//			System.out.println("第" + iterationCount + "次迭代結束;" + "能力估計值：" + currentAbility);
 			iterationCount++;
 		}
 
+		// 將所選題號放入陣列紀錄
 		Long[] selectedItems = new Long[itemList.size()];
 		for (int i = 0; i < itemList.size(); i++) {
 			selectedItems[i] = itemList.get(i).getId();
 		}
 
+		// 將作答選項放入陣列紀錄
 		Long[] selectedOptions = new Long[optionList.size()];
 		optionList.toArray(selectedOptions);
 
+		// 寫入紀錄
 		record.setAbility(currentAbility);
 		record.setSem(sem);
 		record.setSelectedItems(selectedItems);
 		record.setSelectedOptions(selectedOptions);
+		
 		System.out.println("======== End ability estimate ========");
 
 		return record;
