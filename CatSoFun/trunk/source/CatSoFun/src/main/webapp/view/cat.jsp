@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width; initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CatSoFun</title>
 
 <script src="/CatSoFun/js/jquery-1.11.3.min.js"></script>
@@ -141,6 +141,10 @@
 				   		<td style="width: 50%; color: red; font-weight: bold;" id="sem"></td>
 				   	</tr>
 				   	<tr>
+				   		<td style="width: 50%;">信度</td>
+				   		<td style="width: 50%; color: red; font-weight: bold;" id="reliability"></td>
+				   	</tr>
+				   	<tr>
 				   		<td style="width: 50%;">測驗題數</td>
 				   		<td style="width: 50%; color: red; font-weight: bold;" id="itemNum"></td>
 				   	</tr>
@@ -266,20 +270,24 @@
 
 <script>
 var questionCount = 0 ;
+var isNextEventComplete = true;
 
 $(document).ready(function(){
 	questionCount = 1 ;
 
 	// 	按下 next鍵 發ajax 顯示下一題
-	$('#next').click(function() {
+	if (isNextEventComplete) {
+		$('#next').click(function() {
+		isNextEventComplete = false;
 	
-		$('#next').prop("disabled","disabled");
+// 		$('#next').prop("disabled","disabled");
 		
 		var option = $('input:radio[name=optradio]:checked').val();
 		if (option == null || option == undefined || option == ''){
 			//檢核有無勾選radio button
 			$("#warningDialog").trigger( "click" );
-			$('#next').prop("disabled","");
+// 			$('#next').prop("disabled","");
+			isNextEventComplete = true;
 			return;
 		}
 
@@ -302,13 +310,16 @@ $(document).ready(function(){
 					$("#recordTitle").html("測驗結束");
 					
 					var mu = 0;
-					var variance = 2;
+					var variance = 1;
+					var minTheta = -3;
+					var maxTheta = 3.6;
 
 					// 刷新內容div
 					$('#theta').html((obj.record.ability).toFixed(3));
-					$('#tScore').html((50 + 10*(obj.record.ability - mu)/Math.sqrt(variance)).toFixed(3));
+					$('#tScore').html(Math.round((obj.record.ability - minTheta)/(maxTheta - minTheta)*100));
 					$('#itemNum').html(questionCount-1);
 					$('#sem').html((obj.record.sem).toFixed(3));
+					$('#reliability').html((1-((obj.record.sem)*(obj.record.sem))/variance).toFixed(3));
 					$('#testTime').html(Math.round(obj.record.testCompleteTime/1000) + "秒");
 
 					$('#contentDiv').html($('#finishDiv').html());
@@ -329,15 +340,16 @@ $(document).ready(function(){
 					refreshRecordDialog(obj.record);
 					
 					$(':checked').prop('checked',false);
-					$('#next').prop("disabled","");
+// 					$('#next').prop("disabled","");
 				}
+				isNextEventComplete = true;
 			},
 			error : function(json) {
 				return false;
 			}
 		});
 	});
-
+	}
 });
 
 //按下 開始測驗鍵
