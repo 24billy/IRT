@@ -76,17 +76,19 @@
 			</result>
 		</action>
 		
+		<!-- 登入 -->
 		<action name="login" class="adminAction" method="login">
-		    <result name="success" type="chain">home</result>
+		    <result name="success" type="chain">goHome</result>
 		    <result name="error" type="chain">showLogin</result>
 		</action>
 		
+		<!-- 登出 -->
 		<action name="logout" class="adminAction" method="logout">
 		    <result name="success">/admin/login.jsp</result>
 		</action>
 		
 		<!-- 後台功能頁 -->
-		<action name="home">
+		<action name="goHome" class="adminAction" method="goHome">
 			<result>/admin/home.jsp
 			</result>
 		</action>
@@ -98,6 +100,19 @@
 			</result>
 		</action>
 		
+		<!-- 新增帳號 -->
+		<action name="addUser" class="adminAction" method="addUser">
+		    <result type="json">
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<!-- 取得所有帳號 -->
+		<action name="getAllUser" class="adminAction" method="getAllUser">
+		    <result type="json">
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
 	</package>
 
 </struts>

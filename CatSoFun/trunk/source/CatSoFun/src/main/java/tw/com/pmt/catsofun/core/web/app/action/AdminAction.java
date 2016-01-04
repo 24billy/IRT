@@ -23,15 +23,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class AdminAction extends ActionSupport {
 
 	private static final long serialVersionUID = 5201710573821237977L;
-	
-//	private static List<String> adminRoleList;
-//	
-//	static {
-//		adminRoleList.add("admin");
-//		adminRoleList.add("Billy");
-//		adminRoleList.add("Allen");
-//	} 
-	
+
 	@Autowired
 	private IRoleServise roleServise;
 
@@ -41,30 +33,46 @@ public class AdminAction extends ActionSupport {
 	private String username;
 	private String password;
 	
-	private Boolean isLogin;
+	private Boolean isSuccess;
+	private String errorMessage;
 	
 	private List<Record> recordList;
-
+	private List<Role> roleList;
+	
+	/**
+	 * 導頁至登入頁
+	 * 
+	 * @return String
+	 */
 	public String showLogin() {
 		return ActionSupport.SUCCESS;
 	}
 
+	/**
+	 * 登入檢查
+	 * 
+	 * @return String
+	 */
 	public String login() {
 		Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
-		
-		String userName = username;
-		System.out.println("username:" + username);
-		Role role = roleServise.getRoleByUserName(userName);
-		//&& checkAdminRole(role.getUserName()) 
+		Role role = roleServise.getRoleByUserName(username);
+
 		if (role != null && role.getUserPassword().equals(password)) {
 			sessionMap.put("role", role);
 			
 			return ActionSupport.SUCCESS;
+		} else {
+			sessionMap.remove("role");
 		}
-
+		
 		return ActionSupport.ERROR;
 	}
 	
+	/**
+	 * 導頁至後台主功能頁
+	 * 
+	 * @return String
+	 */
 	public String goHome() {
 		return ActionSupport.SUCCESS;
 	}
@@ -76,51 +84,74 @@ public class AdminAction extends ActionSupport {
 		return ActionSupport.SUCCESS;
 	}
 
+	/**
+	 * 取得所有作答結果紀錄
+	 *  
+	 * @return String
+	 */
 	public String getAllRecord() {
 		recordList = recordService.getAllRecord();
 		
 		return ActionSupport.SUCCESS;
 	}
 
-	public String addUser() {
-		Role role = new Role();
-		
-		if(username != null && password != null ) {
-			int roleCount = roleServise.getAllRole().size();
-			
-			role.setUserName(username);
-			role.setUserPassword(password);
-			role.setId(new Long(roleCount + 1));
-
-			roleServise.insertRole(role);
-		}
-		
-		return ActionSupport.SUCCESS;
-	}
-
+	/**
+	 * 取得所有帳號資料
+	 * 
+	 * @return String
+	 */
 	public String getAllUser() {
-		List<Role> roleList = roleServise.getAllRole();
-		
-		for (Role role : roleList) {
-			if (checkAdminRole(role.getUserName())) {
-				role.setUserPassword("****");
-			}
-		}
+		roleList = roleServise.getAllRole();
 		
 		return ActionSupport.SUCCESS;
 	}
 	
 	/**
+	 * 新增帳號/密碼規則
+	 * 
+	 * @return String
+	 */
+	public String addUser() {
+		Role role = new Role();
+		
+		if(username != null && password != null ) {
+			List<Role> roleList = roleServise.getAllRole();
+			
+			for (Role comparedRole : roleList) {
+				if (username.equals(comparedRole.getUserName())) {
+					errorMessage = "此帳號已存在！";
+					isSuccess = false;
+					
+					return ActionSupport.SUCCESS;
+				}
+			}
+			
+			role.setUserName(username);
+			role.setUserPassword(password);
+			role.setId(new Long(roleList.size() + 1));
+
+			try {
+				roleServise.insertRole(role);
+				isSuccess = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				isSuccess = false;
+			}
+		} else {
+			isSuccess = false;
+		}
+		
+		return ActionSupport.SUCCESS;
+	}
+
+	
+	/**
 	 * 檢查是否為管理員帳號
+	 * 
 	 * @param roleName
 	 * @return Boolean
 	 */
 	private Boolean checkAdminRole(String roleName) {
-//		for (String adminRoleName : adminRoleList) {
-//			if (adminRoleName.equals(roleName)) {
-//				return true;
-//			}
-//		}
 		
 		return false;
 	}
@@ -132,6 +163,14 @@ public class AdminAction extends ActionSupport {
 
 	public void setRecordList(List<Record> recordList) {
 		this.recordList = recordList;
+	}
+
+	public List<Role> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
 	}
 
 	public String getUsername() {
@@ -148,6 +187,22 @@ public class AdminAction extends ActionSupport {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Boolean getIsSuccess() {
+		return isSuccess;
+	}
+
+	public void setIsSuccess(Boolean isSuccess) {
+		this.isSuccess = isSuccess;
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
 	}
 
 }

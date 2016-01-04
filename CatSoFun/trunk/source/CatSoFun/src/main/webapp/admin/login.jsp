@@ -5,22 +5,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CatSoFun Admin System</title>
-
-<script src="/CatSoFun/js/jquery-1.11.3.min.js"></script>
-<script src="/CatSoFun/js/bootstrap.min.js"></script>
-
-<link href="/CatSoFun/css/bootstrap.min.css" rel="stylesheet">
-<link href="/CatSoFun/css/font-awesome-4.4.0/css/font-awesome.min.css"
-	rel="stylesheet">
-<style type="text/css">
-	body {
-		padding-top:40px;
-		background-color: #27272b;
-	}
-</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CatSoFun Admin System</title>
+	
+	<script src="/CatSoFun/js/jquery-1.11.3.min.js"></script>
+	<script src="/CatSoFun/js/bootstrap.min.js"></script>
+	
+	<link href="/CatSoFun/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/CatSoFun/css/font-awesome-4.4.0/css/font-awesome.min.css"
+		rel="stylesheet">
+		
+	<style type="text/css">
+		body {
+			padding-top:40px;
+			background-color: #27272b;
+		}
+	</style>
 </head>
 
 <body>
@@ -68,11 +69,8 @@
                     </button>
                 </div>
             </div>
-            <!-- .row -->
         </div>
-        <!-- .container -->
     </div>
-    <!-- #wrapper -->
 
     <!-- Modal -->
     <div id="messageDialog" class="modal fade" role="dialog">
@@ -131,7 +129,6 @@
                 $("button#messageButton").trigger("click");
             }
         }
-        
     </script>
 </body>
 </html>
