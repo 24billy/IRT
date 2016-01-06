@@ -16,6 +16,7 @@ import tw.com.pmt.catsofun.core.common.util.ScopeUtil.Scope;
 import tw.com.pmt.catsofun.core.db.model.Item;
 import tw.com.pmt.catsofun.core.db.model.Record;
 import tw.com.pmt.catsofun.core.db.model.Response;
+import tw.com.pmt.catsofun.core.db.model.Role;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -219,7 +220,9 @@ public class CatAction extends ActionSupport {
 //			System.out.println("Complete Time : " + testCompleteTime);
 			record.setTestCompleteTime(testCompleteTime);
 			record.setCreateTime(new Date());
-			
+
+			record.setRoleId(((Role) ActionContext.getContext().getSession().get("loginRole")).getId());
+
 			recordService.insertRecord(record);
 		}
 
