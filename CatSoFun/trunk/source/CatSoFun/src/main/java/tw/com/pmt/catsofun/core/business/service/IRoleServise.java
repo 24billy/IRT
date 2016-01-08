@@ -14,4 +14,8 @@ public interface IRoleServise {
 	
 	Role getRoleByUserNameAndPwd(String userName, String userPassword);
 
+	List<Role> getAllExaminerRole();
+	
+	Role insertExaminerRole(Role role);
+	
 }

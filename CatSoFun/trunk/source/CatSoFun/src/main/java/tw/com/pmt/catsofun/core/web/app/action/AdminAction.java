@@ -57,7 +57,7 @@ public class AdminAction extends ActionSupport {
 		Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
 		Role role = roleServise.getRoleByUserName(username);
 
-		if (role != null && role.getUserPassword().equals(password)) {
+		if (role != null && role.getUserPassword().equals(password) && role.getRoleType().equals("system")) {
 			sessionMap.put("role", role);
 			
 			return ActionSupport.SUCCESS;
@@ -101,7 +101,7 @@ public class AdminAction extends ActionSupport {
 	 * @return String
 	 */
 	public String getAllUser() {
-		roleList = roleServise.getAllRole();
+		roleList = roleServise.getAllExaminerRole();
 		
 		return ActionSupport.SUCCESS;
 	}
@@ -131,7 +131,7 @@ public class AdminAction extends ActionSupport {
 			role.setId(new Long(roleList.size() + 1));
 
 			try {
-				roleServise.insertRole(role);
+				roleServise.insertExaminerRole(role);
 				isSuccess = true;
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -22,7 +22,7 @@ public class RecordServiceImplTest extends BaseTest {
 		record.setSelectedItems(new Long[]{1l,2l,3l,4l,5l});
 		record.setSelectedOptions(new Long[]{1l,2l,1l,1l,3l});
 		record.setIsFinished(true);
-		record.setRoleId(1L);
+		record.setRoleName("Billy");
 		
 		System.out.println("before" + recordService.getAllRecord());
 		
@@ -49,7 +49,7 @@ public class RecordServiceImplTest extends BaseTest {
 		record.setSelectedItems(new Long[]{1l,2l,3l,4l,5l});
 		record.setSelectedOptions(new Long[]{1l,2l,1l,1l,3l});
 		record.setIsFinished(true);
-		record.setRoleId(1L);
+		record.setRoleName("Billy");
 		
 		recordService.insertRecord(record);
 		List<Record> recordList = recordService.getAllRecord();

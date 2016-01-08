@@ -12,6 +12,7 @@
 	<script src="/CatSoFun/js/jquery-1.11.3.min.js"></script>
 	<script src="/CatSoFun/js/bootstrap.min.js"></script>
 	<script src="/CatSoFun/js/jquery.dataTables.min.js"></script>
+	<script src="/CatSoFun/js/excellentexport.min.js"></script>
 	
 	<link href="/CatSoFun/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/CatSoFun/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -238,11 +239,7 @@ function getAllRecord() {
 			if (jsonData != null) {
 				generateRecordDataTable(jsonData);
 			}
-			$('#recordTable').DataTable({
-				'sDom' : 'tip',
-				'bFilter' : false,
-				"aaSorting" : [[ 0, "asc" ]]
-			});
+			$('#recordTable').DataTable();
 		}
 	});
 }

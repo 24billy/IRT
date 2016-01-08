@@ -1,5 +1,6 @@
 package tw.com.pmt.catsofun.core.business.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,28 @@ public class RoleServiceImpl extends GenericService<Role> implements IRoleServis
 	@Override
 	public Role getRoleByUserNameAndPwd(String userName, String userPassword) {
 		return roleDao.findRoleByUserNameAndUserPassword(userName, userPassword);
+	}
+
+	@Override
+	public List<Role> getAllExaminerRole() {
+		List<Role> allRoleList = roleDao.findAll();
+		List<Role> resultList = new ArrayList<Role>();
+		
+		// 僅將施測者帳號回傳
+		for (Role role : allRoleList) {
+			if("examiner".equals(role.getRoleType())) {
+				resultList.add(role);
+			}
+		}
+		
+		return resultList;
+	}
+
+	@Override
+	public Role insertExaminerRole(Role role) {
+		role.setRoleType("examiner");
+		
+		return roleDao.insert(role);
 	}
 
 }

@@ -39,8 +39,8 @@ public class Record extends GenericEntity  {
 	@Column(name = "is_finished")
 	private Boolean isFinished;
 
-	@Column(name = "role_id")
-	private Long roleId;
+	@Column(name = "role_name")
+	private String roleName;
 	
 	@Column(name = "sem", columnDefinition = "NUMERIC(8,5) default 0")
 	private Double sem;
@@ -92,12 +92,12 @@ public class Record extends GenericEntity  {
 		this.selectedOptions = selectedOptions;
 	}
 
-	public Long getRoleId() {
-		return roleId;
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 	public Double getSem() {
@@ -129,7 +129,7 @@ public class Record extends GenericEntity  {
 		return "Record [initAbility=" + initAbility + ", ability=" + ability
 				+ ", selectedItems=" + Arrays.toString(selectedItems)
 				+ ", selectedOptions=" + Arrays.toString(selectedOptions)
-				+ ", isFinished=" + isFinished + ", roleId=" + roleId
+				+ ", isFinished=" + isFinished + ", roleName=" + roleName
 				+ ", sem=" + sem + ", createTime=" + createTime
 				+ ", testCompleteTime=" + testCompleteTime + ", id=" + id + "]";
 	}

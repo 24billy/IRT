@@ -26,6 +26,10 @@ public class Role extends GenericEntity {
 	@Column(name = "user_password", length = 50, nullable = false)
 	private String userPassword;
 
+	// roleType system, examiner
+	@Column(name = "role_type", length = 50)
+	private String roleType;
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -42,10 +46,18 @@ public class Role extends GenericEntity {
 		this.userPassword = userPassword;
 	}
 
+	public String getRoleType() {
+		return roleType;
+	}
+
+	public void setRoleType(String roleType) {
+		this.roleType = roleType;
+	}
+
 	@Override
 	public String toString() {
 		return "Role [userName=" + userName + ", userPassword=" + userPassword
-				+ ", id=" + id + "]";
+				+ ", roleType=" + roleType + ", id=" + id + "]";
 	}
-	
+
 }
