@@ -327,6 +327,8 @@ $(document).ready(function(){
 					var item = obj.item;
 					var response = obj.response;
 
+					$('#quizDiv').fadeOut();
+					
 					$("#questionCount").html("Q" + questionCount + ".");
 					$("#question").html(item.itemContent);
 					$("#guild").html(obj.response.guild);
@@ -341,6 +343,9 @@ $(document).ready(function(){
 					
 					$(':checked').prop('checked',false);
 // 					$('#next').prop("disabled","");
+
+// 					$('#quizDiv').slideDown("slow");
+					$('#quizDiv').fadeIn();
 				}
 				isNextEventComplete = true;
 			},

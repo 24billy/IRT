@@ -19,8 +19,10 @@
 }
 
 body {
-	background-image: url(../pic/pen.jpg);
-	background-size: cover;
+	background: -webkit-radial-gradient(ellipse,gray,black);
+	background: -o-radial-gradient(ellipse,gray,black);
+	background: -moz-radial-gradient(ellipse,gray,black);
+	background: radial-gradient(ellipse,gray,black);
 }
 </style>
  
