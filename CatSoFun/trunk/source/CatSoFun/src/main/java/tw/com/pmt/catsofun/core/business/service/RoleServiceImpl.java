@@ -60,8 +60,22 @@ public class RoleServiceImpl extends GenericService<Role> implements IRoleServis
 	@Override
 	public Role insertExaminerRole(Role role) {
 		role.setRoleType("examiner");
-		
 		return roleDao.insert(role);
 	}
 
+	@Override
+	public Role updateRole(Role role) {
+		return roleDao.update(role);
+	}
+	
+	@Override
+	public void deleteRole(Role role) {
+		roleDao.delete(role);
+	}
+	
+	@Override
+	public Long getMaxRoleId() {
+		return roleDao.findMaxRoleId();
+	}
+	
 }

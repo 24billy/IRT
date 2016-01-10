@@ -18,4 +18,10 @@ public interface IRoleServise {
 	
 	Role insertExaminerRole(Role role);
 	
+	Role updateRole(Role role);
+	
+	void deleteRole(Role role);
+	
+	Long getMaxRoleId();
+	
 }
