@@ -10,6 +10,7 @@
 <script src="/CatSoFun/js/jquery-1.11.3.min.js"></script>
 <script src="/CatSoFun/js/bootstrap.min.js"></script>
 <script src="/CatSoFun/js/bootbox.min.js"></script>
+<script src="/CatSoFun/js/jquery.dataTables.min.js"></script>
 
 <link href="/CatSoFun/css/bootstrap.min.css" rel="stylesheet">
 
@@ -37,7 +38,7 @@
 		font-family: Microsoft JhengHei;
 	}
 	
-	#quizDiv  {
+	#quizDiv, #practiceDiv1, #practiceDiv2  {
 		font-size: 24px;
 		color: white;
 	}
@@ -56,7 +57,7 @@
 		border-radius: 5px;
 		background-color: white;
 		color: black;
-		opacity:0.6;
+		opacity:0.6; 
  	} 
 	
 	#contentDiv {
@@ -71,7 +72,7 @@
   	background-color: white;
   	color: black;
   	border-radius: 5px;
-  	opacity:0.6;
+   	opacity:1.0; 
   	}
 
 </style>
@@ -97,6 +98,7 @@
 				<ul class="nav navbar-nav">
 				    <li><a href="#about">關於測驗</a></li>
 				    <li><a href="#contact">聯絡我們</a></li>
+				    <li><a href="">查看歷史紀錄</a></li>
 				</ul>
 				<button id="recordButton" type="button" class="btn btn-info btn-lg right" data-toggle="modal" data-target="#recordDialog">
 					檢視目前估計結果
@@ -114,31 +116,62 @@
 	<div class="container" id="contentDiv">
 	
 		<!-- BEGIN 練習試題頁 -->
-		<div class="row" style="display: none;" id="practiceDiv" >
+		<div class="row" style="display: none;" id="practiceDiv1" >
 			<div class="col-md-10 col-md-offset-1" >
 				<div style="border-width: 1px; border-style: solid; border-radius: 5px; padding: 15px;">
-					<p id="questionCount">Q1.</p>
-					<p id="guild">你知道CAT嗎?</p>
-					<p id="question">你知道CAT嗎?</p>
+					<p id="">Q1.</p>
+					<p id="">這是練習題!</p>
+					<p id="">您可以選擇下面任一選項後，點選下方藍色按鈕，即可作答下一題。</p>
 					
 					<form role="form" style="font-size: ; color: ; margin-top: 20px;">
 					  <div class="radio" >
-					    <input type="radio" name="optradio" value="0" id="radio01"><label style="width: 2000px;" for="radio01"><span id="opt0">完全不知</span></label>
+					    <input type="radio" name="optradio" value="0" id="r11"><label style="width: 2000px;" for="r11"><span id="">第1個選項</span></label>
 					  </div>
 					  <div class="radio">
-					    <input type="radio" name="optradio" value="1" id="radio02"><label style="width: 2000px;" for="radio02"><span id="opt1">知道一點點</span></label>
+					    <input type="radio" name="optradio" value="1" id="r12"><label style="width: 2000px;" for="r12"><span id="">第2個選項</span></label>
 					  </div>
 					  <div class="radio">
-					    <input type="radio" name="optradio" value="2" id="radio03"><label style="width: 2000px;" for="radio03"><span id="opt2">略懂</span></label>
+					    <input type="radio" name="optradio" value="2" id="r13"><label style="width: 2000px;" for="r13"><span id="">第3個選項</span></label>
 					  </div>
 					  <div class="radio">
-					    <input type="radio" name="optradio" value="3" id="radio04"><label style="width: 2000px;" for="radio04"><span id="opt3">沒意見</span></label>
+					    <input type="radio" name="optradio" value="3" id="r14"><label style="width: 2000px;" for="r14"><span id="">第4個選項</span></label>
 					  </div>
 					  <div class="radio">
-					    <input type="radio" name="optradio" value="4" id="radio05"><label style="width: 2000px;" for="radio05"><span id="opt4">非常了解</span></label>
+					    <input type="radio" name="optradio" value="4" id="r15"><label style="width: 2000px;" for="r15"><span id="">第5個選項</span></label>
 					  </div>
 					  <div class="text-center" style="margin: 20px 0px 0px 0px;">
-					    <button type="button" class="btn btn-primary btn-lg  form-control" id="" style="">下一題</button>
+					    <button type="button" class="btn btn-primary btn-lg  form-control" id="preBegin1" style="">下一題</button>
+					  </div>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row" style="display: none;" id="practiceDiv2" >
+			<div class="col-md-10 col-md-offset-1" >
+				<div style="border-width: 1px; border-style: solid; border-radius: 5px; padding: 15px;">
+					<p id="">Q2.</p>
+					<p id="">這是最後一題練習題!</p>
+					<p id="">完成此練習題後，將回到測驗說明頁，可進入正式測驗，也可再次進行練習。</p>
+					
+					<form role="form" style="font-size: ; color: ; margin-top: 20px;">
+					  <div class="radio" >
+					    <input type="radio" name="optradio" value="0" id="r21"><label style="width: 2000px;" for="r21"><span id="">練習題二，第1個選項</span></label>
+					  </div>
+					  <div class="radio">
+					    <input type="radio" name="optradio" value="1" id="r22"><label style="width: 2000px;" for="r22"><span id="">練習題二，第2個選項</span></label>
+					  </div>
+					  <div class="radio">
+					    <input type="radio" name="optradio" value="2" id="r23"><label style="width: 2000px;" for="r23"><span id="">練習題二，第3個選項</span></label>
+					  </div>
+					  <div class="radio">
+					    <input type="radio" name="optradio" value="3" id="r24"><label style="width: 2000px;" for="r24"><span id="">練習題二，第4個選項</span></label>
+					  </div>
+					  <div class="radio">
+					    <input type="radio" name="optradio" value="4" id="r25"><label style="width: 2000px;" for="r25"><span id="">練習題二，第5個選項</span></label>
+					  </div>
+					  <div class="text-center" style="margin: 20px 0px 0px 0px;">
+					    <button type="button" class="btn btn-primary btn-lg  form-control" id="preBegin2" style="">下一題</button>
 					  </div>
 					</form>
 				</div>
@@ -150,10 +183,19 @@
 		<!-- BEGIN 測驗開始頁 -->
 		<div class="row" style="opacity:0.9;" id="welcomeDiv">
 			<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 thumbnail" style="padding: 15px; margin-top: 80px; color: black;">
-		        <p>這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗...測驗說明測驗說明</p>
-		        <br>
-		        <p><button type="button" class="btn btn-danger " id="preBegin" onclick="">我想練習看看</button></p>
-		        <p><button type="button" class="btn btn-primary form-control" id="begin">直接開始測驗</button></p>
+		        <p style="font-size: 24px;">您好：</p>
+
+				<ul style="font-size: 22px;">
+					<li>這份測驗主要是用來瞭解您自覺參與社交活動之狀況。</li>
+					<li>請仔細閱讀每道題目，並點選一個您認為最合適的答案。</li>
+					<li>若您對題目內容有不瞭解的地方，請詢問您的治療師後再作答。</li>
+				</ul>
+				
+		        <div class="form-group text-center" style="margin-top: 30px;" >
+		        	<button type="button" class="btn btn-danger btn-lg" id="preBegin" onclick="">我想練習看看</button>
+		        	<button type="button" class="btn btn-primary btn-lg" id="begin" onclick="doConfirmBeginQuiz()">直接開始測驗</button>
+		        </div>
+		        
 			</div>
 		</div>
 		<!-- END 測驗開始頁 -->
@@ -164,41 +206,81 @@
 			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="padding: 15px; opacity:0.9; margin-top: 50px;">
 				<p style="font-size: 24px; text-align: center; color: blue;">您已完成本測驗</p>
 		        
-		        <table style="width: 90%; text-align: center; font-size: 22px; ">
-			    	<tr style="border-bottom:thick double blue;">
-				   		<td style="width: 50%;">能力估計</td>
-				   		<td style="width: 50%; color: red; font-weight: bold;" id="theta"></td>
-				   	</tr>
-			    	<tr style="border-bottom:thick double blue;">
-				   		<td style="width: 50%;">標準誤 (能力估計)</td>
-				   		<td style="width: 50%; color: red; font-weight: bold;" id=""></td>
-				   	</tr>
-				   	<tr style="border-bottom:thick double blue;">
-				   		<td style="width: 50%;">T分數</td>
-				   		<td style="width: 50%; color: red; font-weight: bold;" id="tScore"></td>
-				   	</tr>
-			    	<tr style="border-bottom:thick double blue;">
-				   		<td style="width: 50%;">標準誤 (T分數)</td>
-				   		<td style="width: 50%; color: red; font-weight: bold;" id=""></td>
-				   	</tr>
-				   	<tr style="border-bottom:thick double blue;">
-				   		<td style="width: 50%;">估計標準誤</td>
-				   		<td style="width: 50%; color: red; font-weight: bold;" id="sem"></td>
-				   	</tr>
-				   	<tr style="border-bottom:thick double blue;">
-				   		<td style="width: 50%;">信度</td>
-				   		<td style="width: 50%; color: red; font-weight: bold;" id="reliability"></td>
-				   	</tr>
-				   	<tr style="border-bottom:thick double blue;">
-				   		<td style="width: 50%;">測驗題數</td>
-				   		<td style="width: 50%; color: red; font-weight: bold;" id="itemNum"></td>
-				   	</tr>
-				   	<tr style="border-bottom:thick double blue;">
-				   		<td style="width: 50%;">測驗時間</td>
-				   		<td style="width: 50%; color: red; font-weight: bold;" id="testTime"></td>
-				   	</tr>
-			    </table>
-			    <button type="button" class="btn btn-primary btn-lg text-center" id="" style="margin-top: 20px;" onclick="">返回首頁</button>
+						<table class="table table-striped table-bordered table-hover" id="data_table" style="font-size: 20px;">
+							<thead style="display: none;">
+								<tr>
+									<th class="text-center">1</th>
+									<th class="text-center">2</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td data-title="1">能力估計</td>
+									<td data-title="2" id="theta"></td>
+								</tr>
+								<tr>
+									<td data-title="1">標準誤 (能力估計)</td>
+									<td data-title="2" id="sem"></td>
+								</tr>
+								<tr>
+									<td data-title="1">T分數</td>
+									<td data-title="2" id="tScore"></td>
+								</tr>
+								<tr>
+									<td data-title="1">標準誤 (T分數)</td>
+									<td data-title="2" id="se"></td>
+								</tr>
+								<tr>
+									<td data-title="1">信度</td>
+									<td data-title="2" id="reliability"></td>
+								</tr>
+								<tr>
+									<td data-title="1">施測題數</td>
+									<td data-title="2" id="itemNum"></td>
+								</tr>
+								<tr>
+									<td data-title="1" class="blue">施測時間</td>
+									<td data-title="2" class="blue" id="testTime"></td>
+								</tr>
+							</tbody>
+						</table>
+		        
+		        
+<!-- 		        <table style="width: 90%; text-align: center; font-size: 22px; " id="data_table"> -->
+<!-- 			    	<tr style="border-bottom:thick double blue;"> -->
+<!-- 				   		<td style="width: 50%;">能力估計</td> -->
+<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="theta"></td> -->
+<!-- 				   	</tr> -->
+<!-- 			    	<tr style="border-bottom:thick double blue;"> -->
+<!-- 				   		<td style="width: 50%;">標準誤 (能力估計)</td> -->
+<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="sem"></td> -->
+<!-- 				   	</tr> -->
+<!-- 				   	<tr style="border-bottom:thick double blue;"> -->
+<!-- 				   		<td style="width: 50%;">T分數</td> -->
+<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="tScore"></td> -->
+<!-- 				   	</tr> -->
+<!-- 			    	<tr style="border-bottom:thick double blue;"> -->
+<!-- 				   		<td style="width: 50%;">標準誤 (T分數)</td> -->
+<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="se"></td> -->
+<!-- 				   	</tr> -->
+<!-- 				   	<tr style="border-bottom:thick double blue;"> -->
+<!-- 				   		<td style="width: 50%;">信度</td> -->
+<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="reliability"></td> -->
+<!-- 				   	</tr> -->
+<!-- 				   	<tr style="border-bottom:thick double blue;"> -->
+<!-- 				   		<td style="width: 50%;">測驗題數</td> -->
+<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="itemNum"></td> -->
+<!-- 				   	</tr> -->
+<!-- 				   	<tr style="border-bottom:thick double blue;"> -->
+<!-- 				   		<td style="width: 50%;">測驗時間</td> -->
+<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="testTime"></td> -->
+<!-- 				   	</tr> -->
+<!-- 			    </table> -->
+			    
+			    <div class="form-group text-center" style="margin-top: 20px;" >
+			    	<button type="button" class="btn btn-primary btn-lg " id="" style="margin-top: ;" onclick="window.location.href='showCatMainPage'">回到測驗主頁</button>
+			    	<button type="button" class="btn btn-warning btn-lg " id="" style="margin-top: ;" onclick="window.open('logout');">開啟新的CAT-SoFun測驗</button>
+			    </div>
 			</div>
 		</div>
 		<!-- END 測驗結束頁 -->
@@ -357,16 +439,17 @@ $(document).ready(function(){
 					
 					var mu = 0;
 					var variance = 1;
-					var minTheta = -3.54;
-					var maxTheta = 3.63;
+					var minTheta = -3.5318;
+					var maxTheta = 3.6248;
 
 					// 刷新內容div
 					$('#theta').html((obj.record.ability).toFixed(2));
 					$('#tScore').html(Math.round((obj.record.ability - minTheta)/(maxTheta - minTheta)*100));
 					$('#itemNum').html(questionCount-1);
 					$('#sem').html((obj.record.sem).toFixed(2));
+					$('#se').html(Math.round((obj.record.sem)/(maxTheta - minTheta)*100));
 					$('#reliability').html((1-((obj.record.sem)*(obj.record.sem))/variance).toFixed(2));
-					$('#testTime').html(Math.round(obj.record.testCompleteTime/1000) + "秒");
+					$('#testTime').html((obj.record.testCompleteTime/1000).toFixed(1) + "秒");
 
 					$('#contentDiv').html($('#finishDiv').html());
 				} else {
@@ -408,13 +491,42 @@ $(document).ready(function(){
 
 $('#preBegin').click(function() {
 	$('#welcomeDiv').hide();
-	$('#practiceDiv').show();
+	$('#practiceDiv1').show();
 });
 
-$('#begin').click(function() {
-	$('#welcomeDiv').hide();
-	$('#quizDiv').show();
+$('#preBegin1').click(function() {
+
+	var option = $('input:radio[name=optradio]:checked').val();
+	if (option == null || option == undefined || option == ''){
+		//檢核有無勾選radio button
+		$("#warningDialog").trigger( "click" );
+		return;
+	}
+	
+	$('#practiceDiv1').hide();
+	$('#practiceDiv2').show();
+	
+	$(':checked').prop('checked',false);
 });
+
+$('#preBegin2').click(function() {
+	
+	var option = $('input:radio[name=optradio]:checked').val();
+	if (option == null || option == undefined || option == ''){
+		//檢核有無勾選radio button
+		$("#warningDialog").trigger( "click" );
+		return;
+	}
+
+	$('#practiceDiv2').hide();
+	$('#welcomeDiv').show();
+	$(':checked').prop('checked',false);
+});
+
+// $('#begin').click(function() {
+// 	$('#welcomeDiv').hide();
+// 	$('#quizDiv').show();
+// });
 
 function refreshRecordDialog(record) {
 	$("td#initAbility").html(record.initAbility);
@@ -458,7 +570,7 @@ function goBackHome() {
         buttons : {
             success : {
                 label : "確定",
-                className : "btn-danger",
+                className : "btn-primary",
                 callback : function() {
                     window.location.href='logout';
                 }
@@ -473,8 +585,65 @@ function goBackHome() {
         }
     });
 }
-	
 
+function doConfirmBeginQuiz() {
+	
+	    bootbox.dialog({
+        closeButton : false,
+        size : "null",
+        message : "<h3>確定要開始測驗?</h3>",
+        title : "",
+        buttons : {
+//             success : {
+//                 label : "確定開始測驗",
+//                 className : "btn-primary",
+//                 callback : function() {
+                
+// 					$('#welcomeDiv').hide();
+// 					$('#quizDiv').show();
+                
+//                 }
+//             },
+            danger : {
+                label : "練習一下",
+                className : "btn-danger",
+                callback : function() {
+                	
+                	$('#welcomeDiv').hide();
+                	$('#practiceDiv1').show();
+                	
+                }
+            },
+            success : {
+                label : "確定開始測驗",
+                className : "btn-primary",
+                callback : function() {
+                
+					$('#welcomeDiv').hide();
+					$('#quizDiv').show();
+                
+                }
+            }
+        }
+    });
+}	
+
+   //dataTable設定
+   $('#data_table').dataTable({
+       "bPaginate": false, //翻頁功能
+       "bLengthChange": false, //改變每頁顯示數據數量
+       "bFilter": false, //過濾功能
+       "bSort": false, //排序功能
+       "bInfo": false,//頁腳信息
+       "bAutoWidth": false,//自動寬度
+       "aoColumnDefs": //欄位設定
+            [
+                { 'bSortable': false, 'aTargets': [ ] }, //關閉排序功能
+                { 'sWidth': '50%', 'aTargets': [ 0 ] },
+                { 'sWidth': '50%', 'aTargets': [ 1 ] }
+            ],
+            "aaSorting": [[ 0, "asc" ]] //第0列順序排列
+   });
 	
 </script>
 
