@@ -170,6 +170,16 @@ public class AdminAction extends ActionSupport {
 	}
 	
 	public String deleteUser() {
+		if(username != null && password != null ) {
+			Role role = roleServise.getRoleByUserNameAndPwd(username, password);
+			try {
+				roleServise.deleteRole(role);
+				isSuccess = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				isSuccess = false;
+			}
+		}
 		
 		return ActionSupport.SUCCESS;
 	}
