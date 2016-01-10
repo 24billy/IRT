@@ -12,6 +12,7 @@
 	<script src="/CatSoFun/js/jquery-1.11.3.min.js"></script>
 	<script src="/CatSoFun/js/bootstrap.min.js"></script>
 	<script src="/CatSoFun/js/jquery.dataTables.min.js"></script>
+	<script src="/CatSoFun/js/excellentexport.min.js"></script>
 	
 	<link href="/CatSoFun/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/CatSoFun/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -23,7 +24,6 @@
 			padding-top: 60px;
 			background-color: #27272b;
 		}
-		
 		.toggleBtn {
 			position: relative;
 			float: right;
@@ -85,7 +85,8 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <i class="fa fa-fw fa-table"></i><span class="left5">查詢所有作答結果</span>                          
+                                <i class="fa fa-fw fa-table"></i><span class="left5">查詢所有作答結果</span>
+                                <a class="btn btn-success btn-sm" download="somedata.xls" href="#" onclick="return ExcellentExport.excel(this, 'recordTable');">輸出為Excel檔</a>                          
                                 <a class="btn btn-default btn-sm toggleBtn" data-toggle="collapse" data-parent="#listPanel" id="allRecordBtn" href="#recordPanel" ><i class="fa fa-fw fa-bars"></i></a>
                             </h4>
                         </div>
@@ -94,10 +95,14 @@
                                 <table class="table table-hover table-condensed" id="recordTable" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>序號</th>
-                                        <th>能力估計值</th>
+                                        <th style="width:10%;">個案序號</th>
+                                        <th>能力值</th>
+                                        <th>T分數</th>
                                         <th>估計標準誤</th>
+                                        <th>信度</th>
                                         <th>作答時間</th>
+                                        <th>施測時間</th>
+                                        <th>施測者</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -141,7 +146,7 @@
 									</div>
 	                            </form>
 	                            <div>
-		                            <button class="btn btn-primary btn-sm" id="generateAcount" disabled><del>產生帳號密碼</del></button>
+		                            <button class="btn btn-primary btn-sm" id="generateAcount" style="display:none;" disabled><del>產生帳號密碼</del></button>
 		                            <button class="btn btn-success btn-sm" id="addAcount">送出</button>
 	                            </div>
 	                        </div>
@@ -153,7 +158,7 @@
 	                <div class="panel panel-default">
 	                    <div class="panel-heading">
 	                        <h4 class="panel-title">
-	                            <i class="fa fa-fw fa-table"></i><span class="left10">查詢所有帳號</span>
+	                            <i class="fa fa-fw fa-table"></i><span class="left10">帳號管理</span>
 	                            <a class="btn btn-default btn-sm toggleBtn" id="roleBtn" data-toggle="collapse" data-parent="#listPanel" href="#rolePanel"><i class="fa fa-fw fa-bars"></i></a>
 	                        </h4>
 	                    </div>
@@ -162,8 +167,9 @@
 	                            <table class="table table-hover table-condensed" id="roleTable" width="100%">
 	                                <thead>
 	                                    <tr>
-	                                        <th>帳號名稱</th>
+	                                        <th>名稱</th>
 	                                        <th>密碼</th>
+	                                        <th></th>
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
@@ -238,11 +244,7 @@ function getAllRecord() {
 			if (jsonData != null) {
 				generateRecordDataTable(jsonData);
 			}
-			$('#recordTable').DataTable({
-				'sDom' : 'tip',
-				'bFilter' : false,
-				"aaSorting" : [[ 0, "asc" ]]
-			});
+			$('#recordTable').DataTable();
 		}
 	});
 }
@@ -250,11 +252,29 @@ function getAllRecord() {
 function generateRecordDataTable(jsonData) {
 	$.each(jsonData.recordList, function(index, data) {
     	var $tr = $("<tr width='100%'>");
-		    	
-    	$tr.append($("<td>").html(data.id));
-    	$tr.append($("<td>").html(data.ability));
-    	$tr.append($("<td>").html(data.sem));
-    	$tr.append($("<td>").html(data.testCompleteTime/1000 + "秒"));
+    	
+    	//<th>施測序號</th>
+    	$tr.append($("<td>").html(addZeroLeft(data.id, 5)));
+    	//<th>能力估計值</th>
+    	$tr.append($("<td>").html(data.ability.toFixed(1)));
+        //<th>T分數</th>
+        var mu = 0;
+		var variance = 1;
+		var minTheta = -3;
+		var maxTheta = 3.6;
+        $tr.append($("<td>").html(Math.round((data.ability - minTheta)/(maxTheta - minTheta)*100)));
+        //<th>測量標準誤</th>
+        $tr.append($("<td>").html(data.sem.toFixed(1)));
+        //<th>信度</th>
+        $tr.append($("<td>").html((1-((data.sem)*(data.sem))/variance).toFixed(2)));
+        //<th>作答時間</th>
+        $tr.append($("<td>").html((data.testCompleteTime/1000).toFixed(1) + "秒"));
+        //<th>施測時間</th>
+        $tr.append($("<td>").html(data.createTime));
+        //<th>施測者</th>
+    	$tr.append($("<td>").html(data.roleName));
+    	
+    	
     	
     	$('table#recordTable > tbody:last').append($tr);
 	});
@@ -280,17 +300,47 @@ function generateUserDataTable(jsonData) {
 	
 	$.each(jsonData.roleList, function(index, data) {
     	var $tr = $("<tr width='100%'>");
-	    	if(data.id >= 4) {
 	        	$tr.append($("<td>").html(data.userName));
 	        	$tr.append($("<td>").html(data.userPassword));
+	        	$tr.append($("<td>").html("<a class='btn btn-danger btn-xs'" + 
+	        			"onclick='deleteRole(" + data.userName +  "," + data.userPassword +");'  >刪除</a>"));
 	        	
 	        	$('table#roleTable > tbody:last').append($tr);		
-	    	}
 	});
 }
 
-$("button#generateAcount").on("click",function(){
+function deleteRole(userName, password) {
+	var params = {};
+	params.username = userName;
+	params.password = password;
 	
+	$.ajax({
+		type : "POST",
+		url : "deleteUser.action",
+		data : params,
+		dataType : "text", //ajax返回值設定為text
+		success : function(json) {
+			var obj = $.parseJSON(json); //解析json
+			
+			if (obj.isSuccess) {
+				$('h4#successMessage').show();
+	            $('h4#successMessage').html("帳號已刪除：" + userName);
+	            $("button#messageButton").trigger("click");
+	            
+	            getAllUser();
+			} else {
+				$('h4#errorMessage').show();
+		        $('h4#errorMessage').html("帳號刪除失敗");
+		        $("button#messageButton").trigger("click");
+			}
+		},
+		error : function(json) {
+			return false;
+		}
+	});
+}
+
+$("a#exportExcelButton").on("click",function(){
 });
 
 $("button#addAcount").on("click",function(){
@@ -367,6 +417,15 @@ function validator() {
     }
     
     return true;
+}
+
+// 左邊補0
+function addZeroLeft(str, length){
+	if(str.length >= length) {
+		return str;	
+	} else {
+		return addZeroLeft("0" + str, length);	
+	}
 }
 
 function clearMessage() {

@@ -14,4 +14,14 @@ public interface IRoleServise {
 	
 	Role getRoleByUserNameAndPwd(String userName, String userPassword);
 
+	List<Role> getAllExaminerRole();
+	
+	Role insertExaminerRole(Role role);
+	
+	Role updateRole(Role role);
+	
+	void deleteRole(Role role);
+	
+	Long getMaxRoleId();
+	
 }

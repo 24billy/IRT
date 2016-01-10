@@ -34,8 +34,8 @@ INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALU
 INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(24,'感覺您是別人的負擔?',-0.26,-0.363,-0.602,0.969,-0.004,7);
 
 --使用者帳密--
-INSERT INTO role(id,user_name,user_password) VALUES (1,'Billy','4321');
-INSERT INTO role(id,user_name,user_password) VALUES (2,'Allen','1234');
-INSERT INTO role(id,user_name,user_password) VALUES (3,'admin','admin');
+INSERT INTO role(id,user_name,user_password) VALUES (1,'Billy','4321','system');
+INSERT INTO role(id,user_name,user_password) VALUES (2,'Allen','1234','system');
+INSERT INTO role(id,user_name,user_password) VALUES (3,'admin','admin','system');
 
 --作答結果--

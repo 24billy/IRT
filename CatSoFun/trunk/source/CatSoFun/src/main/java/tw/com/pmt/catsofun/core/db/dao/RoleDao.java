@@ -1,6 +1,8 @@
 package tw.com.pmt.catsofun.core.db.dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Projections;
 import org.springframework.stereotype.Repository;
 
 import tw.com.pmt.catsofun.core.common.dao.GenericDao;
@@ -42,6 +44,14 @@ public class RoleDao extends GenericDao<Role> {
 		}
 		
 		return null;
+	}
+	
+	public Long findMaxRoleId() {
+		Criteria criteria = getSession().createCriteria(Role.class)
+				.setProjection(Projections.max("id"));
+		Long maxRoleId = (Long) criteria.uniqueResult();
+		
+		return maxRoleId;
 	}
 	
 }

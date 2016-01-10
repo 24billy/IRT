@@ -221,7 +221,7 @@ public class CatAction extends ActionSupport {
 			record.setTestCompleteTime(testCompleteTime);
 			record.setCreateTime(new Date());
 
-			record.setRoleId(((Role) ActionContext.getContext().getSession().get("loginRole")).getId());
+			record.setRoleName(((Role) ActionContext.getContext().getSession().get("loginRole")).getUserName());
 
 			recordService.insertRecord(record);
 		}

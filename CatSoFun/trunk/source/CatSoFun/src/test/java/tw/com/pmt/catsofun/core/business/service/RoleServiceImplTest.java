@@ -36,4 +36,23 @@ public class RoleServiceImplTest extends BaseTest {
 		System.out.println(roleServise.getAllRole());
 	}
 
+	@Test 
+	public void testUpdateRole() {
+		Role role = new Role();
+		role.setId(5l);
+		role.setUserName("Steven");
+		role.setUserPassword("123456");
+		System.out.println(roleServise.updateRole(role));
+	}
+	
+	@Test
+	public void testDeleteRole() {
+		Role role = new Role();
+		role.setId(5l);
+		role.setUserName("Steven");
+		role.setUserPassword("1234");
+		
+		roleServise.deleteRole(role);
+	}
+	
 }
