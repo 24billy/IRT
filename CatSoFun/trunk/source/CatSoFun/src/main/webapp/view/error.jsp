@@ -51,8 +51,8 @@ body {
 
 <!-- BEGIN Content -->
 <br><br><br><br><br>
-<div class="row" style="opacity:0.6;">
-	<div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px;text-align: center;">
+<div class="row" style="opacity:0.9;">
+	<div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px; margin-top: 80px; text-align: center;">
 		<h2>帳號或密碼錯誤!</h2>
 		<h4>10秒後將自動導回登入頁!</h4> 
 		<h4>您也可點選下列連結返回登入頁!</h4>

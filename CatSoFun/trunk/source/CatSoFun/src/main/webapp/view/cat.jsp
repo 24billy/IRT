@@ -9,6 +9,7 @@
 
 <script src="/CatSoFun/js/jquery-1.11.3.min.js"></script>
 <script src="/CatSoFun/js/bootstrap.min.js"></script>
+<script src="/CatSoFun/js/bootbox.min.js"></script>
 
 <link href="/CatSoFun/css/bootstrap.min.css" rel="stylesheet">
 
@@ -89,7 +90,8 @@
 			    <span class="icon-bar"></span>
 			    <span class="icon-bar"></span>
 			  </button>
-			  <a class="navbar-brand" href="/CatSoFun">CatSoFun</a>
+<!-- 			  <a class="navbar-brand" href="/CatSoFun/frontend/showLogin" >CatSoFun</a> -->
+			  <a class="navbar-brand" href="#" onclick="goBackHome();" >CatSoFun</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -111,12 +113,47 @@
 	
 	<div class="container" id="contentDiv">
 	
+		<!-- BEGIN 練習試題頁 -->
+		<div class="row" style="display: none;" id="practiceDiv" >
+			<div class="col-md-10 col-md-offset-1" >
+				<div style="border-width: 1px; border-style: solid; border-radius: 5px; padding: 15px;">
+					<p id="questionCount">Q1.</p>
+					<p id="guild">你知道CAT嗎?</p>
+					<p id="question">你知道CAT嗎?</p>
+					
+					<form role="form" style="font-size: ; color: ; margin-top: 20px;">
+					  <div class="radio" >
+					    <input type="radio" name="optradio" value="0" id="radio01"><label style="width: 2000px;" for="radio01"><span id="opt0">完全不知</span></label>
+					  </div>
+					  <div class="radio">
+					    <input type="radio" name="optradio" value="1" id="radio02"><label style="width: 2000px;" for="radio02"><span id="opt1">知道一點點</span></label>
+					  </div>
+					  <div class="radio">
+					    <input type="radio" name="optradio" value="2" id="radio03"><label style="width: 2000px;" for="radio03"><span id="opt2">略懂</span></label>
+					  </div>
+					  <div class="radio">
+					    <input type="radio" name="optradio" value="3" id="radio04"><label style="width: 2000px;" for="radio04"><span id="opt3">沒意見</span></label>
+					  </div>
+					  <div class="radio">
+					    <input type="radio" name="optradio" value="4" id="radio05"><label style="width: 2000px;" for="radio05"><span id="opt4">非常了解</span></label>
+					  </div>
+					  <div class="text-center" style="margin: 20px 0px 0px 0px;">
+					    <button type="button" class="btn btn-primary btn-lg  form-control" id="" style="">下一題</button>
+					  </div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- END 練習試題頁 -->
+		
+		
 		<!-- BEGIN 測驗開始頁 -->
-		<div class="row" style="opacity:0.6;" id="welcomeDiv">
-			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="padding: 15px; color: black;">
+		<div class="row" style="opacity:0.9;" id="welcomeDiv">
+			<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 thumbnail" style="padding: 15px; margin-top: 80px; color: black;">
 		        <p>這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗這是一個測驗...測驗說明測驗說明</p>
 		        <br>
-		        <p><button type="button" class="btn btn-primary form-control" id="begin">開始測驗</button></p>
+		        <p><button type="button" class="btn btn-danger " id="preBegin" onclick="">我想練習看看</button></p>
+		        <p><button type="button" class="btn btn-primary form-control" id="begin">直接開始測驗</button></p>
 			</div>
 		</div>
 		<!-- END 測驗開始頁 -->
@@ -124,35 +161,44 @@
 	
 		<!-- BEGIN 測驗結束頁 -->
 		<div class="row" style="display: none;" id="finishDiv">
-			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="padding: 15px; opacity:0.6; margin-top: 50px;">
+			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="padding: 15px; opacity:0.9; margin-top: 50px;">
 				<p style="font-size: 24px; text-align: center; color: blue;">您已完成本測驗</p>
 		        
-		        <table style="width: 90%; text-align: center; font-size: 22px;">
-			    	<tr>
+		        <table style="width: 90%; text-align: center; font-size: 22px; ">
+			    	<tr style="border-bottom:thick double blue;">
 				   		<td style="width: 50%;">能力估計</td>
 				   		<td style="width: 50%; color: red; font-weight: bold;" id="theta"></td>
 				   	</tr>
-				   	<tr>
-				   		<td style="width: 50%;">t分數</td>
+			    	<tr style="border-bottom:thick double blue;">
+				   		<td style="width: 50%;">標準誤 (能力估計)</td>
+				   		<td style="width: 50%; color: red; font-weight: bold;" id=""></td>
+				   	</tr>
+				   	<tr style="border-bottom:thick double blue;">
+				   		<td style="width: 50%;">T分數</td>
 				   		<td style="width: 50%; color: red; font-weight: bold;" id="tScore"></td>
 				   	</tr>
-				   	<tr>
+			    	<tr style="border-bottom:thick double blue;">
+				   		<td style="width: 50%;">標準誤 (T分數)</td>
+				   		<td style="width: 50%; color: red; font-weight: bold;" id=""></td>
+				   	</tr>
+				   	<tr style="border-bottom:thick double blue;">
 				   		<td style="width: 50%;">估計標準誤</td>
 				   		<td style="width: 50%; color: red; font-weight: bold;" id="sem"></td>
 				   	</tr>
-				   	<tr>
+				   	<tr style="border-bottom:thick double blue;">
 				   		<td style="width: 50%;">信度</td>
 				   		<td style="width: 50%; color: red; font-weight: bold;" id="reliability"></td>
 				   	</tr>
-				   	<tr>
+				   	<tr style="border-bottom:thick double blue;">
 				   		<td style="width: 50%;">測驗題數</td>
 				   		<td style="width: 50%; color: red; font-weight: bold;" id="itemNum"></td>
 				   	</tr>
-				   	<tr>
+				   	<tr style="border-bottom:thick double blue;">
 				   		<td style="width: 50%;">測驗時間</td>
 				   		<td style="width: 50%; color: red; font-weight: bold;" id="testTime"></td>
 				   	</tr>
 			    </table>
+			    <button type="button" class="btn btn-primary btn-lg text-center" id="" style="margin-top: 20px;" onclick="">返回首頁</button>
 			</div>
 		</div>
 		<!-- END 測驗結束頁 -->
@@ -183,7 +229,7 @@
 					    <input type="radio" name="optradio" value="4" id="radio05"><label style="width: 2000px;" for="radio05"><span id="opt4">${response.option05}</span></label>
 					  </div>
 					  <div class="text-center" style="margin: 20px 0px 0px 0px;">
-					    <button type="button" class="btn btn-primary btn-lg  form-control" id="next" style="">NEXT</button>
+					    <button type="button" class="btn btn-primary btn-lg  form-control" id="next" style="">下一題</button>
 					  </div>
 					</form>
 				</div>
@@ -311,15 +357,15 @@ $(document).ready(function(){
 					
 					var mu = 0;
 					var variance = 1;
-					var minTheta = -3;
-					var maxTheta = 3.6;
+					var minTheta = -3.54;
+					var maxTheta = 3.63;
 
 					// 刷新內容div
-					$('#theta').html((obj.record.ability).toFixed(3));
+					$('#theta').html((obj.record.ability).toFixed(2));
 					$('#tScore').html(Math.round((obj.record.ability - minTheta)/(maxTheta - minTheta)*100));
 					$('#itemNum').html(questionCount-1);
-					$('#sem').html((obj.record.sem).toFixed(3));
-					$('#reliability').html((1-((obj.record.sem)*(obj.record.sem))/variance).toFixed(3));
+					$('#sem').html((obj.record.sem).toFixed(2));
+					$('#reliability').html((1-((obj.record.sem)*(obj.record.sem))/variance).toFixed(2));
 					$('#testTime').html(Math.round(obj.record.testCompleteTime/1000) + "秒");
 
 					$('#contentDiv').html($('#finishDiv').html());
@@ -358,6 +404,13 @@ $(document).ready(function(){
 });
 
 //按下 開始測驗鍵
+
+
+$('#preBegin').click(function() {
+	$('#welcomeDiv').hide();
+	$('#practiceDiv').show();
+});
+
 $('#begin').click(function() {
 	$('#welcomeDiv').hide();
 	$('#quizDiv').show();
@@ -390,6 +443,38 @@ function refreshRecordDialog(record) {
 	}
 	$("td#recordSelectedOptions").html(selectedOptions);
 };
+
+function goBackHome() {
+// 	bootbox.confirm("測驗進行中，你確定要回到登入頁?", function(result) {
+// // 		window.location.href='/CatSoFun/mock';
+// 		window.location.href='logout';
+// 	});
+	
+	    bootbox.dialog({
+        closeButton : false,
+        size : "null",
+        message : "<h3>測驗進行中，你確定要回到登入頁?</h3>",
+        title : "",
+        buttons : {
+            success : {
+                label : "確定",
+                className : "btn-danger",
+                callback : function() {
+                    window.location.href='logout';
+                }
+            },
+            danger : {
+                label : "取消",
+                className : "btn-default",
+                callback : function() {
+                	//do nothing
+                }
+            }
+        }
+    });
+}
+	
+
 	
 </script>
 
