@@ -96,12 +96,13 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-				    <li><a href="#about">關於測驗</a></li>
-				    <li><a href="#contact">聯絡我們</a></li>
-				    <li><a href="">查看歷史紀錄</a></li>
+<!-- 				    <li><a href="#about">關於測驗</a></li> -->
+<!-- 				    <li><a href="#contact">聯絡我們</a></li> -->
+<!-- 				    <li><a href="#" onclick="doQueryHistory()">查看歷史紀錄</a></li> -->
+				    <li><button type="button" class="btn btn-success" onclick="doQueryHistory()">查看歷史紀錄</button></li>
 				</ul>
 				<button id="recordButton" type="button" class="btn btn-info btn-lg right" data-toggle="modal" data-target="#recordDialog">
-					檢視目前估計結果
+					檢視目前估計結果(測試用)
 				</button>
 				<form class="navbar-form navbar-right" role="search">
 				    <input class="btn btn-default" type="button" value="登出" onclick="location.href='logout'">
@@ -182,18 +183,18 @@
 		
 		<!-- BEGIN 測驗開始頁 -->
 		<div class="row" style="opacity:0.9;" id="welcomeDiv">
-			<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 thumbnail" style="padding: 15px; margin-top: 80px; color: black;">
-		        <p style="font-size: 24px;">您好：</p>
+			<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 thumbnail" style="padding: 15px; margin-top: 60px; color: black;">
+		        <p style="font-size: 22px;">您好：</p>
 
-				<ul style="font-size: 22px;">
+				<ul style="font-size: 20px;">
 					<li>這份測驗主要是用來瞭解您自覺參與社交活動之狀況。</li>
 					<li>請仔細閱讀每道題目，並點選一個您認為最合適的答案。</li>
 					<li>若您對題目內容有不瞭解的地方，請詢問您的治療師後再作答。</li>
 				</ul>
 				
 		        <div class="form-group text-center" style="margin-top: 30px;" >
-		        	<button type="button" class="btn btn-danger btn-lg" id="preBegin" onclick="">我想練習看看</button>
-		        	<button type="button" class="btn btn-primary btn-lg" id="begin" onclick="doConfirmBeginQuiz()">直接開始測驗</button>
+		        	<button type="button" class="btn btn-danger" id="preBegin" onclick="">我想練習看看</button>
+		        	<button type="button" class="btn btn-primary" id="begin" onclick="doConfirmBeginQuiz()">直接開始測驗</button>
 		        </div>
 		        
 			</div>
@@ -203,83 +204,51 @@
 	
 		<!-- BEGIN 測驗結束頁 -->
 		<div class="row" style="display: none;" id="finishDiv">
-			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="padding: 15px; opacity:0.9; margin-top: 50px;">
+			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="padding: 15px; opacity:0.9; margin-top: 40px;">
 				<p style="font-size: 24px; text-align: center; color: blue;">您已完成本測驗</p>
 		        
-						<table class="table table-striped table-bordered table-hover" id="data_table" style="font-size: 20px;">
-							<thead style="display: none;">
-								<tr>
-									<th class="text-center">1</th>
-									<th class="text-center">2</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td data-title="1">能力估計</td>
-									<td data-title="2" id="theta"></td>
-								</tr>
-								<tr>
-									<td data-title="1">標準誤 (能力估計)</td>
-									<td data-title="2" id="sem"></td>
-								</tr>
-								<tr>
-									<td data-title="1">T分數</td>
-									<td data-title="2" id="tScore"></td>
-								</tr>
-								<tr>
-									<td data-title="1">標準誤 (T分數)</td>
-									<td data-title="2" id="se"></td>
-								</tr>
-								<tr>
-									<td data-title="1">信度</td>
-									<td data-title="2" id="reliability"></td>
-								</tr>
-								<tr>
-									<td data-title="1">施測題數</td>
-									<td data-title="2" id="itemNum"></td>
-								</tr>
-								<tr>
-									<td data-title="1" class="blue">施測時間</td>
-									<td data-title="2" class="blue" id="testTime"></td>
-								</tr>
-							</tbody>
-						</table>
-		        
-		        
-<!-- 		        <table style="width: 90%; text-align: center; font-size: 22px; " id="data_table"> -->
-<!-- 			    	<tr style="border-bottom:thick double blue;"> -->
-<!-- 				   		<td style="width: 50%;">能力估計</td> -->
-<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="theta"></td> -->
-<!-- 				   	</tr> -->
-<!-- 			    	<tr style="border-bottom:thick double blue;"> -->
-<!-- 				   		<td style="width: 50%;">標準誤 (能力估計)</td> -->
-<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="sem"></td> -->
-<!-- 				   	</tr> -->
-<!-- 				   	<tr style="border-bottom:thick double blue;"> -->
-<!-- 				   		<td style="width: 50%;">T分數</td> -->
-<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="tScore"></td> -->
-<!-- 				   	</tr> -->
-<!-- 			    	<tr style="border-bottom:thick double blue;"> -->
-<!-- 				   		<td style="width: 50%;">標準誤 (T分數)</td> -->
-<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="se"></td> -->
-<!-- 				   	</tr> -->
-<!-- 				   	<tr style="border-bottom:thick double blue;"> -->
-<!-- 				   		<td style="width: 50%;">信度</td> -->
-<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="reliability"></td> -->
-<!-- 				   	</tr> -->
-<!-- 				   	<tr style="border-bottom:thick double blue;"> -->
-<!-- 				   		<td style="width: 50%;">測驗題數</td> -->
-<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="itemNum"></td> -->
-<!-- 				   	</tr> -->
-<!-- 				   	<tr style="border-bottom:thick double blue;"> -->
-<!-- 				   		<td style="width: 50%;">測驗時間</td> -->
-<!-- 				   		<td style="width: 50%; color: red; font-weight: bold;" id="testTime"></td> -->
-<!-- 				   	</tr> -->
-<!-- 			    </table> -->
+					<table class="table table-striped table-bordered table-hover" id="data_table" style="font-size: 20px;">
+						<thead style="display: none;">
+							<tr>
+								<th class="text-center">1</th>
+								<th class="text-center">2</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td data-title="1">能力估計</td>
+								<td data-title="2" id="theta"></td>
+							</tr>
+							<tr>
+								<td data-title="1">標準誤 (能力估計)</td>
+								<td data-title="2" id="sem"></td>
+							</tr>
+							<tr>
+								<td data-title="1">T分數</td>
+								<td data-title="2" id="tScore"></td>
+							</tr>
+							<tr>
+								<td data-title="1">標準誤 (T分數)</td>
+								<td data-title="2" id="se"></td>
+							</tr>
+							<tr>
+								<td data-title="1">信度</td>
+								<td data-title="2" id="reliability"></td>
+							</tr>
+							<tr>
+								<td data-title="1">施測題數</td>
+								<td data-title="2" id="itemNum"></td>
+							</tr>
+							<tr>
+								<td data-title="1" class="blue">施測時間</td>
+								<td data-title="2" class="blue" id="testTime"></td>
+							</tr>
+						</tbody>
+					</table>
 			    
-			    <div class="form-group text-center" style="margin-top: 20px;" >
-			    	<button type="button" class="btn btn-primary btn-lg " id="" style="margin-top: ;" onclick="window.location.href='showCatMainPage'">回到測驗主頁</button>
-			    	<button type="button" class="btn btn-warning btn-lg " id="" style="margin-top: ;" onclick="window.open('logout');">開啟新的CAT-SoFun測驗</button>
+			    <div class="form-group text-center row" style="margin-top: 20px;" >
+			    	<button type="button" class="btn btn-primary" id="" style="margin-top: ;" onclick="window.location.href='showCatMainPage'">回到測驗主頁<br>(無須重新登入)</button>
+			    	<button type="button" class="btn btn-warning" id="" style="margin-top: ;" onclick="window.open('logout');">開啟新的CAT-SoFun測驗<br>(需重新登入)</button>
 			    </div>
 			</div>
 		</div>
@@ -408,13 +377,10 @@ $(document).ready(function(){
 		$('#next').click(function() {
 		isNextEventComplete = false;
 	
-// 		$('#next').prop("disabled","disabled");
-		
 		var option = $('input:radio[name=optradio]:checked').val();
 		if (option == null || option == undefined || option == ''){
 			//檢核有無勾選radio button
 			$("#warningDialog").trigger( "click" );
-// 			$('#next').prop("disabled","");
 			isNextEventComplete = true;
 			return;
 		}
@@ -471,9 +437,7 @@ $(document).ready(function(){
 					refreshRecordDialog(obj.record);
 					
 					$(':checked').prop('checked',false);
-// 					$('#next').prop("disabled","");
 
-// 					$('#quizDiv').slideDown("slow");
 					$('#quizDiv').fadeIn();
 				}
 				isNextEventComplete = true;
@@ -557,13 +521,9 @@ function refreshRecordDialog(record) {
 };
 
 function goBackHome() {
-// 	bootbox.confirm("測驗進行中，你確定要回到登入頁?", function(result) {
-// // 		window.location.href='/CatSoFun/mock';
-// 		window.location.href='logout';
-// 	});
 	
 	    bootbox.dialog({
-        closeButton : false,
+        closeButton : true,
         size : "null",
         message : "<h3>測驗進行中，你確定要回到登入頁?</h3>",
         title : "",
@@ -589,32 +549,12 @@ function goBackHome() {
 function doConfirmBeginQuiz() {
 	
 	    bootbox.dialog({
-        closeButton : false,
+        closeButton : true,
         size : "null",
         message : "<h3>確定要開始測驗?</h3>",
         title : "",
         buttons : {
-//             success : {
-//                 label : "確定開始測驗",
-//                 className : "btn-primary",
-//                 callback : function() {
-                
-// 					$('#welcomeDiv').hide();
-// 					$('#quizDiv').show();
-                
-//                 }
-//             },
-            danger : {
-                label : "練習一下",
-                className : "btn-danger",
-                callback : function() {
-                	
-                	$('#welcomeDiv').hide();
-                	$('#practiceDiv1').show();
-                	
-                }
-            },
-            success : {
+          success : {
                 label : "確定開始測驗",
                 className : "btn-primary",
                 callback : function() {
@@ -623,10 +563,40 @@ function doConfirmBeginQuiz() {
 					$('#quizDiv').show();
                 
                 }
+            },
+            danger : {
+                label : "取消",
+                className : "btn-default",
+                callback : function() {
+                	
+//                 	$('#welcomeDiv').hide();
+//                 	$('#practiceDiv1').show();
+                	
+                }
             }
         }
     });
 }	
+
+function doQueryHistory() {
+		
+		bootbox.alert({
+        closeButton : true,
+        size : "large",
+        message : "<h3>歷史紀錄</h3>",
+        title : "歷史作答記錄",
+        buttons : {
+            ok : {
+                label : "確定",
+                className : "btn-primary",
+                callback : function() {
+                	
+                	
+                }
+            }
+        }
+    });
+}
 
    //dataTable設定
    $('#data_table').dataTable({
