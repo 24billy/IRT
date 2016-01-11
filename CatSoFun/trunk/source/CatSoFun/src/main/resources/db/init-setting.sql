@@ -1,16 +1,16 @@
 --作答反應--
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (1,'完全無法做到','很多困難','中等困難','一點困難','完全沒有困難','在過去一週裡：');
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (2,'非常同意','中等同意','不同意也不反對','中等不同意','非常不同意','在過去一週裡：');
-INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (3,'總是如此','大部分時間如此','某些時間如此','很少時間如此','從未如此','在過去四星期內,您在從事以下活動而感覺受限的情況有多頻繁…');
-INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (4,'極不滿意','不滿意','中等程度滿意','滿意','極滿意','我們的問題所關心的是您最近兩星期內的生活情形，請您用自己的標準、希望、愉快、以及關注點來回答問題。請參考下面的例題：');
-INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (5,'完全沒有','有一點有','中等程度有','很有','極有','我們的問題所關心的是您最近兩星期內的生活情形，請您用自己的標準、希望、愉快、以及關注點來回答問題。請參考下面的例題：');
-INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (6,'完全沒有機會','少許機會','中等程度機會','很有機會','完全有機會','我們的問題所關心的是您最近兩星期內的生活情形，請您用自己的標準、希望、愉快、以及關注點來回答問題。請參考下面的例題：');
-INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (7,'總是','常常','偶爾','很少','從來沒有','在過去一星期內‚您出現以下情況有多頻繁…');
+INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (3,'總是如此','大部分時間如此','某些時間如此','很少時間如此','從未如此','在過去四週內,您在從事以下活動而感覺受限的頻率為…');
+INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (4,'極不滿意','不滿意','中等程度滿意','滿意','極滿意','在過去二週裡：');
+INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (5,'完全沒有','有一點有','中等程度有','很有','極有','在過去二週裡：');
+INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (6,'完全沒有機會','少許機會','中等程度機會','很有機會','完全有機會','在過去二週裡：');
+INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (7,'總是','常常','偶爾','很少','從來沒有','在過去一週內‚您出現以下情況有多頻繁…');
 
 --題目--
 INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(1,'從事以前工作',0.168,0.293,0.049,-0.155,-0.188,1);
 INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(2,'覺得自已是家人的負擔',0.141,-0.599,1.365,-0.522,-0.244,2);
-INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(3,'身體狀況妨礙家庭生活',0.201,-0.625,1.549,-1.187,0.263,2);
+INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(3,'我的身體狀況妨礙家庭生活',0.201,-0.625,1.549,-1.187,0.263,2);
 INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(4,'出門的次數沒有想要的那麼多',0.368,-0.318,0.805,0.037,-0.524,2);
 INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(5,'從事嗜好及娛樂時間比想要的時間少',0.353,-0.503,0.867,0.359,-0.723,2);
 INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(6,'見到的朋友沒有想要的那麼多',0.191,-0.377,0.405,0.078,-0.106,2);
@@ -34,8 +34,8 @@ INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALU
 INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(24,'感覺您是別人的負擔?',-0.26,-0.363,-0.602,0.969,-0.004,7);
 
 --使用者帳密--
-INSERT INTO role(id,user_name,user_password) VALUES (1,'Billy','4321','system');
-INSERT INTO role(id,user_name,user_password) VALUES (2,'Allen','1234','system');
-INSERT INTO role(id,user_name,user_password) VALUES (3,'admin','admin','system');
+INSERT INTO role(id,user_name,user_password,role_type) VALUES (1,'Billy','4321','system');
+INSERT INTO role(id,user_name,user_password,role_type) VALUES (2,'Allen','1234','system');
+INSERT INTO role(id,user_name,user_password,role_type) VALUES (3,'admin','admin','system');
 
 --作答結果--

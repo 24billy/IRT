@@ -8,12 +8,7 @@
 </head>
 
 <body>
-	<h1>CatSoFun is Work</h1>
-	
-	<br>
-		<h3><a href="/CatSoFun/mock" target="_blank">mock_cat</a></h3>
-		
-		<h3><a href="/CatSoFun/frontend/showLogin" target="_blank">showLogin</a></h3>
+	<h1 style="text-align: center;padding:50px">CatSoFun is Work</h1>
 </body>
 
 </html>
