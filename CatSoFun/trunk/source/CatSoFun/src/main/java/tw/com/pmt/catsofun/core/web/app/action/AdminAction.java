@@ -57,7 +57,7 @@ public class AdminAction extends ActionSupport {
 		Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
 		Role role = roleServise.getRoleByUserName(username);
 
-		if (role != null && role.getUserPassword().equals(password) && role.getRoleType().equals("system")) {
+		if (role != null && role.getUserPassword().equals(password) && "system".equals(role.getRoleType())) {
 			sessionMap.put("role", role);
 			
 			return ActionSupport.SUCCESS;
