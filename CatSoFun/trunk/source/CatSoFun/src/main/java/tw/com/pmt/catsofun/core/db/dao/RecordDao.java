@@ -1,5 +1,7 @@
 package tw.com.pmt.catsofun.core.db.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
@@ -24,5 +26,18 @@ public class RecordDao extends GenericDao<Record> {
 		
 		return null;
 	}
-	
+
+	public List<Record> findRecordByRoleId(String roleName) {
+		if (roleName != null) {
+			Query query = getSession().createQuery("from Record where role_name = :roleName ORDER BY create_time DESC");
+
+			query.setString("roleName", roleName);
+
+			return query.list();
+
+		}
+
+		return null;
+	}
+
 }

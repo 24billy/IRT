@@ -13,6 +13,7 @@
 <script src="/CatSoFun/js/jquery.dataTables.min.js"></script>
 
 <link href="/CatSoFun/css/bootstrap.min.css" rel="stylesheet">
+<link href="/CatSoFun/css/jquery.dataTables.min.css" rel="stylesheet">
 
 <style type="text/css">
 	@media (max-width: 768px) {
@@ -91,15 +92,13 @@
 			    <span class="icon-bar"></span>
 			    <span class="icon-bar"></span>
 			  </button>
-<!-- 			  <a class="navbar-brand" href="/CatSoFun/frontend/showLogin" >CatSoFun</a> -->
-			  <a class="navbar-brand" href="#" onclick="goBackHome();" >CatSoFun</a>
+			  <a class="navbar-brand" onclick="goBackHome();" >CatSoFun</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-<!-- 				    <li><a href="#about">關於測驗</a></li> -->
-<!-- 				    <li><a href="#contact">聯絡我們</a></li> -->
-<!-- 				    <li><a href="#" onclick="doQueryHistory()">查看歷史紀錄</a></li> -->
-				    <li><button type="button" class="btn btn-success" onclick="doQueryHistory()">查看歷史紀錄</button></li>
+				    <li><a onclick="doQueryHistory()">查看歷史紀錄</a></li>
+<!-- 				    <li><a href="" Target="_blank" onclick="">查看歷史紀錄(另開)</a></li> -->
+				    
 				</ul>
 				<button id="recordButton" type="button" class="btn btn-info btn-lg right" data-toggle="modal" data-target="#recordDialog">
 					檢視目前估計結果(測試用)
@@ -204,10 +203,10 @@
 	
 		<!-- BEGIN 測驗結束頁 -->
 		<div class="row" style="display: none;" id="finishDiv">
-			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="padding: 15px; opacity:0.9; margin-top: 40px;">
+			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="padding: 15px; opacity:0.9; margin-top: 20px;">
 				<p style="font-size: 24px; text-align: center; color: blue;">您已完成本測驗</p>
 		        
-					<table class="table table-striped table-bordered table-hover" id="data_table" style="font-size: 20px;">
+					<table class="table table-striped table-bordered table-hover" style="font-size: 20px;">
 						<thead style="display: none;">
 							<tr>
 								<th class="text-center">1</th>
@@ -289,6 +288,53 @@
 		<!-- END 試題頁 -->
 	
 	</div>
+	
+	<!-- BEGIN record dialog -->
+	<div style="display: none" id="recordDiv">
+		<div class="thumbnail">
+			<table class="table table-hover table-condensed text-center"
+				id="recordTable" width="100%">
+				<thead>
+					<tr>
+						<th>能力值</th>
+						<th>T分數</th>
+						<th>估計標準誤</th>
+						<th>信度</th>
+						<th>施測題數</th>
+						<th>作答時間</th>
+						<th>施測時間</th>
+						<th>施測者</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- END record dialog -->
+	
+	
+<!-- 	test -->
+<!-- 	<div class="thumbnail"> -->
+<!-- 		<table class="table table-hover table-condensed " -->
+<!-- 			id="recordTable2" width="100%"> -->
+<!-- 			<thead> -->
+<!-- 				<tr> -->
+<!-- 					<th>能力值</th> -->
+<!-- 					<th>T分數</th> -->
+<!-- 					<th>估計標準誤</th> -->
+<!-- 					<th>信度</th> -->
+<!-- 					<th>施測題數</th> -->
+<!-- 					<th>作答時間</th> -->
+<!-- 					<th>施測時間</th> -->
+<!-- 					<th>施測者</th> -->
+<!-- 				</tr> -->
+<!-- 			</thead> -->
+<!-- 			<tbody> -->
+<!-- 			</tbody> -->
+<!-- 		</table> -->
+<!-- 	</div> -->
+<!-- 	test -->
 	
 	
 	<!-- END Content -->
@@ -522,27 +568,27 @@ function refreshRecordDialog(record) {
 
 function goBackHome() {
 	
-	    bootbox.dialog({
-        closeButton : true,
-        size : "null",
-        message : "<h3>測驗進行中，你確定要回到登入頁?</h3>",
-        title : "",
-        buttons : {
-            success : {
-                label : "確定",
-                className : "btn-primary",
-                callback : function() {
-                    window.location.href='logout';
-                }
-            },
-            danger : {
-                label : "取消",
-                className : "btn-default",
-                callback : function() {
-                	//do nothing
-                }
-            }
-        }
+    bootbox.dialog({
+       closeButton : true,
+       size : "null",
+       message : "<h3>測驗進行中，你確定要回到登入頁?</h3>",
+       title : "",
+       buttons : {
+           success : {
+               label : "確定",
+               className : "btn-primary",
+               callback : function() {
+                   window.location.href='logout';
+               }
+           },
+           danger : {
+               label : "取消",
+               className : "btn-default",
+               callback : function() {
+               	//do nothing
+               }
+           }
+       }
     });
 }
 
@@ -579,42 +625,107 @@ function doConfirmBeginQuiz() {
 }	
 
 function doQueryHistory() {
+
+	getAllRecord();
 		
-		bootbox.alert({
-        closeButton : true,
-        size : "large",
-        message : "<h3>歷史紀錄</h3>",
-        title : "歷史作答記錄",
-        buttons : {
-            ok : {
-                label : "確定",
-                className : "btn-primary",
-                callback : function() {
-                	
-                	
-                }
-            }
-        }
+	bootbox.alert({
+       closeButton : true,
+       size : "large",
+       message : $('#recordDiv').html(),
+       title : "歷史作答記錄",
+       buttons : {
+           ok : {
+               label : "確定",
+               className : "btn-primary",
+               callback : function() {
+               	//do nothing
+               }
+           }
+       }
     });
 }
 
-   //dataTable設定
-   $('#data_table').dataTable({
-       "bPaginate": false, //翻頁功能
-       "bLengthChange": false, //改變每頁顯示數據數量
-       "bFilter": false, //過濾功能
-       "bSort": false, //排序功能
-       "bInfo": false,//頁腳信息
-       "bAutoWidth": false,//自動寬度
-       "aoColumnDefs": //欄位設定
-            [
-                { 'bSortable': false, 'aTargets': [ ] }, //關閉排序功能
-                { 'sWidth': '50%', 'aTargets': [ 0 ] },
-                { 'sWidth': '50%', 'aTargets': [ 1 ] }
-            ],
-            "aaSorting": [[ 0, "asc" ]] //第0列順序排列
-   });
+   	function getAllRecord() {
+		$.ajax({
+			type : "POST",
+			url : "getHistoryRecord.action",
+			dataType : "text", //ajax返回值設定為text
+			success : function(data) {
+				var jsonData = $.parseJSON(data); //解析json
+
+				if (jsonData != null) {
+					generateRecordDataTable(jsonData);
+				}
+// 				$('#recordTable').DataTable({
+					
+//        				"retrieve": true,
+//        				"bPaginate": true, //翻頁功能
+//        				"bLengthChange": false, //改變每頁顯示數據數量
+//        				"bFilter": false, //過濾功能
+// 			        "bSort": true, //排序功能
+// 			        "bInfo": true,//頁腳信息
+// 			        "bAutoWidth": false,//自動寬度
+// 			        "aoColumnDefs": //欄位設定
+// 			            [
+// 			                { 'bSortable': false, 'aTargets': [ ] }, //關閉排序功能
+// 			                { 'sWidth': '10%', 'aTargets': [ 0 ] },
+// 			                { 'sWidth': '10%', 'aTargets': [ 1 ] },
+// 			                { 'sWidth': '10%', 'aTargets': [ 2 ] },
+// 			                { 'sWidth': '10%', 'aTargets': [ 3 ] },
+// 			                { 'sWidth': '10%', 'aTargets': [ 4 ] },
+// 			                { 'sWidth': '10%', 'aTargets': [ 5 ] },
+// 			                { 'sWidth': '30%', 'aTargets': [ 6 ] },
+// 			                { 'sWidth': '10%', 'aTargets': [ 7 ] }
+// 			            ],
+//             		"aaSorting": [[ 0, "asc" ]] //第0列順序排列
+//    				});
+			}
+		});
+	}
 	
+	function generateRecordDataTable(jsonData) {
+		$.each(jsonData.recordList, function(index, data) {
+			/**
+			 * 結果摘要
+			 */
+			var $tr = $("<tr width='100%'>");
+
+			//<th>施測序號</th>
+// 			var recordId = 1;
+// 			$tr.append($("<td>").html(recordId));
+			//<th>能力估計值</th>
+			$tr.append($("<td>").html(data.ability.toFixed(1)));
+			//<th>T分數</th>
+			var mu = 0;
+			var variance = 1;
+			var minTheta = -3.5318;
+			var maxTheta = 3.6248;
+
+			$tr.append($("<td>").html(
+					Math.round((data.ability - minTheta)
+							/ (maxTheta - minTheta) * 100)));
+			//<th>測量標準誤</th>
+			$tr.append($("<td>").html(data.sem.toFixed(1)));
+			//<th>信度</th>
+			$tr.append($("<td>").html(
+					(1 - ((data.sem) * (data.sem)) / variance).toFixed(2)));
+			//<th>施測題數</th>
+			$tr.append($("<td>").html(data.selectedItems.length));
+			//<th>作答時間</th>
+			$tr.append($("<td>").html(
+					(data.testCompleteTime / 1000).toFixed(1) + "秒"));
+			//<th>施測時間</th>
+			$tr.append($("<td>").html(data.createTime));
+			//<th>施測者</th>
+			$tr.append($("<td>").html(data.roleName));
+
+			$('table#recordTable > tbody:last').append($tr);
+
+		});
+	}
+	
+
+   
 </script>
 
 </body>

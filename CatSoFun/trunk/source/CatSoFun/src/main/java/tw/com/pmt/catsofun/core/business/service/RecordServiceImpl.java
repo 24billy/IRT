@@ -52,5 +52,11 @@ public class RecordServiceImpl extends GenericService<Record> implements
 
 		return null;
 	}
+	
+	@Override
+	public List<Record> queryRecordByRoleName(String roleName) {
+		return recordDao.findRecordByRoleId(roleName);
+	}
+
 
 }

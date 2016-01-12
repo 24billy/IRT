@@ -56,8 +56,27 @@ public class CatAction extends ActionSupport {
 
 	private static Double prior = Parameter.TEST_PRIOR_INVERSE_VARIANCE;
 	private Long startTime;
+
+	private List<Record> recordList;
 	
-	
+
+	/**
+	 * 取得所有作答結果紀錄
+	 *  
+	 * @return String
+	 */
+	public String getHistoryRecord() {
+		Role role = (Role) ActionContext.getContext().getSession().get("loginRole");
+
+		if (role == null) {
+			return ActionSupport.ERROR;
+		}
+
+		recordList = recordService.queryRecordByRoleName(role.getUserName());
+
+		return ActionSupport.SUCCESS;
+	}
+
 	public String showCatMainPage() {
 		System.out.println("showCatMainContent() begin...");
 
@@ -456,6 +475,14 @@ public class CatAction extends ActionSupport {
 
 	public void setRecord(Record record) {
 		this.record = record;
+	}
+	
+	public List<Record> getRecordList() {
+		return recordList;
+	}
+
+	public void setRecordList(List<Record> recordList) {
+		this.recordList = recordList;
 	}
 
 }

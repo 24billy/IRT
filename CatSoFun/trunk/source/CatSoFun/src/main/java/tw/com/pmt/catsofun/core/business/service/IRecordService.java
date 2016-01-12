@@ -44,4 +44,11 @@ public interface IRecordService {
 	 */
 	Record getLastRecordId();
 	
+	/**
+	 * 取得該帳號作答歷史紀錄
+	 * 
+	 * @return List<Record>
+	 */
+	List<Record> queryRecordByRoleName(String roleName);
+	
 }
