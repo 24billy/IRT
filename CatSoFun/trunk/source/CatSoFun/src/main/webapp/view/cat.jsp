@@ -182,7 +182,7 @@
 		
 		<!-- BEGIN 測驗開始頁 -->
 		<div class="row" style="opacity:0.9;" id="welcomeDiv">
-			<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 thumbnail" style="padding: 15px; margin-top: 60px; color: black;">
+			<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 thumbnail" style="padding: 15px; margin-top: 30px; color: black;">
 		        <p style="font-size: 22px;">您好：</p>
 
 				<ul style="font-size: 20px;">

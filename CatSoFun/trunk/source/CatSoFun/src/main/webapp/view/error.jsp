@@ -39,8 +39,8 @@ body {
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-			    <li><a href="#about">關於測驗</a></li>
-			    <li><a href="#contact">聯絡我們</a></li>
+<!-- 			    <li><a href="#about">關於測驗</a></li> -->
+<!-- 			    <li><a href="#contact">聯絡我們</a></li> -->
 			</ul>
 			<form class="navbar-form navbar-right" role="search">
 			</form>
