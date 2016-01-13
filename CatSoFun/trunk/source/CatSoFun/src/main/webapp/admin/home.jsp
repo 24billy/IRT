@@ -84,25 +84,19 @@ body {
 									<a class="btn btn-success btn-xs" download="cat_summary.xls"
 										href="#"
 										onclick="return ExcellentExport.excel(this, 'recordTable');">
-										<i class="fa fa-fw fa-file-excel-o"></i>
-										CAT施測結果摘要
-									</a> 
-									<a class="btn btn-success btn-xs" download="cat_history.xls"
+										<i class="fa fa-fw fa-file-excel-o"></i> CAT施測結果摘要
+									</a> <a class="btn btn-success btn-xs" download="cat_history.xls"
 										href="#"
 										onclick="return ExcellentExport.excel(this, 'historyTable');">
-										<i class="fa fa-fw fa-file-excel-o"></i>
-										CAT施測歷程記錄
-									</a> 
-									<a class="btn btn-success btn-xs" download="data_matrix.xls"
+										<i class="fa fa-fw fa-file-excel-o"></i> CAT施測歷程記錄
+									</a> <a class="btn btn-success btn-xs" download="data_matrix.xls"
 										href="#"
 										onclick="return ExcellentExport.excel(this, 'dataMatrixTable');">
-										<i class="fa fa-fw fa-file-excel-o"></i>
-										資料矩陣
-									</a> 
-									<a class="btn btn-default btn-sm toggleBtn"
+										<i class="fa fa-fw fa-file-excel-o"></i> 資料矩陣
+									</a> <a class="btn btn-default btn-sm toggleBtn"
 										data-toggle="collapse" data-parent="#listPanel"
-										id="allRecordBtn" href="#recordPanel">
-										<i class="fa fa-fw fa-bars"></i>
+										id="allRecordBtn" href="#recordPanel"> <i
+										class="fa fa-fw fa-bars"></i>
 									</a>
 								</h4>
 							</div>
@@ -240,19 +234,19 @@ body {
 							<div class="panel-heading">
 								<h4 class="panel-title">
 									<i class="fa fa-fw fa-table"></i><span class="left10">帳號管理</span>
-									<a class="btn btn-default btn-sm toggleBtn" id="roleBtn"
+									<a class="btn btn-default btn-sm toggleBtn" style="left:2px;" id="roleBtn"
 										data-toggle="collapse" data-parent="#listPanel"
 										href="#rolePanel"><i class="fa fa-fw fa-bars"></i></a>
 								</h4>
 							</div>
 							<div id="rolePanel" class="panel-collapse collapse">
 								<div class="panel-body">
-									<table class="table table-hover table-condensed" id="roleTable"
+										
+									<table class="table table-striped" id="roleTable"
 										width="100%">
 										<thead>
 											<tr>
-												<th>名稱</th>
-												<th>密碼</th>
+												<th>名稱/密碼</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -431,9 +425,9 @@ body {
 
 			$('table#dataMatrixTable > tbody:last').append($trDataMatrix);
 		});
-		
-		$( "table#recordTable tr th:nth-child(6)" ).hide();
-        $( "table#recordTable tr td:nth-child(6)" ).hide();
+
+		$("table#recordTable tr th:nth-child(6)").hide();
+		$("table#recordTable tr td:nth-child(6)").hide();
 	}
 
 	function getAllUser() {
@@ -456,18 +450,18 @@ body {
 
 		$.each(jsonData.roleList, function(index, data) {
 			var $tr = $("<tr width='100%'>");
-			$tr.append($("<td>").html(data.userName));
-			$tr.append($("<td>").html(data.userPassword));
-			$tr.append($("<td>").html(
-					"<a class='btn btn-danger btn-xs'" + "onclick='deleteRole(\""
-							+ data.userName + "\",\"" + data.userPassword
-							+ "\");'  >刪除</a>"));
-			$tr.append($("<td>").html(
-							"<a class='btn btn-default btn-xs'"
-									+ "onclick='openUpdateRole(\""
-									+ data.userName + "\",\""
-									+ data.userPassword + "\");'  >修改密碼</a>"));
-
+			var template = "帳號：" + data.userName + '<br>' + "密碼：" + data.userPassword;
+			$tr.append($("<td width='70%'>").html(template));
+			
+			var buttonSet = "<a class='btn btn-danger btn-xs'"
+				+ "onclick='deleteRole(\"" + data.userName
+				+ "\",\"" + data.userPassword + "\");'  >刪除</a><span>  </span>"
+				+ "<a class='btn btn-primary btn-xs'"
+				+ "onclick='openUpdateRole(\""
+				+ data.userName + "\",\""
+				+ data.userPassword + "\");'  >修改</a>";
+			$tr.append($("<td width='30%'>").html(buttonSet));
+			
 			$('table#roleTable > tbody:last').append($tr);
 		});
 	}
@@ -606,11 +600,17 @@ body {
 
 		var username = $("input[name=username]").val();
 		var password = $("input[name=password]").val();
+		var errorMessage = "";
 		var isPass = true;
 
 		if (username == null || username == undefined || username == '') {
 			isPass = false;
 			$("#nameInput").addClass("has-error");
+			errorMessage = "帳號與密碼不得為空";
+		} else if (username.length > 8) {
+			isPass = false;
+			$("#nameInput").addClass("has-error");
+			errorMessage = "帳號與密碼不得超過八碼";
 		} else {
 			$("#nameInput").removeClass("has-error");
 		}
@@ -618,13 +618,18 @@ body {
 		if (password == null || password == undefined || password == '') {
 			isPass = false;
 			$("#pwdInput").addClass("has-error");
+			errorMessage = "帳號與密碼不得為空";
+		} else if (password.length > 8) {
+			isPass = false;
+			$("#pwdInput").addClass("has-error");
+			errorMessage = "帳號與密碼不得超過八碼";			
 		} else {
 			$("#pwdInput").removeClass("has-error");
 		}
 
 		if (!isPass) {
 			$('h4#errorMessage').show();
-			$('h4#errorMessage').html("帳號與密碼不得為空");
+			$('h4#errorMessage').html(errorMessage);
 			$("button#messageButton").trigger("click");
 
 			return false;
