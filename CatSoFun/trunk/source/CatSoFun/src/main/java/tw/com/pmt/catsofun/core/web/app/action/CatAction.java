@@ -113,8 +113,8 @@ public class CatAction extends ActionSupport {
 			}
 
 			// 取得作答反應 
-			int responseIndex = item.getAnswerType().intValue() - 1;
-			response = responseService.getAllResponse().get(responseIndex);
+			Long responseIndex = item.getAnswerType();
+			response = responseService.getResponseById(responseIndex);
 
 			// 耕新選題結果
 			Long[] selected = new Long[selectedItems.size()];
@@ -199,8 +199,8 @@ public class CatAction extends ActionSupport {
 			} 
 			
 			// 取得所選題目的作答選項與指導語
-			int responseIndex = item.getAnswerType().intValue() - 1;
-			response = responseService.getAllResponse().get(responseIndex);
+			Long responseIndex = item.getAnswerType();
+			response = responseService.getResponseById(responseIndex);
 	
 			// 更新選題結果
 //			System.out.println("selectedItems : " + selectedItems);

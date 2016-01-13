@@ -18,11 +18,10 @@ public class ResponseServiceImplTest extends BaseTest {
 
 	@Test
 	public void testGetResponseById() {
-		Response response = new Response();
 		Long responseId = new Long(2);
-		response.setId(responseId);
 		
-		System.out.println(responseService.getResponseById(response));
+		
+		System.out.println(responseService.getResponseById(responseId));
 	}
 
 	@Test
@@ -58,7 +57,7 @@ public class ResponseServiceImplTest extends BaseTest {
 		Response response = new Response();
 		response.setId(new Long(1));
 		
-		responseService.deleteResponse(responseService.getResponseById(response));
+		responseService.deleteResponse(responseService.getResponseById(1l));
 	}
 
 }

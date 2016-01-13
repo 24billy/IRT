@@ -28,8 +28,7 @@ public class ResponseServiceImpl extends GenericService<Response> implements
 	}
 
 	@Override
-	public Response getResponseById(Response response) {
-		Long id = response.getId();
+	public Response getResponseById(Long id) {
 
 		return responseDao.findById(id);
 	}

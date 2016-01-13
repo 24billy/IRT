@@ -8,7 +8,7 @@ public interface IResponseService {
 
 	List<Response> getAllResponse();
 	
-	Response getResponseById(Response response);
+	Response getResponseById(Long id);
 	
 	Response insertResponse(Response response);
 	
