@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<!-- icon -->
+<link href='/CatSoFun/images/icon/cat_icon.png' rel='icon' type='image/x-icon'/>
 </head>
 
 <body>

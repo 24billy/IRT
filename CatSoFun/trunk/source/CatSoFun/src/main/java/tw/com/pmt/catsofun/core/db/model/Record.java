@@ -42,6 +42,9 @@ public class Record extends GenericEntity  {
 	@Column(name = "role_name")
 	private String roleName;
 	
+	@Column(name = "subject_name")
+	private String subjectName;
+	
 	@Column(name = "sem", columnDefinition = "NUMERIC(8,5) default 0")
 	private Double sem;
 	
@@ -100,6 +103,14 @@ public class Record extends GenericEntity  {
 		this.roleName = roleName;
 	}
 
+	public String getSubjectName() {
+		return subjectName;
+	}
+
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+
 	public Double getSem() {
 		return sem;
 	}
@@ -130,8 +141,9 @@ public class Record extends GenericEntity  {
 				+ ", selectedItems=" + Arrays.toString(selectedItems)
 				+ ", selectedOptions=" + Arrays.toString(selectedOptions)
 				+ ", isFinished=" + isFinished + ", roleName=" + roleName
-				+ ", sem=" + sem + ", createTime=" + createTime
-				+ ", testCompleteTime=" + testCompleteTime + ", id=" + id + "]";
+				+ ", subjectName=" + subjectName + ", sem=" + sem
+				+ ", createTime=" + createTime + ", testCompleteTime="
+				+ testCompleteTime + ", id=" + id + "]";
 	}
 
 }
