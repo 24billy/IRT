@@ -59,7 +59,7 @@ body {
 <div class="row" style="opacity:0.9;">
 	
 	<div class="col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4 thumbnail" style="font-family:Microsoft JhengHei; padding: 15px; margin-top: 80px;">
-		<form method="POST" class="form-signin" role="form" action="login" target="_blank">
+		<form method="POST" class="form-signin" role="form" action="login" target="">
 			<h2 class="form-signin-heading">請登入帳密</h2>
 			<label for="inputUserName" class="sr-only">UserName</label> 
 			<input type="text" id="inputUserName" name="loginId" class="form-control" placeholder="UserName" required="" autofocus=""> 
