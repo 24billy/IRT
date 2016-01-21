@@ -7,6 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html, charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- icon -->
+<link href='/CatSoFun/images/icon/cat_icon_admin.png' rel='icon' type='image/x-icon'/>
+
 <title>CatSoFun Admin System</title>
 
 <script src="/CatSoFun/js/jquery-1.11.3.min.js"></script>
@@ -511,6 +514,18 @@ body {
 	function updateUser() {
 		var userName = $("#updateUserName").html();
 		var password = $("#updatePassword").val();
+		
+		// 驗證新密碼長度
+		$('h4#errorMessage').html("");
+
+		if (password.length > 8 ) {
+			$('h4#errorMessage').show();
+			$('h4#errorMessage').html("密碼長度不得超過八碼！");
+			$("button#messageButton").trigger("click");
+			
+			return;
+		}
+		
 		var params = {};
 		params.username = userName;
 		params.password = password;
@@ -525,13 +540,13 @@ body {
 
 				if (obj.isSuccess) {
 					$('h4#successMessage').show();
-					$('h4#successMessage').html("密碼已更新：" + userName);
+					$('h4#successMessage').html("密碼已更新：" + userName + ":" + password);
 					$("button#messageButton").trigger("click");
 
 					getAllUser();
 				} else {
 					$('h4#errorMessage').show();
-					$('h4#errorMessage').html("密碼失敗");
+					$('h4#errorMessage').html("密碼更新失敗");
 					$("button#messageButton").trigger("click");
 				}
 			},
