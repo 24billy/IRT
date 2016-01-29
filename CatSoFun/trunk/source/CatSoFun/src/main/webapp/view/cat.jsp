@@ -100,7 +100,7 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-				    <li><a onclick="doQueryHistory()">查看歷史紀錄</a></li>
+<!-- 				    <li><a onclick="doQueryHistory()">查看歷史紀錄</a></li> -->
 <!-- 				    <li><a href="" Target="_blank" onclick="">查看歷史紀錄(另開)</a></li> -->
 				    
 				</ul>
@@ -116,9 +116,43 @@
 	<!-- END header -->   
 	
 	<!-- BEGIN Content -->
-	
 	<div class="container" id="contentDiv">
 	
+		<!-- BEGIN 登入後首頁 -->
+		<div class="row" style="opacity:0.9;" id="loginedDiv">
+			<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 thumbnail" style="padding: 15px; margin-top: 30px; color: black;">
+				
+		        <div class="form-group text-center" style="margin-top: 30px;" >
+		        	<button type="button" class="btn btn-danger" onclick="queryHistory()" id="history">查看歷史紀錄</button>
+		        	<button type="button" class="btn btn-primary" onclick="beginQuiz()">進入測驗</button>
+		        </div>
+		        
+			</div>
+		</div>
+		<!-- END 登入後首頁 -->	
+
+
+		<!-- BEGIN 測驗開始頁(測驗指導語) -->
+		<div class="row" style="opacity:0.9; display: none;" id="welcomeDiv">
+			<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 thumbnail" style="padding: 15px; margin-top: 30px; color: black;">
+		        <p style="font-size: 22px;">您好：</p>
+
+				<ul style="font-size: 20px;">
+					<li>這份測驗主要是用來瞭解您自覺參與社交活動之狀況。</li>
+					<li>請仔細閱讀每道題目，並點選一個您認為最合適的答案。</li>
+					<li>若您對題目內容有不瞭解的地方，請詢問您的治療師後再作答。</li>
+				</ul>
+				
+		        <div class="form-group text-center" style="margin-top: 30px;" >
+		        	<button type="button" class="btn btn-danger" id="preBegin" onclick="doPractice()">我想練習看看</button>
+		        	<button type="button" class="btn btn-primary" id="begin" onclick="doConfirmBeginQuiz()">直接開始測驗</button>
+		        </div>
+		        
+			</div>
+		</div>
+		<!-- END 測驗開始頁(測驗指導語) -->
+
+
 		<!-- BEGIN 練習試題頁 -->
 		<div class="row" style="display: none;" id="practiceDiv1" >
 			<div class="col-md-10 col-md-offset-1" >
@@ -159,19 +193,19 @@
 					<p id="">在過去一週裡，您有多常「覺得自己是家人的負擔」？</p>
 					
 					<form role="form" style="font-size: ; color: ; margin-top: 20px;">
-					  <div class="radio" >
+					  <div class="radio" style="margin: 15px 0px;">
 					    <input type="radio" name="optradio" value="0" id="r21"><label style="width: 2000px;" for="r21"><span id="">非常同意</span></label>
 					  </div>
-					  <div class="radio">
+					  <div class="radio" style="margin: 15px 0px;">
 					    <input type="radio" name="optradio" value="1" id="r22"><label style="width: 2000px;" for="r22"><span id="">中等同意</span></label>
 					  </div>
-					  <div class="radio">
+					  <div class="radio" style="margin: 15px 0px;">
 					    <input type="radio" name="optradio" value="2" id="r23"><label style="width: 2000px;" for="r23"><span id="">不同意也不反對</span></label>
 					  </div>
-					  <div class="radio">
+					  <div class="radio" style="margin: 15px 0px;">
 					    <input type="radio" name="optradio" value="3" id="r24"><label style="width: 2000px;" for="r24"><span id="">中等不同意</span></label>
 					  </div>
-					  <div class="radio">
+					  <div class="radio" style="margin: 15px 0px;">
 					    <input type="radio" name="optradio" value="4" id="r25"><label style="width: 2000px;" for="r25"><span id="">非常不同意</span></label>
 					  </div>
 					  <div class="text-center" style="margin: 20px 0px 0px 0px;">
@@ -190,19 +224,19 @@
 					<p id="">在過去一週裡，您有多常感覺自己沒有親近的人?</p>
 					
 					<form role="form" style="font-size: ; color: ; margin-top: 20px;">
-					  <div class="radio" >
+					  <div class="radio" style="margin: 15px 0px;">
 					    <input type="radio" name="optradio" value="0" id="r31"><label style="width: 2000px;" for="r31"><span id="">從來沒有</span></label>
 					  </div>
-					  <div class="radio">
+					  <div class="radio" style="margin: 15px 0px;">
 					    <input type="radio" name="optradio" value="1" id="r32"><label style="width: 2000px;" for="r32"><span id="">很少</span></label>
 					  </div>
-					  <div class="radio">
+					  <div class="radio" style="margin: 15px 0px;">
 					    <input type="radio" name="optradio" value="2" id="r33"><label style="width: 2000px;" for="r33"><span id="">偶爾</span></label>
 					  </div>
-					  <div class="radio">
+					  <div class="radio" style="margin: 15px 0px;">
 					    <input type="radio" name="optradio" value="3" id="r34"><label style="width: 2000px;" for="r34"><span id="">常常</span></label>
 					  </div>
-					  <div class="radio">
+					  <div class="radio" style="margin: 15px 0px;">
 					    <input type="radio" name="optradio" value="4" id="r35"><label style="width: 2000px;" for="r35"><span id="">總是</span></label>
 					  </div>
 					  <div class="text-center" style="margin: 20px 0px 0px 0px;">
@@ -213,85 +247,6 @@
 			</div>
 		</div>
 		<!-- END 練習試題頁 -->
-		
-		
-		<!-- BEGIN 測驗開始頁 -->
-		<div class="row" style="opacity:0.9;" id="welcomeDiv">
-			<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 thumbnail" style="padding: 15px; margin-top: 30px; color: black;">
-		        <p style="font-size: 22px;">您好：</p>
-
-				<ul style="font-size: 20px;">
-					<li>這份測驗主要是用來瞭解您自覺參與社交活動之狀況。</li>
-					<li>請仔細閱讀每道題目，並點選一個您認為最合適的答案。</li>
-					<li>若您對題目內容有不瞭解的地方，請詢問您的治療師後再作答。</li>
-				</ul>
-				
-		        <div class="form-group text-center" style="margin-top: 30px;" >
-		        	<button type="button" class="btn btn-danger" id="preBegin" onclick="">我想練習看看</button>
-		        	<button type="button" class="btn btn-primary" id="begin" onclick="doConfirmBeginQuiz()">直接開始測驗</button>
-		        </div>
-		        
-			</div>
-		</div>
-		<!-- END 測驗開始頁 -->
-
-	
-		<!-- BEGIN 測驗結束頁 -->
-		<div class="row" style="display: none;" id="finishDiv">
-			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="padding: 15px; opacity:0.9; margin-top: 20px;">
-				<p id="resultTitle" style="font-size: 24px; text-align: center; color: blue;">您已完成本測驗，請通知施測人員!</p>
-				
-				<div class="submitBtnSet form-group text-center">
-					<button type="button" class="btn btn-primary" id=""  onclick="showResult('T')">回傳結果</button>
-					<button type="button" class="btn btn-danger" id=""  onclick="showResult('F')">不列入紀錄</button>
-				</div>
-		        
-					<table class="table table-striped table-bordered table-hover" style="font-size: 20px; display: none" id = "resultTable">
-						<thead style="display: none;">
-							<tr>
-								<th class="text-center">1</th>
-								<th class="text-center">2</th>
-							</tr>
-						</thead>
-						<tbody>
-<!-- 							<tr> -->
-<!-- 								<td data-title="1">能力估計</td> -->
-<!-- 								<td data-title="2" id="theta"></td> -->
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td data-title="1">標準誤 (能力估計)</td> -->
-<!-- 								<td data-title="2" id="sem"></td> -->
-<!-- 							</tr> -->
-							<tr>
-								<td data-title="1">T分數</td>
-								<td data-title="2" id="tScore"></td>
-							</tr>
-<!-- 							<tr> -->
-<!-- 								<td data-title="1">標準誤 (T分數)</td> -->
-<!-- 								<td data-title="2" id="se"></td> -->
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td data-title="1">信度</td> -->
-<!-- 								<td data-title="2" id="reliability"></td> -->
-<!-- 							</tr> -->
-							<tr>
-								<td data-title="1">施測題數</td>
-								<td data-title="2" id="itemNum"></td>
-							</tr>
-							<tr>
-								<td data-title="1" class="blue">施測時間</td>
-								<td data-title="2" class="blue" id="testTime"></td>
-							</tr>
-						</tbody>
-					</table>
-			    
-			    <div class="form-group text-center row" style="margin-top: 20px; display: none;" id= "goBackMainPage">
-			    	<button type="button" class="btn btn-primary" id="" style="margin-top: ;" onclick="window.location.href='showCatMainPage'">回到測驗主頁</button>
-<!-- 			    	<button type="button" class="btn btn-warning" id="" style="margin-top: ;" onclick="window.open('logout');">開啟新的CAT-SoFun測驗<br>(需重新登入)</button> -->
-			    </div>
-			</div>
-		</div>
-		<!-- END 測驗結束頁 -->
 
 
 		<!-- BEGIN 試題頁 -->
@@ -326,25 +281,87 @@
 			</div>
 		</div>
 		<!-- END 試題頁 -->
-	
+
+
+		<!-- BEGIN 測驗結束頁 -->
+		<div class="row" style="display: none;" id="finishDiv">
+			<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 thumbnail" style="padding: 15px; opacity:0.9; margin-top: 20px;">
+				<p id="resultTitle" style="font-size: 24px; text-align: center; color: blue;">您已完成本測驗，請通知施測人員!</p>
+				
+
+				<!-- Begin 測驗結果table -->
+				<table class="table table-striped table-bordered table-hover" style="font-size: 20px; display: " id = "resultTable">
+					<thead style="display: none;">
+						<tr>
+							<th class="text-center">1</th>
+							<th class="text-center">2</th>
+						</tr>
+					</thead>
+					<tbody>
+<!-- 							<tr> -->
+<!-- 								<td data-title="1">能力估計</td> -->
+<!-- 								<td data-title="2" id="theta"></td> -->
+<!-- 							</tr> -->
+<!-- 							<tr> -->
+<!-- 								<td data-title="1">標準誤 (能力估計)</td> -->
+<!-- 								<td data-title="2" id="sem"></td> -->
+<!-- 							</tr> -->
+						<tr>
+							<td data-title="1">T分數</td>
+							<td data-title="2" id="tScore"></td>
+						</tr>
+<!-- 							<tr> -->
+<!-- 								<td data-title="1">標準誤 (T分數)</td> -->
+<!-- 								<td data-title="2" id="se"></td> -->
+<!-- 							</tr> -->
+<!-- 							<tr> -->
+<!-- 								<td data-title="1">信度</td> -->
+<!-- 								<td data-title="2" id="reliability"></td> -->
+<!-- 							</tr> -->
+						<tr>
+							<td data-title="1">施測題數</td>
+							<td data-title="2" id="itemNum"></td>
+						</tr>
+						<tr>
+							<td data-title="1" class="blue">施測時間</td>
+							<td data-title="2" class="blue" id="testTime"></td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- END 測驗結果table -->
+					
+				<div class="submitBtnSet form-group text-center" id="finishDivBtn" style="display: none; margin-top: 20px;">
+					<button type="button" class="btn btn-primary" onclick="saveResult()">儲存結果</button>
+					<button type="button" class="btn btn-danger" onclick="invalidResult()">不列入紀錄</button>
+				</div>
+			    
+			    <div class="form-group text-center row" style="margin-top: 20px; display: none;" id= "goBackMainPage">
+			    	<button type="button" class="btn btn-primary" id="" style="margin-top: ;" onclick="window.location.href='showCatMainPage'">回到測驗主頁</button>
+<!-- 			    	<button type="button" class="btn btn-warning" id="" style="margin-top: ;" onclick="window.open('logout');">開啟新的CAT-SoFun測驗<br>(需重新登入)</button> -->
+			    </div>
+			</div>
+		</div>
+		<!-- END 測驗結束頁 -->
+
 	</div>
-	
+	<!-- END Content -->
+
+
 	<!-- BEGIN record dialog -->
-	<div style="display: none" id="recordDiv">
-		<div class="thumbnail">
-			<table class="table table-hover table-condensed "
-				id="recordTable" width="100%">
+	<div style="display: none;" id="recordDiv">
+		<div class="widget thumbnail">
+			<h2 style="color: blue; text-align: center;">測驗歷史紀錄</h2>
+			<table class="table table-hover table-condensed" id="recordTable">
 				<thead>
 					<tr>
+						<th>受測者代碼</th>
 						<th>能力值</th>
 						<th>估計標準誤</th>	
 						<th>T分數</th>
-
 						<th>信度</th>
 						<th>施測題數</th>
 						<th>作答時間</th>
 						<th>施測時間</th>
-<!-- 						<th>施測者</th> -->
 					</tr>
 				</thead>
 				<tbody>
@@ -353,32 +370,6 @@
 		</div>
 	</div>
 	<!-- END record dialog -->
-	
-	
-<!-- 	test -->
-<!-- 	<div class="thumbnail"> -->
-<!-- 		<table class="table table-hover table-condensed " -->
-<!-- 			id="recordTable2" width="100%"> -->
-<!-- 			<thead> -->
-<!-- 				<tr> -->
-<!-- 					<th>能力值</th> -->
-<!-- 					<th>T分數</th> -->
-<!-- 					<th>估計標準誤</th> -->
-<!-- 					<th>信度</th> -->
-<!-- 					<th>施測題數</th> -->
-<!-- 					<th>作答時間</th> -->
-<!-- 					<th>施測時間</th> -->
-<!-- 					<th>施測者</th> -->
-<!-- 				</tr> -->
-<!-- 			</thead> -->
-<!-- 			<tbody> -->
-<!-- 			</tbody> -->
-<!-- 		</table> -->
-<!-- 	</div> -->
-<!-- 	test -->
-	
-	
-	<!-- END Content -->
 	
 	<!-- BEGIN footer -->
 	<div class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
@@ -453,31 +444,37 @@
 </div>
 
 <script>
+var subjectCode;
 var questionCount = 0 ;
 var isNextEventComplete = true;
 
 $(document).ready(function(){
+
+
+// 	$('#welcomeDiv').hide(); //一開始先隱藏 "受測者歡迎頁"
+
 	questionCount = 1 ;
 
 	// 	按下 next鍵 發ajax 顯示下一題
 	if (isNextEventComplete) {
 		$('#next').click(function() {
 		isNextEventComplete = false;
-		
-		$("#quizDiv").animate({opacity:'0.6'},1000);
 	
 		var option = $('input:radio[name=optradio]:checked').val();
 		if (option == null || option == undefined || option == ''){
 			//檢核有無勾選radio button
 			$("#warningDialog").trigger( "click" );
 			isNextEventComplete = true;
-			$("#quizDiv").animate({opacity:'1.0'},1000);
+
 			return;
 		}
 
 		var params = {
-			selectedOption : $('input:radio[name=optradio]:checked').val()
+			selectedOption : $('input:radio[name=optradio]:checked').val(),
+			subjectCode : subjectCode
 		};
+		
+		console.log(params);
 
 		$.ajax({
 			type : "POST",
@@ -486,8 +483,6 @@ $(document).ready(function(){
 			dataType : "text", //ajax返回值設定為text
 			success : function(json) {
 				questionCount++;
-				
-// 				$('#quizDiv').fadeOut();
 				
 				var obj = $.parseJSON(json); //解析json
 				
@@ -510,12 +505,12 @@ $(document).ready(function(){
 					$('#testTime').html((obj.record.testCompleteTime/1000).toFixed(1) + "秒");
 
 					$('#contentDiv').html($('#finishDiv').html());
+					
+					$('#finishDivBtn').show(10000);
 				} else {
 					var item = obj.item;
 					var response = obj.response;
 
-// 					$('#quizDiv').fadeOut();
-					
 					$("#questionCount").html("Q" + questionCount + ".");
 					$("#question").html(item.itemContent);
 					$("#guild").html(obj.response.guild);
@@ -529,9 +524,6 @@ $(document).ready(function(){
 					refreshRecordDialog(obj.record);
 					
 					$(':checked').prop('checked',false);
-
-// 					$('#quizDiv').fadeIn();
-					$("#quizDiv").animate({opacity:'1.0'},1000);
 				}
 				isNextEventComplete = true;
 			},
@@ -543,221 +535,70 @@ $(document).ready(function(){
 	}
 });
 
-//按下 開始測驗鍵
 
 
-$('#preBegin').click(function() {
-	$('#welcomeDiv').hide();
-	$('#practiceDiv1').show();
-});
+	/**
+	 * 按下  「查看歷史紀錄」按鈕
+	 */
+	function queryHistory() {
+		$('#history').attr("disabled", "disabled");//didabled 「查看歷史紀錄」按鈕
+		$('#recordDiv').show();
 
-$('#preBegin1').click(function() {
+		getAllRecord();
 
-	var option = $('input:radio[name=optradio]:checked').val();
-	if (option == null || option == undefined || option == ''){
-		//檢核有無勾選radio button
-		$("#warningDialog").trigger( "click" );
-		return;
-	}
-	
-	$('#practiceDiv1').hide();
-	$('#practiceDiv2').show();
-	
-	$(':checked').prop('checked',false);
-});
+		//dataTable設定
+			   $("#recordTable").dataTable({
+// 			   	   "destroy": true,
+// 			       "bPaginate": true, //翻頁功能
+// 			       "bLengthChange": true, //改變每頁顯示數據數量
+// 			       "bFilter": true, //過濾功能
+// 			       "bSort": true, //排序功能
+// 			       "bInfo": true,//頁腳信息
+// 			       "bAutoWidth": false,//自動寬度
+// 			       "aoColumnDefs": //欄位設定
+// 			            [
+// 			                { 'bSortable': true, 'aTargets': [0,1] }, //關閉排序功能
+// 			                { 'sWidth': '50%', 'aTargets': [ 0 ] },
+// 			                { 'sWidth': '50%', 'aTargets': [ 1 ] }
+// 			            ],
+// 			            "aaSorting": [[ 0, "asc" ]] //第0列順序排列
+			   });
 
-$('#preBegin2').click(function() {
-	
-	var option = $('input:radio[name=optradio]:checked').val();
-	if (option == null || option == undefined || option == ''){
-		//檢核有無勾選radio button
-		$("#warningDialog").trigger( "click" );
-		return;
-	}
-
-	$('#practiceDiv2').hide();
-	$('#practiceDiv3').show();
-	$(':checked').prop('checked',false);
-});
-
-$('#preBegin3').click(function() {
-	
-	var option = $('input:radio[name=optradio]:checked').val();
-	if (option == null || option == undefined || option == ''){
-		//檢核有無勾選radio button
-		$("#warningDialog").trigger( "click" );
-		return;
 	}
 
-	$('#practiceDiv3').hide();
-	$('#welcomeDiv').show();
-	$(':checked').prop('checked',false);
-});
-
-// $('#begin').click(function() {
-// 	$('#welcomeDiv').hide();
-// 	$('#quizDiv').show();
-// });
-
-function refreshRecordDialog(record) {
-	$("td#initAbility").html(record.initAbility);
-	
-	$("td#recordAbility").html(record.ability);
-
-	$("td#recordSem").html(record.sem);
-	
-	var selectedItems='';
-	for(var key in record.selectedItems){
-		if(key == 0) {
-			selectedItems = record.selectedItems[key]
-		} else {
-			selectedItems += "," + record.selectedItems[key]
-		}
-	}
-	$("td#recordSelectedItems").html(selectedItems);
-	
-	var selectedOptions='';
-	for(var key in record.selectedOptions){
-		if(key == 0) {
-			selectedOptions = record.selectedOptions[key]
-		} else {
-			selectedOptions += "," + record.selectedOptions[key]
-		}
-	}
-	$("td#recordSelectedOptions").html(selectedOptions);
-};
-
-function goBackHome() {
-	
-    bootbox.dialog({
-       closeButton : true,
-       size : "null",
-       message : "<h3>測驗進行中，你確定要回到登入頁?</h3>",
-       title : "",
-       buttons : {
-           success : {
-               label : "確定",
-               className : "btn-primary",
-               callback : function() {
-                   window.location.href='logout';
-               }
-           },
-           danger : {
-               label : "取消",
-               className : "btn-default",
-               callback : function() {
-               	//do nothing
-               }
-           }
-       }
-    });
-}
-
-function doConfirmBeginQuiz() {
-	
-	    bootbox.dialog({
-        closeButton : true,
-        size : "null",
-        message : "<h3>確定要開始測驗?</h3>",
-        title : "",
-        buttons : {
-          success : {
-                label : "確定開始測驗",
-                className : "btn-primary",
-                callback : function() {
-                
-					$('#welcomeDiv').hide();
-					$('#quizDiv').show();
-                
-                }
-            },
-            danger : {
-                label : "取消",
-                className : "btn-default",
-                callback : function() {
-                	
-//                 	$('#welcomeDiv').hide();
-//                 	$('#practiceDiv1').show();
-                	
-                }
-            }
-        }
-    });
-}	
-
-function doQueryHistory() {
-
-	getAllRecord();
-		
-	bootbox.alert({
-       closeButton : true,
-       size : "large",
-       message : $('#recordDiv').html(),
-       title : "歷史作答記錄",
-       buttons : {
-           ok : {
-               label : "確定",
-               className : "btn-primary",
-               callback : function() {
-               	//do nothing
-               }
-           }
-       }
-    });
-}
-
-   	function getAllRecord() {
+	function getAllRecord() {
 		$.ajax({
 			type : "POST",
 			url : "getHistoryRecord.action",
 			dataType : "text", //ajax返回值設定為text
 			success : function(data) {
+
 				var jsonData = $.parseJSON(data); //解析json
+
+				console.log(jsonData);
 
 				if (jsonData != null) {
 					generateRecordDataTable(jsonData);
 				}
-// 				$('#recordTable').DataTable({
-					
-//        				"retrieve": true,
-//        				"bPaginate": true, //翻頁功能
-//        				"bLengthChange": false, //改變每頁顯示數據數量
-//        				"bFilter": false, //過濾功能
-// 			        "bSort": true, //排序功能
-// 			        "bInfo": true,//頁腳信息
-// 			        "bAutoWidth": false,//自動寬度
-// 			        "aoColumnDefs": //欄位設定
-// 			            [
-// 			                { 'bSortable': false, 'aTargets': [ ] }, //關閉排序功能
-// 			                { 'sWidth': '10%', 'aTargets': [ 0 ] },
-// 			                { 'sWidth': '10%', 'aTargets': [ 1 ] },
-// 			                { 'sWidth': '10%', 'aTargets': [ 2 ] },
-// 			                { 'sWidth': '10%', 'aTargets': [ 3 ] },
-// 			                { 'sWidth': '10%', 'aTargets': [ 4 ] },
-// 			                { 'sWidth': '10%', 'aTargets': [ 5 ] },
-// 			                { 'sWidth': '30%', 'aTargets': [ 6 ] },
-// 			                { 'sWidth': '10%', 'aTargets': [ 7 ] }
-// 			            ],
-//             		"aaSorting": [[ 0, "asc" ]] //第0列順序排列
-//    				});
+
 			}
 		});
 	}
-	
+
 	function generateRecordDataTable(jsonData) {
 		$.each(jsonData.recordList, function(index, data) {
-			/**
-			 * 結果摘要
-			 */
+
 			var $tr = $("<tr width='100%'>");
 
-			//<th>施測序號</th>
-// 			var recordId = 1;
-// 			$tr.append($("<td>").html(recordId));
+			//<th>受測者代碼</th>
+			$tr.append($("<td>").html(data.subjectName));
+			
 			//<th>能力估計值</th>
 			$tr.append($("<td>").html(data.ability.toFixed(1)));
+			
 			//<th>測量標準誤</th>
 			$tr.append($("<td>").html(data.sem.toFixed(1)));
+			
 			//<th>T分數</th>
 			var mu = 0;
 			var variance = 1;
@@ -770,41 +611,226 @@ function doQueryHistory() {
 			//<th>信度</th>
 			$tr.append($("<td>").html(
 					(1 - ((data.sem) * (data.sem)) / variance).toFixed(2)));
+
 			//<th>施測題數</th>
 			$tr.append($("<td>").html(data.selectedItems.length));
+			
 			//<th>作答時間</th>
 			$tr.append($("<td>").html(
 					(data.testCompleteTime / 1000).toFixed(1) + "秒"));
+					
 			//<th>施測時間</th>
 			$tr.append($("<td>").html(data.createTime));
+			
 			//<th>施測者</th>
-// 			$tr.append($("<td>").html(data.roleName));
+			// 			$tr.append($("<td>").html(data.roleName));
 
 			$('table#recordTable > tbody:last').append($tr);
 
 		});
 	}
-	
-	function showResult(status) {
-	alert(status);
-		if ("T" == status) {
-			alert("success");
-			$('.submitBtnSet').hide();
-			$('#resultTable').attr("style", "display:''");
-			$('#goBackMainPage').attr("style", "display:''");
+
+	/**
+	 * 按下  「進入測驗」按鈕，彈出輸入「受測者代碼」對話框
+	 */
+	function beginQuiz() {
+		bootbox.prompt("請輸入受測者代碼", function(result) {
+			if (result === null) {
+				//do nothing
+			} else {
 			
-			$('#resultTitle').text("測驗結果");
-			
-		} else {
-			alert("fail");
-			$('.submitBtnSet').hide();
-			$('#goBackMainPage').attr("style", "display:''");
-			$('#resultTitle').text("點選下面按鈕，可再次進行測驗。");
+				if (result.trim() == ""){
+					return;
+				}
+				subjectCode = result;
+				$('#recordDiv').hide();
+				$('#loginedDiv').hide();//隱藏「查看歷史紀錄」、「進入測驗」此DIV
+				$('#welcomeDiv').show();//顯示 測驗指導語DIV(含有「我想練習看看」、「直接開始測驗」兩個按鈕)
+			}
+		});
+	}
+
+	/**
+	 * 按下 「我想練習看看」按鈕，有3題練習題
+	 */
+	function doPractice() {
+		$('#welcomeDiv').hide();//隱藏 測驗指導語DIV
+		$('#practiceDiv1').show();
+	}
+
+	$('#preBegin1').click(function() {
+		var option = $('input:radio[name=optradio]:checked').val();
+		if (option == null || option == undefined || option == '') {
+			//檢核有無勾選radio button
+			$("#warningDialog").trigger("click");
+			return;
 		}
 
-		
+		$('#practiceDiv1').hide();
+		$('#practiceDiv2').show();
+
+		$(':checked').prop('checked', false);
+	});
+
+	$('#preBegin2').click(function() {
+		var option = $('input:radio[name=optradio]:checked').val();
+		if (option == null || option == undefined || option == '') {
+			//檢核有無勾選radio button
+			$("#warningDialog").trigger("click");
+			return;
+		}
+
+		$('#practiceDiv2').hide();
+		$('#practiceDiv3').show();
+		$(':checked').prop('checked', false);
+	});
+
+	$('#preBegin3').click(function() {
+		var option = $('input:radio[name=optradio]:checked').val();
+		if (option == null || option == undefined || option == '') {
+			//檢核有無勾選radio button
+			$("#warningDialog").trigger("click");
+			return;
+		}
+
+		$('#practiceDiv3').hide();
+		$('#welcomeDiv').show();
+		$(':checked').prop('checked', false);
+	});
+
+
+	/**
+	 * 按下 「直接開始測驗」按鈕，彈出「確認開始測驗」對話框
+	 */
+	function doConfirmBeginQuiz() {
+		bootbox.dialog({
+			closeButton : true,
+			size : "null",
+			message : "<h3>確定要開始測驗?</h3>",
+			title : "",
+			buttons : {
+				success : {
+					label : "確定開始測驗",
+					className : "btn-primary",
+					callback : function() {
+
+						$('#welcomeDiv').hide();//隱藏測驗指導語DIV
+						$('#quizDiv').show();//顯示正式測驗題目DIV
+
+					}
+				},
+				danger : {
+					label : "取消",
+					className : "btn-default",
+					callback : function() {
+
+					}
+				}
+			}
+		});
 	}
-   
+	
+	/**
+	 * 按下 「儲存結果」按鈕
+	 */
+	function saveResult() {
+		$('.submitBtnSet').hide();
+		$('#goBackMainPage').attr("style", "display:''");
+
+		$('#resultTitle').text("點選下面按鈕，可再次進行測驗。");
+	}
+
+	/**
+	 * 按下「不列入紀錄」按鈕
+	 */
+	function invalidResult() {
+		$.ajax({
+			type : "POST",
+			url : "updateCaseRecord.action",
+			dataType : "text", //ajax返回值設定為text
+			success : function(data) {
+				// 				var jsonData = $.parseJSON(data); //解析json
+				$('.submitBtnSet').hide();
+				$('#goBackMainPage').attr("style", "display:''");
+				$('#resultTitle').text("點選下面按鈕，可再次進行測驗。");
+			}
+		});
+	}
+
+	function refreshRecordDialog(record) {
+		$("td#initAbility").html(record.initAbility);
+
+		$("td#recordAbility").html(record.ability);
+
+		$("td#recordSem").html(record.sem);
+
+		var selectedItems = '';
+		for ( var key in record.selectedItems) {
+			if (key == 0) {
+				selectedItems = record.selectedItems[key]
+			} else {
+				selectedItems += "," + record.selectedItems[key]
+			}
+		}
+		$("td#recordSelectedItems").html(selectedItems);
+
+		var selectedOptions = '';
+		for ( var key in record.selectedOptions) {
+			if (key == 0) {
+				selectedOptions = record.selectedOptions[key]
+			} else {
+				selectedOptions += "," + record.selectedOptions[key]
+			}
+		}
+		$("td#recordSelectedOptions").html(selectedOptions);
+	};
+
+	function goBackHome() {
+
+		bootbox.dialog({
+			closeButton : true,
+			size : "null",
+			message : "<h3>測驗進行中，你確定要回到登入頁?</h3>",
+			title : "",
+			buttons : {
+				success : {
+					label : "確定",
+					className : "btn-primary",
+					callback : function() {
+						window.location.href = 'logout';
+					}
+				},
+				danger : {
+					label : "取消",
+					className : "btn-default",
+					callback : function() {
+						//do nothing
+					}
+				}
+			}
+		});
+	}
+
+	// function doQueryHistory() {
+
+	// 	getAllRecord();
+
+	// 	bootbox.alert({
+	//        closeButton : true,
+	//        size : "large",
+	//        message : $('#recordDiv').html(),
+	//        title : "歷史作答記錄",
+	//        buttons : {
+	//            ok : {
+	//                label : "確定",
+	//                className : "btn-primary",
+	//                callback : function() {
+	//                	//do nothing
+	//                }
+	//            }
+	//        }
+	//     });
+	// }
 </script>
 
 </body>

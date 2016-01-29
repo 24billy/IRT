@@ -59,7 +59,26 @@ public class CatAction extends ActionSupport {
 
 	private List<Record> recordList;
 	
+	private String subjectCode;
+	
+	/**
+	 * 更新測驗完成狀態
+	 *  
+	 * @return String
+	 */
+	public String updateCaseRecord() {
+		// Session取出初始化結果
+		Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
+		record = (Record) sessionMap.get("record");
 
+		// 更新測驗完成狀態
+		record.setIsFinished(false);
+
+		recordService.updateRecord(record);
+		
+		return ActionSupport.SUCCESS;
+	}
+	
 	/**
 	 * 取得所有作答結果紀錄
 	 *  
@@ -145,7 +164,7 @@ public class CatAction extends ActionSupport {
 
 	public String chooseItem() {
 		System.out.println("chooseItem() begin...");
-		
+
 		// Session取出初始化結果
 		Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
 		record = (Record) sessionMap.get("record");
@@ -241,6 +260,8 @@ public class CatAction extends ActionSupport {
 			record.setCreateTime(new Date());
 
 			record.setRoleName(((Role) ActionContext.getContext().getSession().get("loginRole")).getUserName());
+			
+			record.setSubjectName(subjectCode);
 
 			recordService.insertRecord(record);
 		}
@@ -483,6 +504,14 @@ public class CatAction extends ActionSupport {
 
 	public void setRecordList(List<Record> recordList) {
 		this.recordList = recordList;
+	}
+
+	public String getSubjectCode() {
+		return subjectCode;
+	}
+
+	public void setSubjectCode(String subjectCode) {
+		this.subjectCode = subjectCode;
 	}
 
 }

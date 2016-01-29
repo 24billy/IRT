@@ -58,5 +58,9 @@ public class RecordServiceImpl extends GenericService<Record> implements
 		return recordDao.findRecordByRoleId(roleName);
 	}
 
+	@Override
+	public Record updateRecord(Record record) {
+		return recordDao.update(record);
+	}
 
 }

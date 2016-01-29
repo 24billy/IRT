@@ -51,4 +51,6 @@ public interface IRecordService {
 	 */
 	List<Record> queryRecordByRoleName(String roleName);
 	
+	Record updateRecord(Record record);
+
 }
