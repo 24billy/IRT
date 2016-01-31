@@ -50,7 +50,12 @@ public interface IRecordService {
 	 * @return List<Record>
 	 */
 	List<Record> queryRecordByRoleName(String roleName);
-	
+
+	/**
+	 * 更新該帳號作答的作答狀態
+	 * 
+	 * @return List<Record>
+	 */
 	Record updateRecord(Record record);
 
 }
