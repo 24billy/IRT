@@ -350,23 +350,25 @@
 	<!-- BEGIN record dialog -->
 	<div style="display: none;" id="recordDiv">
 		<div class="widget thumbnail">
-			<h2 style="color: blue; text-align: center;">測驗歷史紀錄</h2>
-			<table class="table table-hover table-condensed" id="recordTable">
-				<thead>
-					<tr>
-						<th>受測者代碼</th>
-						<th>能力值</th>
-						<th>估計標準誤</th>	
-						<th>T分數</th>
-						<th>信度</th>
-						<th>施測題數</th>
-						<th>作答時間</th>
-						<th>施測時間</th>
-					</tr>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
+			<div class="container-fluid">
+				<h2 style="color: blue; text-align: center;">測驗歷史紀錄</h2>
+				<table class="table table-hover table-condensed" id="recordTable">
+					<thead>
+						<tr>
+							<th>受測者代碼</th>
+							<th>能力值</th>
+							<th>估計標準誤</th>	
+							<th>T分數</th>
+							<th>信度</th>
+							<th>施測題數</th>
+							<th>作答時間</th>
+							<th>施測時間</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 	<!-- END record dialog -->
@@ -544,7 +546,7 @@ $(document).ready(function(){
 		getAllRecord();
 
 		//dataTable設定
-			   $("#recordTable").dataTable({
+			   //$("#recordTable").dataTable({
 // 			   	   "destroy": true,
 // 			       "bPaginate": true, //翻頁功能
 // 			       "bLengthChange": true, //改變每頁顯示數據數量
@@ -559,7 +561,7 @@ $(document).ready(function(){
 // 			                { 'sWidth': '50%', 'aTargets': [ 1 ] }
 // 			            ],
 // 			            "aaSorting": [[ 0, "asc" ]] //第0列順序排列
-			   });
+			   //});
 
 	}
 
@@ -577,7 +579,7 @@ $(document).ready(function(){
 				if (jsonData != null) {
 					generateRecordDataTable(jsonData);
 				}
-
+				$("#recordTable").dataTable();
 			}
 		});
 	}
