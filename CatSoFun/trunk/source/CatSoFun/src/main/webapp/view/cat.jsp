@@ -331,7 +331,7 @@
 				<!-- END 測驗結果table -->
 					
 				<div class="submitBtnSet form-group text-center" id="finishDivBtn" style="display: none; margin-top: 20px;">
-					<button type="button" class="btn btn-primary" onclick="saveResult()">儲存結果</button>
+					<button type="button" class="btn btn-primary" onclick="saveResult()">列入紀錄</button>
 					<button type="button" class="btn btn-danger" onclick="invalidResult()">不列入紀錄</button>
 				</div>
 			    
@@ -449,9 +449,6 @@ var questionCount = 0 ;
 var isNextEventComplete = true;
 
 $(document).ready(function(){
-
-
-// 	$('#welcomeDiv').hide(); //一開始先隱藏 "受測者歡迎頁"
 
 	questionCount = 1 ;
 
