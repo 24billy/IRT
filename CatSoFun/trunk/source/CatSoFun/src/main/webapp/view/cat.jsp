@@ -121,6 +121,12 @@
 		<!-- BEGIN 登入後首頁 -->
 		<div class="row" style="opacity:0.9;" id="loginedDiv">
 			<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 thumbnail" style="padding: 15px; margin-top: 30px; color: black;">
+		        <p style="font-size: 22px;" id="roleName">您好：</p>
+
+				<ul style="font-size: 20px;">
+					<li>點選「查看歷史紀錄」，可檢視所有受試者的測驗結果。</li>
+					<li>點選「進入測驗」，則需輸入受試者代碼後，方可進行測驗。</li>
+				</ul>
 				
 		        <div class="form-group text-center" style="margin-top: 30px;" >
 		        	<button type="button" class="btn btn-danger" onclick="queryHistory()" id="history">查看歷史紀錄</button>
@@ -135,7 +141,7 @@
 		<!-- BEGIN 測驗開始頁(測驗指導語) -->
 		<div class="row" style="opacity:0.9; display: none;" id="welcomeDiv">
 			<div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 thumbnail" style="padding: 15px; margin-top: 30px; color: black;">
-		        <p style="font-size: 22px;">您好：</p>
+		        <p style="font-size: 22px;" id="subject">您好：</p>
 
 				<ul style="font-size: 20px;">
 					<li>這份測驗主要是用來瞭解您自覺參與社交活動之狀況。</li>
@@ -329,11 +335,15 @@
 					</tbody>
 				</table>
 				<!-- END 測驗結果table -->
-					
-				<div class="submitBtnSet form-group text-center" id="finishDivBtn" style="display: none; margin-top: 20px;">
-					<button type="button" class="btn btn-primary" onclick="saveResult()">列入紀錄</button>
-					<button type="button" class="btn btn-danger" onclick="invalidResult()">不列入紀錄</button>
+				
+				<div class="form-group text-center" id="finishBtn" style="margin-top: 20px;">
+					<button type="button" class="btn btn-primary" onclick="confirmResult()">施測人員確認</button>
 				</div>
+					
+<!-- 				<div class="submitBtnSet form-group text-center" style="display: none; margin-top: 20px;"> -->
+<!-- 					<button type="button" class="btn btn-primary" onclick="saveResult()">列入紀錄</button> -->
+<!-- 					<button type="button" class="btn btn-danger" onclick="invalidResult()">不列入紀錄</button> -->
+<!-- 				</div> -->
 			    
 			    <div class="form-group text-center row" style="margin-top: 20px; display: none;" id= "goBackMainPage">
 			    	<button type="button" class="btn btn-primary" id="" style="margin-top: ;" onclick="window.location.href='showCatMainPage'">回到測驗主頁</button>
@@ -451,7 +461,6 @@ var questionCount = 0 ;
 var isNextEventComplete = true;
 
 $(document).ready(function(){
-
 	questionCount = 1 ;
 
 	// 	按下 next鍵 發ajax 顯示下一題
@@ -504,8 +513,6 @@ $(document).ready(function(){
 					$('#testTime').html((obj.record.testCompleteTime/1000).toFixed(1) + "秒");
 
 					$('#contentDiv').html($('#finishDiv').html());
-					
-					$('#finishDivBtn').show(10000);
 				} else {
 					var item = obj.item;
 					var response = obj.response;
@@ -642,6 +649,7 @@ $(document).ready(function(){
 					return;
 				}
 				subjectCode = result;
+				$('#subject').html(subjectCode + "，您好");
 				$('#recordDiv').hide();
 				$('#loginedDiv').hide();//隱藏「查看歷史紀錄」、「進入測驗」此DIV
 				$('#welcomeDiv').show();//顯示 測驗指導語DIV(含有「我想練習看看」、「直接開始測驗」兩個按鈕)
@@ -728,12 +736,41 @@ $(document).ready(function(){
 			}
 		});
 	}
+
+	/**
+	 * 按下 「施測人員確認」按鈕，顯示「列入紀錄」、「不列入紀錄」按鈕
+	 */
+	function confirmResult() {
+		bootbox.dialog({
+			closeButton : false,
+			size : "null",
+			message : "<h3>測驗結束，請問是否列入正式測驗紀錄?</h3>",
+			title : "",
+			buttons : {
+				success : {
+					label : "列入紀錄",
+					className : "btn-primary",
+					callback : function() {
+						saveResult();
+					}
+				},
+				danger : {
+					label : "不列入紀錄",
+					className : "btn-danger",
+					callback : function() {
+						invalidResult();
+					}
+				}
+			}
+		});
 	
+		$('#finishBtn').hide();
+	}
+
 	/**
 	 * 按下 「儲存結果」按鈕
 	 */
 	function saveResult() {
-		$('.submitBtnSet').hide();
 		$('#goBackMainPage').attr("style", "display:''");
 
 		$('#resultTitle').text("點選下面按鈕，可再次進行測驗。");
@@ -749,7 +786,6 @@ $(document).ready(function(){
 			dataType : "text", //ajax返回值設定為text
 			success : function(data) {
 				// 				var jsonData = $.parseJSON(data); //解析json
-				$('.submitBtnSet').hide();
 				$('#goBackMainPage').attr("style", "display:''");
 				$('#resultTitle').text("點選下面按鈕，可再次進行測驗。");
 			}
