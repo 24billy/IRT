@@ -581,12 +581,25 @@ $(document).ready(function(){
 
 				var jsonData = $.parseJSON(data); //解析json
 
-				console.log(jsonData);
+				//console.log(jsonData);
 
 				if (jsonData != null) {
 					generateRecordDataTable(jsonData);
 				}
-				$("#recordTable").dataTable();
+				$("#recordTable").dataTable({
+					"oLanguage":{"sProcessing":"處理中...",
+                        "sLengthMenu":"顯示 _MENU_ 筆結果",
+                        "sZeroRecords":"沒有匹配結果",
+                        "sInfo":"顯示第 _START_ 筆至 _END_ 筆結果，共有 _TOTAL_ 筆",
+                        "sInfoEmpty":"顯示第 0 筆至第 0 筆結果，共有 0 筆",
+                        "sInfoFiltered":"(從 _MAX_ 項結果過濾)",
+                        "sSearch":"搜尋:",
+                        "oPaginate":{"sFirst":"<<第一頁",
+                                             "sPrevious":"上一頁",
+                                             "sNext":"下一頁",
+                                             "sLast":"最後一頁>>"}
+                        }
+				});
 			}
 		});
 	}
