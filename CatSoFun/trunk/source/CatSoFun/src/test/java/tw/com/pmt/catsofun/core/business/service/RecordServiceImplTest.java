@@ -80,7 +80,7 @@ public class RecordServiceImplTest extends BaseTest {
 
 	@Test
 	public void testSelectAndInsert() {
-		int generateCount = 100;
+		int generateCount = 300;
 		
 		for (int i = 0; i <= generateCount; i++) {
 			Long index = recordService.getLastRecordId().getId() + 1l;
