@@ -60,12 +60,13 @@ body {
 								href="/CatSoFun/frontend/showLogin.action">前往CatSoFun</a></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle"
 								data-toggle="dropdown" role="button" aria-haspopup="true"
-								aria-expanded="false"> <i class="fa fa-fw fa-user"></i> <span
-									id="loginRole">Admin</span> <span class="caret"></span>
-							</a>
+								aria-expanded="false"> <i class="fa fa-fw fa-user"></i> 
+								<span id="loginRole">Admin</span> 
+								<span class="caret"></span>
+								</a>
 								<ul class="dropdown-menu">
 									<li><a href="logout" class=""> <i
 											class="fa fa-sign-out"></i> 登出
@@ -84,19 +85,7 @@ body {
 							<div class="panel-heading">
 								<h4 class="panel-title">
 									<i class="fa fa-fw fa-table"></i><span class="left5">查詢所有作答結果</span>
-									<a class="btn btn-success btn-xs" download="cat_summary.xls"
-										href="#"
-										onclick="return ExcellentExport.excel(this, 'recordTable');">
-										<i class="fa fa-fw fa-file-excel-o"></i> CAT施測結果摘要
-									</a> <a class="btn btn-success btn-xs" download="cat_history.xls"
-										href="#"
-										onclick="return ExcellentExport.excel(this, 'historyTable');">
-										<i class="fa fa-fw fa-file-excel-o"></i> CAT施測歷程記錄
-									</a> <a class="btn btn-success btn-xs" download="data_matrix.xls"
-										href="#"
-										onclick="return ExcellentExport.excel(this, 'dataMatrixTable');">
-										<i class="fa fa-fw fa-file-excel-o"></i> 資料矩陣
-									</a> <a class="btn btn-default btn-sm toggleBtn"
+									<a class="btn btn-default btn-sm toggleBtn"
 										data-toggle="collapse" data-parent="#listPanel"
 										id="allRecordBtn" href="#recordPanel"> <i
 										class="fa fa-fw fa-bars"></i>
@@ -123,7 +112,48 @@ body {
 										<tbody>
 										</tbody>
 									</table>
-
+									<div class="panel panel-default">
+										<div class="panel-body">
+										<label>輸出Excel：</label>
+										<a class="btn btn-success btn-xs" download="cat_currentPage_summary.xls"
+											onclick="return ExcellentExport.excel(this, 'recordTable');">
+											<i class="fa fa-fw fa-file-excel-o"></i> 施測結果摘要(當前頁面)
+										</a>
+										<a class="btn btn-success btn-xs" download="cat_summary.xls"
+											onclick="return ExcellentExport.excel(this, 'summaryTable');">
+											<i class="fa fa-fw fa-file-excel-o"></i> 施測結果摘要(所有資料)
+										</a> 
+										<a class="btn btn-success btn-xs" download="cat_history.xls"
+											onclick="return ExcellentExport.excel(this, 'historyTable');">
+											<i class="fa fa-fw fa-file-excel-o"></i> 施測歷程記錄
+										</a> 
+										<a class="btn btn-success btn-xs" download="data_matrix.xls"
+											onclick="return ExcellentExport.excel(this, 'dataMatrixTable');">
+											<i class="fa fa-fw fa-file-excel-o"></i> 資料矩陣
+										</a>
+										</div>
+									</div>
+									
+									<!-- table for export to excel -->
+									<table class="table table-hover table-condensed text-center"
+										id="summaryTable" width="100%" style="display: none;">
+										<thead>
+											<tr>
+												<th>個案序號</th>
+												<th>能力值</th>
+												<th>T分數</th>
+												<th>估計標準誤</th>
+												<th>信度</th>
+												<th>施測題數</th>
+												<th>作答時間</th>
+												<th>施測時間</th>
+												<th>施測者</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+									
 									<!-- table for export to excel -->
 									<table class="table table-hover table-condensed"
 										id="historyTable" width="100%" style="display: none;">
@@ -353,7 +383,20 @@ body {
 				if (jsonData != null) {
 					generateRecordDataTable(jsonData);
 				}
-				$('#recordTable').DataTable();
+				$('#recordTable').DataTable({
+					"oLanguage":{"sProcessing":"處理中...",
+                        "sLengthMenu":"顯示 _MENU_ 筆結果",
+                        "sZeroRecords":"沒有匹配結果",
+                        "sInfo":"顯示第 _START_ 筆至 _END_ 筆結果，共有 _TOTAL_ 筆",
+                        "sInfoEmpty":"顯示第 0 筆至第 0 筆結果，共有 0 筆",
+                        "sInfoFiltered":"(從 _MAX_ 項結果過濾)",
+                        "sSearch":"搜尋:",
+                        "oPaginate":{"sFirst":"<<第一頁",
+                                             "sPrevious":"上一頁",
+                                             "sNext":"下一頁",
+                                             "sLast":"最後一頁>>"}
+                        }
+				});
 			}
 		});
 	}
@@ -364,12 +407,15 @@ body {
 			 * 結果摘要
 			 */
 			var $tr = $("<tr width='100%'>");
-
+			var $trSummary = $("<tr width='100%'>");
+			
 			//<th>施測序號</th>
 			var recordId = addZeroLeft(data.id, 5);
 			$tr.append($("<td>").html(recordId));
+			$trSummary.append($("<td>").html(recordId));
 			//<th>能力估計值</th>
 			$tr.append($("<td>").html(data.ability.toFixed(1)));
+			$trSummary.append($("<td>").html(data.ability.toFixed(1)));
 			//<th>T分數</th>
 			var mu = 0;
 			var variance = 1;
@@ -379,23 +425,39 @@ body {
 			$tr.append($("<td>").html(
 					Math.round((data.ability - minTheta)
 							/ (maxTheta - minTheta) * 100)));
+			$trSummary.append($("<td>").html(
+					Math.round((data.ability - minTheta)
+							/ (maxTheta - minTheta) * 100)));
 			//<th>測量標準誤</th>
 			$tr.append($("<td>").html(data.sem.toFixed(1)));
+			$trSummary.append($("<td>").html(data.sem.toFixed(1)));
 			//<th>信度</th>
 			$tr.append($("<td>").html(
 					(1 - ((data.sem) * (data.sem)) / variance).toFixed(2)));
+			$trSummary.append($("<td>").html(
+					(1 - ((data.sem) * (data.sem)) / variance).toFixed(2)));
 			//<th>施測題數</th>
 			$tr.append($("<td>").html(data.selectedItems.length));
+			$trSummary.append($("<td>").html(data.selectedItems.length));
 			//<th>作答時間</th>
 			$tr.append($("<td>").html(
 					(data.testCompleteTime / 1000).toFixed(1) + "秒"));
+			$trSummary.append($("<td>").html(
+					(data.testCompleteTime / 1000).toFixed(1) + "秒"));
 			//<th>施測時間</th>
 			$tr.append($("<td>").html(data.createTime));
+			$trSummary.append($("<td>").html(data.createTime));
 			//<th>施測者</th>
 			$tr.append($("<td>").html(data.roleName));
-
+			$trSummary.append($("<td>").html(data.roleName));
+			
 			$('table#recordTable > tbody:last').append($tr);
-
+			
+			/**
+			 * 所有結果摘要
+			 */
+			$('table#summaryTable > tbody:last').append($trSummary);
+			
 			/**
 			 * 作答歷程
 			 */
