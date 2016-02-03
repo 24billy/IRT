@@ -80,7 +80,7 @@ body {
 <!-- BEGIN footer -->
 <div class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
 	<div class="container">
-		<p style="color: white;">Copyright ©2015 footer......</p>
+		<p style="color: white;">Copyright by Allen Chen & Billy Shih   ©2015</p>
 	</div>
 </div>
 <!-- END footer -->

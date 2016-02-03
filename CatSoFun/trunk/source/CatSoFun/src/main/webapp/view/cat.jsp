@@ -104,7 +104,7 @@
 <!-- 				    <li><a href="" Target="_blank" onclick="">查看歷史紀錄(另開)</a></li> -->
 				    
 				</ul>
-				<button id="recordButton" type="button" class="btn btn-info btn-lg right" data-toggle="modal" data-target="#recordDialog">
+				<button id="recordButton" type="button" class="btn btn-info btn-lg right" data-toggle="modal" data-target="#recordDialog" style="display:none;">
 					檢視目前估計結果(測試用)
 				</button>
 				<form class="navbar-form navbar-right" role="search">
@@ -386,7 +386,7 @@
 	<!-- BEGIN footer -->
 	<div class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
 		<div class="container">
-			<p style="color: white;">Copyright ©2015 footer</p>
+			<p style="color: white;">Copyright by Allen Chen & Billy Shih   ©2015</p>
 		</div>
 	</div>
 	<!-- END footer -->
