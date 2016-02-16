@@ -41,6 +41,18 @@ public class ResponseDaoTest extends BaseTest {
 
 	@Test
 	public void testDelete() {
+		for (long index = 1 ; index <= 7l ; index++) {
+			Response response = new Response();
+			response.setId(new Long(index));
+			response.setOption01("選項一");
+			response.setOption02("選項二");
+			response.setOption03("選項三");
+			response.setOption04("選項四");
+			response.setOption05("選項五");
+			response.setGuild("指導語44");
+			
+			responseDao.delete(response);
+		}
 	}
 
 }
