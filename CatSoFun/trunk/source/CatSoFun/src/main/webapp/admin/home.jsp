@@ -107,6 +107,7 @@ body {
 												<th>作答時間</th>
 												<th>施測時間</th>
 												<th>施測者</th>
+												<th>受試者</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -148,6 +149,7 @@ body {
 												<th>作答時間</th>
 												<th>施測時間</th>
 												<th>施測者</th>
+												<th>受試者</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -450,6 +452,10 @@ body {
 			//<th>施測者</th>
 			$tr.append($("<td>").html(data.roleName));
 			$trSummary.append($("<td>").html(data.roleName));
+			
+			//<th>受試者</th>
+			$tr.append($("<td>").html(data.subjectName));
+			$trSummary.append($("<td>").html(data.subjectName));
 			
 			$('table#recordTable > tbody:last').append($tr);
 			
