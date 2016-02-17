@@ -1,11 +1,11 @@
 --作答反應--
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (1,'完全無法做到','很多困難','中等困難','一點困難','完全沒有困難','在過去一週裡：');
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (2,'非常同意','中等同意','不同意也不反對','中等不同意','非常不同意','在過去一週裡：');
-INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (3,'總是如此','大部分時間如此','某些時間如此','很少時間如此','從未如此','在過去四週裡');
+INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (3,'總是如此','大部分時間如此','某些時間如此','很少時間如此','從未如此','在過去四週裡：');
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (4,'極不滿意','不滿意','中等程度滿意','滿意','極滿意','在過去二週裡：');
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (5,'完全沒有','有一點有','中等程度有','很有','極有','在過去二週裡：');
 INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (6,'完全沒有機會','少許機會','中等程度機會','很有機會','完全有機會','在過去二週裡：');
-INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (7,'總是','常常','偶爾','很少','從來沒有','在過去一週裡');
+INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild) VALUES (7,'總是','常常','偶爾','很少','從來沒有','在過去一週裡：');
 
 --題目--
 INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(1,'您從事以前的工作有困難嗎？',0.168,0.293,0.049,-0.155,-0.188,1);
