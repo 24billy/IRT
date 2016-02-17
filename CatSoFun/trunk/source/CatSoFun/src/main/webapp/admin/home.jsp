@@ -585,8 +585,12 @@ body {
 		
 		// 驗證新密碼長度
 		$('h4#errorMessage').html("");
-
+		$('h4#successMessage').html("");
+		$('h4#errorMessage').hide();
+		$('h4#successMessage').hide();
+		
 		if (password.length > 8 ) {
+			
 			$('h4#errorMessage').show();
 			$('h4#errorMessage').html("密碼長度不得超過八碼！");
 			$("button#messageButton").trigger("click");
