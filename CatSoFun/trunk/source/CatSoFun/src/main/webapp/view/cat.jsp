@@ -164,8 +164,8 @@
 			<div class="col-md-10 col-md-offset-1" >
 				<div style="border-width: 1px; border-style: solid; border-radius: 5px; padding: 15px;">
 					<p id="">Q1.</p>
-					<p id="">從事以前工作</p>
-					<p id="">在過去一週裡，您從事以前的工作有困難嗎？</p>
+					<p id="">在過去一週裡 :</p>
+					<p id="">您從事以前的工作有困難嗎？</p>
 					
 					<form role="form" style="font-size: ; color: ; margin-top: 20px;">
 					  <div class="radio" style="margin: 15px 0px;">
@@ -195,8 +195,8 @@
 			<div class="col-md-10 col-md-offset-1" >
 				<div style="border-width: 1px; border-style: solid; border-radius: 5px; padding: 15px;">
 					<p id="">Q2.</p>
-					<p id="">覺得自已是家人的負擔</p>
-					<p id="">在過去一週裡，您有多常「覺得自己是家人的負擔」？</p>
+					<p id="">在過去一週裡 :</p>
+					<p id="">您有多常「覺得自己是家人的負擔」？</p>
 					
 					<form role="form" style="font-size: ; color: ; margin-top: 20px;">
 					  <div class="radio" style="margin: 15px 0px;">
@@ -226,8 +226,8 @@
 			<div class="col-md-10 col-md-offset-1" >
 				<div style="border-width: 1px; border-style: solid; border-radius: 5px; padding: 15px;">
 					<p id="">Q3.</p>
-					<p id="">感覺沒有親近的人?</p>
-					<p id="">在過去一週裡，您有多常感覺自己沒有親近的人?</p>
+					<p id="">在過去一週裡 :</p>
+					<p id="">您有多常感覺自己沒有親近的人?</p>
 					
 					<form role="form" style="font-size: ; color: ; margin-top: 20px;">
 					  <div class="radio" style="margin: 15px 0px;">

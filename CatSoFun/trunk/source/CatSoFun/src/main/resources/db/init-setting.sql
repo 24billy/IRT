@@ -9,7 +9,7 @@ INSERT INTO response(id,option_01,option_02,option_03,option_04,option_05,guild)
 
 --題目--
 INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(1,'您從事以前的工作有困難嗎？',0.168,0.293,0.049,-0.155,-0.188,1);
-INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(2,'您有多常「覺得自己是家人的負擔」？',0.141,-0.599,1.365,-0.522,-0.244,7);
+INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(2,'您有多同意「我覺得自己是家人的負擔」？',0.141,-0.599,1.365,-0.522,-0.244,2);
 INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(3,'您有多同意「我的身體狀況妨礙我的家庭生活」？',0.201,-0.625,1.549,-1.187,0.263,2);
 INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(4,'您有多同意「我出門的次數沒有我想要的那麼多」？',0.368,-0.318,0.805,0.037,-0.524,2);
 INSERT INTO item(id,item_content,delta,step1,step2,step3,step4,answer_type) VALUES(5,'您有多同意「我從事嗜好及娛樂的時間，比我想要的時間少」？',0.353,-0.503,0.867,0.359,-0.723,2);

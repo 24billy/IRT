@@ -9,9 +9,9 @@
 
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url"
-			value="jdbc:postgresql://localhost:5432/training" />
-		<property name="username" value="training" />
-		<property name="password" value="training" />
+			value="jdbc:postgresql://localhost:5433/catsofun" />
+		<property name="username" value="catsofun" />
+		<property name="password" value="catsofun" />
 		<property name="initialSize" value="10" />
 		<property name="maxActive" value="50" />
 		<property name="maxWait" value="20" />
