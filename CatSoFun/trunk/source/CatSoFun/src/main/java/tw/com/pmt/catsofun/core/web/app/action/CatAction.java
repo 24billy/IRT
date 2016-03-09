@@ -196,7 +196,8 @@ public class CatAction extends ActionSupport {
 		System.out.println("currentReliability:" + currentReliability);
 		Double deltaReliability = Math.abs(currentReliability - originalReliability);
 		
-		if (deltaReliability < 0.005) {
+		// 測驗中止調件(信度 >= 0.9 或 兩次信度差 < 0.001)
+		if (currentReliability >= 0.9 || deltaReliability < 0.001) {
 			isFinished = true;
 			record.setIsFinished(isFinished);
 		} else {
