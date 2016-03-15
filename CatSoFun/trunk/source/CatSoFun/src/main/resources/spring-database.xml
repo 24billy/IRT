@@ -9,7 +9,7 @@
 
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url"
-			value="jdbc:postgresql://localhost:5433/training" />
+			value="jdbc:postgresql://localhost:5432/training" />
 		<property name="username" value="training" />
 		<property name="password" value="training" />
 		<property name="initialSize" value="10" />
