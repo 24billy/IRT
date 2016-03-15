@@ -733,9 +733,20 @@ $(document).ready(function(){
 					label : "確定開始測驗",
 					className : "btn-primary",
 					callback : function() {
+		
+						// 按下確定開始測驗後，發ajax 初始化測驗開始時間
+						$.ajax({
+							type : "POST",
+							url : "initializeBeginTime.action",
+							dataType : "text", //ajax返回值設定為text
+							success : function(data) {
+								$('#welcomeDiv').hide();//隱藏測驗指導語DIV
+								$('#quizDiv').show();//顯示正式測驗題目DIV
+							}
+						});
 
-						$('#welcomeDiv').hide();//隱藏測驗指導語DIV
-						$('#quizDiv').show();//顯示正式測驗題目DIV
+// 						$('#welcomeDiv').hide();//隱藏測驗指導語DIV
+// 						$('#quizDiv').show();//顯示正式測驗題目DIV
 
 					}
 				},

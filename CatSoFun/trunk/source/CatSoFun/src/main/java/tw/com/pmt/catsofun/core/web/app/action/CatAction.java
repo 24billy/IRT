@@ -60,6 +60,20 @@ public class CatAction extends ActionSupport {
 	private List<Record> recordList;
 	
 	private String subjectCode;
+
+	/**
+	 * 初始化測驗開始時間
+	 *  
+	 * @return String
+	 */
+	public String initializeBeginTime() {
+		//初始化時間 存入session
+		startTime = new Date().getTime();
+		Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
+		sessionMap.put("startTime", startTime);
+
+		return ActionSupport.SUCCESS;
+	}
 	
 	/**
 	 * 更新測驗完成狀態
@@ -100,7 +114,7 @@ public class CatAction extends ActionSupport {
 		System.out.println("showCatMainContent() begin...");
 
 		// 初始化測驗開始時間
-		startTime = new Date().getTime();
+//		startTime = new Date().getTime();
 
 		String loginFlag = (String) ActionContext.getContext().getSession().get("loginFlag");
 
@@ -151,7 +165,7 @@ public class CatAction extends ActionSupport {
 			// 使用同一組Record
 			Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
 			sessionMap.put("record", record);
-			sessionMap.put("startTime", startTime);
+//			sessionMap.put("startTime", startTime);
 
 			System.out.println("record(init) : " + record);
 
