@@ -502,10 +502,15 @@ $(document).ready(function(){
 					var variance = 1;
 					var minTheta = -3.5318;
 					var maxTheta = 3.6248;
+					
+					var t_score = (obj.record.ability - minTheta)/(maxTheta - minTheta)*100; //t分數
+					var t_se = (obj.record.sem)/(maxTheta - minTheta)*100;
+					var t_lowerbound = Math.round(t_score - 2*t_se);
+					var t_upperbound = Math.round(t_score + 2*t_se);
 
 					// 刷新內容div
 // 					$('#theta').html((obj.record.ability).toFixed(2));
-					$('#tScore').html(Math.round((obj.record.ability - minTheta)/(maxTheta - minTheta)*100));
+					$('#tScore').html(Math.round(t_score) + "  ( " + t_lowerbound + " ~ " + t_upperbound + " )" );
 					$('#itemNum').html(questionCount-1);
 // 					$('#sem').html((obj.record.sem).toFixed(2));
 // 					$('#se').html(Math.round((obj.record.sem)/(maxTheta - minTheta)*100));
