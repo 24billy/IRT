@@ -32,10 +32,6 @@ public class CatAction extends ActionSupport {
 	private static final long serialVersionUID = 352281438045676179L;
 
 	private String selectedOption;
-	private static List<Long> selectedOptions;
-	private static List<Item> selectedItems;
-
-	private static List<Item> chooseItemPool;
 
 	@Autowired
 	private IItemService itemService;
@@ -113,9 +109,6 @@ public class CatAction extends ActionSupport {
 	public String showCatMainPage() {
 		System.out.println("showCatMainContent() begin...");
 
-		// 初始化測驗開始時間
-//		startTime = new Date().getTime();
-
 		String loginFlag = (String) ActionContext.getContext().getSession().get("loginFlag");
 
 		System.out.println("loginFlag = " + loginFlag);
@@ -125,15 +118,14 @@ public class CatAction extends ActionSupport {
 
 			// 初始化可選題庫，選取題目
 			isFinished = false;
-			initChooseItemPool();
-			selectedOptions = new ArrayList<Long>();
-
+			
+			List<Long> selectedOptions = new ArrayList<Long>();
+			List<Item> selectedItems = new ArrayList<Item>();;
+			List<Item> chooseItemPool = new ArrayList<Item>();;
+			chooseItemPool = itemService.getAllItem();
+			
 			initAbility = (Math.random() * 1 - 0.5);
-	//		initAbility = -0.4252277076193661;
 			currentAbility = initAbility;
-
-			// 隨機選題與作答反應
-	//		item = chooseRandomItem(chooseItemPool);
 
 			// 正式選題
 			item = itemSelection(initAbility, chooseItemPool, prior);
@@ -162,11 +154,19 @@ public class CatAction extends ActionSupport {
 			record.setAbility(currentAbility);
 			record.setIsFinished(false);
 
-			// 使用同一組Record
+			// 使用Session紀錄作答歷程
 			Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
+			sessionMap.remove("record");
+			sessionMap.remove("selectedOptions");
+			sessionMap.remove("selectedItems");
+			sessionMap.remove("chooseItemPool");
+			
 			sessionMap.put("record", record);
-//			sessionMap.put("startTime", startTime);
-
+			sessionMap.put("selectedOptions", selectedOptions);
+			sessionMap.put("selectedItems", selectedItems);
+			sessionMap.put("chooseItemPool", chooseItemPool);
+			
+			
 			System.out.println("record(init) : " + record);
 
 			return ActionSupport.SUCCESS;
@@ -181,6 +181,13 @@ public class CatAction extends ActionSupport {
 
 		// Session取出初始化結果
 		Map<String, Object> sessionMap = ScopeUtil.getScopeAttribute(Scope.SESSION);
+		@SuppressWarnings("unchecked")
+		List<Long> selectedOptions = (List<Long>) sessionMap.get("selectedOptions");
+		@SuppressWarnings("unchecked")
+		List<Item> selectedItems = (List<Item>) sessionMap.get("selectedItems");
+		@SuppressWarnings("unchecked")
+		List<Item> chooseItemPool = (List<Item>) sessionMap.get("chooseItemPool");
+		
 		record = (Record) sessionMap.get("record");
 		startTime = (Long) sessionMap.get("startTime");
 		isFinished = record.getIsFinished();
@@ -237,7 +244,6 @@ public class CatAction extends ActionSupport {
 			response = responseService.getResponseById(responseIndex);
 	
 			// 更新選題結果
-//			System.out.println("selectedItems : " + selectedItems);
 			Long[] items = new Long[selectedItems.size()];
 			for (int i = 0; i < selectedItems.size(); i++) {
 				items[i] = selectedItems.get(i).getId();
@@ -270,7 +276,6 @@ public class CatAction extends ActionSupport {
 
 			// 紀錄測驗完成時間(千分之一秒)
 			Long testCompleteTime = new Date().getTime() - startTime;
-//			System.out.println("Complete Time : " + testCompleteTime);
 			record.setTestCompleteTime(testCompleteTime);
 			record.setCreateTime(new Date());
 
@@ -335,9 +340,6 @@ public class CatAction extends ActionSupport {
 
 			Double itemInformation = betaProb - (expectK * expectK) + prior;
 
-//			System.out.println("itemInformation(" + item.getId() + "):"
-//					+ itemInformation);
-
 			if (itemInformation > maxInformation) {
 				maxInformation = itemInformation;
 				chooseItem = item.getId();
@@ -401,10 +403,6 @@ public class CatAction extends ActionSupport {
 				Double expectK = (1 * prob1) + (2 * prob2) + (3 * prob3)
 						+ (4 * prob4) + (5 * prob5);
 
-//				System.out.println("b-E(K) : " + (selected - expectK));
-//				System.out.println("bbp-E(K)^2:"
-//						+ (betaProb - (expectK * expectK)));
-
 				sumOfbetaDiffEk += (selected - expectK);
 				sumOfbetaDiffSqEk += ((expectK * expectK) - betaProb);
 			}
@@ -412,20 +410,14 @@ public class CatAction extends ActionSupport {
 			Double firstOrderDiff = sumOfbetaDiffEk - (currentAbility - mu)
 					/ variance;
 			Double secondOrderDiff = sumOfbetaDiffSqEk - (1 / variance);
-//			System.out.println("firstOrderDiff:" + firstOrderDiff);
-//			System.out.println("secondOrderDiff:" + secondOrderDiff);
 
 			deltaAbility = firstOrderDiff / secondOrderDiff;
 			currentAbility = currentAbility - deltaAbility;
-//			System.out.println("deltaAbility:" + deltaAbility);
-//			System.out.println("currentAbility:" + currentAbility);
 
+			// 計算SEM
 			Double itemInformation = -sumOfbetaDiffSqEk + (1 / variance);
 			sem = Math.sqrt(1 / itemInformation);
-//			System.out.println("itemInformation:" + itemInformation);
-//			System.out.println("sem:" + sem);
-//
-//			System.out.println("第" + iterationCount + "次迭代結束;" + "能力估計值：" + currentAbility);
+
 			iterationCount++;
 		}
 
@@ -448,29 +440,6 @@ public class CatAction extends ActionSupport {
 		System.out.println("======== End ability estimate ========");
 
 		return record;
-	}
-
-	private Item chooseRandomItem(List<Item> chooseItemPool) {
-		// 根據目前可選題號隨機產生選題
-		Integer chooseSize = chooseItemPool.size();
-		int choosedItemIndex = (int) Math.round(Math.random()
-				* (chooseSize - 1));
-
-		// 由可選題號取出數字並移出備選清單
-		Item item = chooseItemPool.get(choosedItemIndex);
-		selectedItems.add(item);
-		chooseItemPool.remove(choosedItemIndex);
-
-		return item;
-	}
-
-	private List<Item> initChooseItemPool() {
-		// 取得目前題庫題數
-		selectedItems = new ArrayList<Item>();
-		chooseItemPool = new ArrayList<Item>();
-		chooseItemPool = itemService.getAllItem();
-
-		return chooseItemPool;
 	}
 
 	public String getSelectedOption() {

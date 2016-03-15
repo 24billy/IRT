@@ -107,7 +107,7 @@ body {
 												<th>作答時間</th>
 												<th>施測時間</th>
 												<th>施測者</th>
-												<th>受試者</th>
+												<th>受測者</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -149,7 +149,7 @@ body {
 												<th>作答時間</th>
 												<th>施測時間</th>
 												<th>施測者</th>
-												<th>受試者</th>
+												<th>受測者</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -162,6 +162,7 @@ body {
 										<thead>
 											<tr>
 												<th>個案序號</th>
+												<th>受測者</th>
 												<th>第1題</th>
 												<th>第2題</th>
 												<th>第3題</th>
@@ -185,6 +186,7 @@ body {
 										<thead>
 											<tr>
 												<th>個案序號</th>
+												<th>受測者</th>
 												<th>第1題</th>
 												<th>第2題</th>
 												<th>第3題</th>
@@ -469,6 +471,8 @@ body {
 			 */
 			var $trHistory = $("<tr width='100%'>");
 			$trHistory.append($("<td>").html(recordId));
+			//<th>受試者</th>
+			$trHistory.append($("<td>").html(data.subjectName));
 
 			for ( var key in data.selectedItems) {
 				$trHistory.append($("<td>").html(data.selectedItems[key]));
@@ -481,7 +485,9 @@ body {
 			 */
 			var $trDataMatrix = $("<tr width='100%'>");
 			$trDataMatrix.append($("<td>").html(recordId));
-
+			//<th>受試者</th>
+			$trDataMatrix.append($("<td>").html(data.subjectName));
+			
 			for (var i = 1; i <= 24; i++) {
 				var dataResponse = "";
 
