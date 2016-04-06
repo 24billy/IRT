@@ -304,26 +304,14 @@
 						</tr>
 					</thead>
 					<tbody>
-<!-- 							<tr> -->
-<!-- 								<td data-title="1">能力估計</td> -->
-<!-- 								<td data-title="2" id="theta"></td> -->
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td data-title="1">標準誤 (能力估計)</td> -->
-<!-- 								<td data-title="2" id="sem"></td> -->
-<!-- 							</tr> -->
 						<tr>
-							<td data-title="1">T分數</td>
+							<td data-title="1">量尺分數</td>
 							<td data-title="2" id="tScore"></td>
 						</tr>
-<!-- 							<tr> -->
-<!-- 								<td data-title="1">標準誤 (T分數)</td> -->
-<!-- 								<td data-title="2" id="se"></td> -->
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td data-title="1">信度</td> -->
-<!-- 								<td data-title="2" id="reliability"></td> -->
-<!-- 							</tr> -->
+						<tr>
+							<td data-title="1">T分數</td>
+							<td data-title="2" id="tScore2"></td>
+						</tr>
 						<tr>
 							<td data-title="1">施測題數</td>
 							<td data-title="2" id="itemNum"></td>
@@ -498,23 +486,21 @@ $(document).ready(function(){
 					refreshRecordDialog(obj.record);
 					$("#recordTitle").html("測驗結束");
 					
-					var mu = 0;
-					var variance = 1;
-					var minTheta = -3.5318;
-					var maxTheta = 3.6248;
+					var mu = 0.268;
+					var variance = 0.542;
+					var minTheta = -2.4354;
+					var maxTheta = 2.6064;
 					
-					var t_score = (obj.record.ability - minTheta)/(maxTheta - minTheta)*100; //t分數
-					var t_se = (obj.record.sem)/(maxTheta - minTheta)*100;
-					var t_lowerbound = Math.round(t_score - 2*t_se);
-					var t_upperbound = Math.round(t_score + 2*t_se);
-
+					var t_score = (obj.record.ability - minTheta)/(maxTheta - minTheta)*100; //量尺分數
+					
+					var t_score2 = Math.round(((obj.record.ability - mu)/Math.sqrt(variance)) *10 + 50 );//平均數=0.268 標準差=sqrt(0.542)
+					var t_lowerbound2 = Math.round(((obj.record.ability - mu - 2*obj.record.sem)/Math.sqrt(variance)) *10 + 50);
+					var t_upperbound2 = Math.round(((obj.record.ability - mu + 2*obj.record.sem)/Math.sqrt(variance)) *10 + 50);
+					
 					// 刷新內容div
-// 					$('#theta').html((obj.record.ability).toFixed(2));
-					$('#tScore').html(Math.round(t_score) + "  ( " + t_lowerbound + " ~ " + t_upperbound + " )" );
+					$('#tScore').html(Math.round(t_score) + "  ( 0 ~ 100 )" );//量尺分數
+					$('#tScore2').html(t_score2 + "  (" + t_lowerbound2 + " ~ " + t_upperbound2 + ")" );//T分數
 					$('#itemNum').html(questionCount-1);
-// 					$('#sem').html((obj.record.sem).toFixed(2));
-// 					$('#se').html(Math.round((obj.record.sem)/(maxTheta - minTheta)*100));
-// 					$('#reliability').html((1-((obj.record.sem)*(obj.record.sem))/variance).toFixed(2));
 					$('#testTime').html((obj.record.testCompleteTime/1000).toFixed(1) + "秒");
 
 					$('#contentDiv').html($('#finishDiv').html());
@@ -624,10 +610,10 @@ $(document).ready(function(){
 			$tr.append($("<td>").html(data.sem.toFixed(1)));
 			
 			//<th>T分數</th>
-			var mu = 0;
-			var variance = 1;
-			var minTheta = -3.5318;
-			var maxTheta = 3.6248;
+			var mu = 0.268;
+			var variance = 0.542;
+			var minTheta = -2.4354;
+			var maxTheta = 2.6064;
 
 			$tr.append($("<td>").html(
 					Math.round((data.ability - minTheta)
