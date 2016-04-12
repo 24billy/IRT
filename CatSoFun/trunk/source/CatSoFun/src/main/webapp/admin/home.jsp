@@ -418,28 +418,30 @@ body {
 			$tr.append($("<td>").html(recordId));
 			$trSummary.append($("<td>").html(recordId));
 			//<th>能力估計值</th>
-			$tr.append($("<td>").html(data.ability.toFixed(1)));
-			$trSummary.append($("<td>").html(data.ability.toFixed(1)));
+			$tr.append($("<td>").html(data.ability.toFixed(2)));
+			$trSummary.append($("<td>").html(data.ability.toFixed(3)));
 			//<th>T分數</th>
-			var mu = 0;
-			var variance = 1;
-			var minTheta = -3.5318;
-			var maxTheta = 3.6248;
+			var mu = 0.268;
+			var variance = 0.542;
+			var minTheta = -2.4354;
+			var maxTheta = 2.6064;
+			
+			var t_score = (data.record.ability - minTheta)/(maxTheta - minTheta)*100; //量尺分數
+			
+			var t_score2 = Math.round(((data.record.ability - mu)/Math.sqrt(variance)) *10 + 50 );//平均數=0.268 標準差=sqrt(0.542)
+			var t_lowerbound2 = Math.round(((data.record.ability - mu - 2*obj.record.sem)/Math.sqrt(variance)) *10 + 50);
+			var t_upperbound2 = Math.round(((data.record.ability - mu + 2*obj.record.sem)/Math.sqrt(variance)) *10 + 50);
 
-			$tr.append($("<td>").html(
-					Math.round((data.ability - minTheta)
-							/ (maxTheta - minTheta) * 100)));
-			$trSummary.append($("<td>").html(
-					Math.round((data.ability - minTheta)
-							/ (maxTheta - minTheta) * 100)));
+			$tr.append($("<td>").html(t_score));
+			$trSummary.append($("<td>").html(t_score));
 			//<th>測量標準誤</th>
-			$tr.append($("<td>").html(data.sem.toFixed(1)));
-			$trSummary.append($("<td>").html(data.sem.toFixed(1)));
+			$tr.append($("<td>").html(data.sem.toFixed(2)));
+			$trSummary.append($("<td>").html(data.sem.toFixed(3)));
 			//<th>信度</th>
 			$tr.append($("<td>").html(
 					(1 - ((data.sem) * (data.sem)) / variance).toFixed(2)));
 			$trSummary.append($("<td>").html(
-					(1 - ((data.sem) * (data.sem)) / variance).toFixed(2)));
+					(1 - ((data.sem) * (data.sem)) / variance).toFixed(3)));
 			//<th>施測題數</th>
 			$tr.append($("<td>").html(data.selectedItems.length));
 			$trSummary.append($("<td>").html(data.selectedItems.length));
