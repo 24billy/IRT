@@ -222,17 +222,14 @@ public class CatAction extends ActionSupport {
 			isFinished = true;
 			record.setIsFinished(isFinished);
 		} else {
-			isFinished = false;
-			record.setIsFinished(isFinished);
-		}
-		
-		// 設定中止條件，作答二十四題結束
-		if (selectedItems.size() >= Parameter.TEST_MAX_ITEM_LENGTH) {
-			isFinished = true;
-			record.setIsFinished(isFinished);
-		} else {
-			isFinished = false;
-			record.setIsFinished(isFinished);
+			// 設定中止條件，作答二十四題結束
+			if (selectedItems.size() >= Parameter.TEST_MAX_ITEM_LENGTH) {
+				isFinished = true;
+				record.setIsFinished(isFinished);
+			} else {
+				isFinished = false;
+				record.setIsFinished(isFinished);
+			}
 		}
 		
 		// 若未結束則繼續選題
