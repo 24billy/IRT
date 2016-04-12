@@ -432,8 +432,8 @@ body {
 			var t_lowerbound2 = Math.round(((data.ability - mu - 2 * data.sem)/Math.sqrt(variance)) *10 + 50);
 			var t_upperbound2 = Math.round(((data.ability - mu + 2 * data.sem)/Math.sqrt(variance)) *10 + 50);
 
-			$tr.append($("<td>").html(t_score));
-			$trSummary.append($("<td>").html(t_score));
+			$tr.append($("<td>").html(t_score.toFixed(2)));
+			$trSummary.append($("<td>").html(t_score.toFixed(3)));
 			//<th>測量標準誤</th>
 			$tr.append($("<td>").html(data.sem.toFixed(2)));
 			$trSummary.append($("<td>").html(data.sem.toFixed(3)));
