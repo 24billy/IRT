@@ -426,11 +426,11 @@ body {
 			var minTheta = -2.4354;
 			var maxTheta = 2.6064;
 			
-			var t_score = (data.record.ability - minTheta)/(maxTheta - minTheta)*100; //量尺分數
+			var t_score = (data.ability - minTheta)/(maxTheta - minTheta)*100; //量尺分數
 			
-			var t_score2 = Math.round(((data.record.ability - mu)/Math.sqrt(variance)) *10 + 50 );//平均數=0.268 標準差=sqrt(0.542)
-			var t_lowerbound2 = Math.round(((data.record.ability - mu - 2*obj.record.sem)/Math.sqrt(variance)) *10 + 50);
-			var t_upperbound2 = Math.round(((data.record.ability - mu + 2*obj.record.sem)/Math.sqrt(variance)) *10 + 50);
+			var t_score2 = Math.round(((data.ability - mu)/Math.sqrt(variance)) *10 + 50 );//平均數=0.268 標準差=sqrt(0.542)
+			var t_lowerbound2 = Math.round(((data.ability - mu - 2*obj.record.sem)/Math.sqrt(variance)) *10 + 50);
+			var t_upperbound2 = Math.round(((data.ability - mu + 2*obj.record.sem)/Math.sqrt(variance)) *10 + 50);
 
 			$tr.append($("<td>").html(t_score));
 			$trSummary.append($("<td>").html(t_score));
