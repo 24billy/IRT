@@ -213,8 +213,8 @@ public class CatAction extends ActionSupport {
 		record = abilityEstimate(selectedItems, originalAbility, selectedOptions);
 		
 		Double currentReliability = 1 - Math.pow(record.getSem(),2);
-		System.out.println("originalReliability:" + originalReliability);
-		System.out.println("currentReliability:" + currentReliability);
+		//System.out.println("originalReliability:" + originalReliability);
+		//System.out.println("currentReliability:" + currentReliability);
 		Double deltaReliability = Math.abs(currentReliability - originalReliability);
 		
 		// 測驗中止調件(信度 >= 0.9 或 兩次信度差 < 0.001)
@@ -226,6 +226,16 @@ public class CatAction extends ActionSupport {
 			record.setIsFinished(isFinished);
 		}
 		
+		// 設定中止條件，作答二十四題結束
+		if (selectedItems.size() >= Parameter.TEST_MAX_ITEM_LENGTH) {
+			isFinished = true;
+			record.setIsFinished(isFinished);
+		} else {
+			isFinished = false;
+			record.setIsFinished(isFinished);
+		}
+		
+		// 若未結束則繼續選題
 		if (!isFinished) {
 			// 隨機「選題﹞與「作答反應」
 			//item = chooseRandomItem(chooseItemPool);
@@ -251,16 +261,6 @@ public class CatAction extends ActionSupport {
 	
 			Long[] options = new Long[selectedOptions.size()];
 			selectedOptions.toArray(options);
-	
-			// 設定中止條件，作答十二題結束
-			if (selectedItems.size() > 12) {
-//				if (selectedItems.size() > Parameter.TEST_MAX_ITEM_LENGTH) {
-				isFinished = true;
-				record.setIsFinished(isFinished);
-			} else {
-				isFinished = false;
-				record.setIsFinished(isFinished);
-			}
 		}
 		
 		if (isFinished) {

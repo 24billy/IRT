@@ -100,6 +100,7 @@ body {
 											<tr>
 												<th style="width: 10%;">個案序號</th>
 												<th>能力值</th>
+												<th>量尺分數</th>
 												<th>T分數</th>
 												<th>估計標準誤</th>
 												<th>信度</th>
@@ -142,6 +143,7 @@ body {
 											<tr>
 												<th>個案序號</th>
 												<th>能力值</th>
+												<th>量尺分數</th>
 												<th>T分數</th>
 												<th>估計標準誤</th>
 												<th>信度</th>
@@ -420,7 +422,8 @@ body {
 			//<th>能力估計值</th>
 			$tr.append($("<td>").html(data.ability.toFixed(2)));
 			$trSummary.append($("<td>").html(data.ability.toFixed(3)));
-			//<th>T分數</th>
+			
+			
 			var mu = 0.268;
 			var variance = 0.542;
 			var minTheta = -2.4354;
@@ -431,9 +434,15 @@ body {
 			var t_score2 = Math.round(((data.ability - mu)/Math.sqrt(variance)) *10 + 50 );//平均數=0.268 標準差=sqrt(0.542)
 			var t_lowerbound2 = Math.round(((data.ability - mu - 2 * data.sem)/Math.sqrt(variance)) *10 + 50);
 			var t_upperbound2 = Math.round(((data.ability - mu + 2 * data.sem)/Math.sqrt(variance)) *10 + 50);
-
+			
+			//<th>量尺分數</th>
 			$tr.append($("<td>").html(t_score.toFixed(2)));
 			$trSummary.append($("<td>").html(t_score.toFixed(3)));
+			
+			//<th>T分數</th>
+			$tr.append($("<td>").html(t_score2 + "  (" + t_lowerbound2 + " ~ " + t_upperbound2 + ")" ));
+			$trSummary.append($("<td>").html(t_score2 + "  (" + t_lowerbound2 + " ~ " + t_upperbound2 + ")" ));
+			
 			//<th>測量標準誤</th>
 			$tr.append($("<td>").html(data.sem.toFixed(2)));
 			$trSummary.append($("<td>").html(data.sem.toFixed(3)));
